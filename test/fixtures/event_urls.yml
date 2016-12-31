@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  web_link: MyString
+  registration_link: MyString
+  college_link: MyString
+  facebook_link: MyString
+  twitter_link: MyString
+  youtube_link: MyString
+  apps_link: MyString
+
+two:
+  web_link: MyString
+  registration_link: MyString
+  college_link: MyString
+  facebook_link: MyString
+  twitter_link: MyString
+  youtube_link: MyString
+  apps_link: MyString

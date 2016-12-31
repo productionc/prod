@@ -1,0 +1,159 @@
+<!--banner start-->
+  <div class='eventfilter_page_banner'><img class='text-center img-responsive' src="<%= asset_path('banner.png')%>" ></div>
+<!--banner end-->
+
+<!--Filter, filter results and googleadd section start-->
+  <div id='home_body_container'>
+    <div class='container-fluid'>
+      <div class='row'>
+        
+        <!--filter section start-->
+        <div class='col-md-3'>
+          <div class='event_filter'>
+            <form action="#" id="event_filter_form" method="post" accept-charset="utf-8">
+
+              <div class="form-group">
+                <label class='customlabel'>Event Type</label>
+                <select name="eventtype" class="eventtype form-control">
+                  <option value="" selected="selected">Select event Type</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class='customlabel'>Country</label>
+                <select name="country" class="country form-control">
+                  <option value="" selected="selected">Select Country</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class='customlabel'>State</label>
+                <select name="state" class="state form-control">
+                  <option value="" selected="selected">Select State</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class='customlabel'>City</label>
+                <select name="city" class="city form-control">
+                  <option value="" selected="selected">Select City</option>
+                </select>
+              </div>
+
+              <div class="departments">
+                <label class='customlabel'>Department</label>
+                <div class='department_checkbox'>
+                  <label>
+                    <input class='department' type='checkbox' name='department' value='1'>Department1
+                  </label>
+                  <label>
+                    <input class='department' type='checkbox' name='department' value='2'>Department2
+                  </label> 
+                  <label>
+                    <input class='department' type='checkbox' name='department' value='1'>Department1
+                  </label>
+                  <label>
+                    <input class='department' type='checkbox' name='department' value='2'>Department2
+                  </label>
+                  <label>
+                    <input class='department' type='checkbox' name='department' value='1'>Department1
+                  </label>
+                  <label>
+                    <input class='department' type='checkbox' name='department' value='2'>Department2
+                  </label>
+                  <label>
+                    <input class='department' type='checkbox' name='department' value='1'>Department1
+                  </label>
+                  <label>
+                    <input class='department' type='checkbox' name='department' value='2'>Department2
+                  </label>
+                  <label>
+                    <input class='department' type='checkbox' name='department' value='1'>Department1
+                  </label>
+                  <label>
+                    <input class='department' type='checkbox' name='department' value='2'>Department2
+                  </label>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label class='customlabel'>Date</label>
+                <div class='input-group date' id='date'>
+                  <input type="text" name="date" value="" placeholder="Date" class="form-control"/>
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+              </div>
+
+            </form>  
+          </div>
+        </div>
+        <!--filter section end-->
+
+        <!--filter results section start-->
+        <div class='col-md-6'>
+          <div id="event_results" class="event_results">
+            <h2 class="text-center">Search Results for Events</h2>
+            <div class="event_search_result">
+              <div class="section1">
+                <div class="section1_left">
+                  <h2 class="eventname"><a href="">eventname2</a></h2>
+                  <p class="colg_name">college2</p>
+                  <p class="locat">Madurai ,Tamil Nadu, India</p>
+                  <p class="event_typename">Technical Event, 8days</p>
+                </div>
+                <div class="section1_right">
+                  <img src="<%= asset_path('dummy_college_logo.png') %>">
+                </div>
+              </div>
+              <div class="section2">
+                <div class="dates">
+                  <p><b>Date: </b>02-Dec-2016 <span></span> 10-Dec-2016</p>
+                </div>
+              <a href="event/7" class="view_det_btn hvr-bubble-float-right" target="_blank">View Details</a>
+              </div>
+              <div class="section3">
+                <ul>
+                <li>Going - 23456</li>
+                <li>May be - 10006</li>
+                <li>Event Reach - 23347899</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="event_search_result">
+              <div class="section1">
+                <div class="section1_left">
+                  <h2 class="eventname"><a href="">eventname2</a></h2>
+                  <p class="colg_name">college2</p>
+                  <p class="locat">Madurai ,Tamil Nadu, India</p>
+                  <p class="event_typename">Technical Event, 8days</p>
+                </div>
+                <div class="section1_right">
+                  <img src="<%= asset_path('dummy_college_logo.png') %>">
+                </div>
+              </div>
+              <div class="section2">
+                <div class="dates">
+                  <p><b>Date: </b>02-Dec-2016 <span></span> 10-Dec-2016</p>
+                </div>
+              <a href="event/7" class="view_det_btn hvr-bubble-float-right" target="_blank">View Details</a>
+              </div>
+              <div class="section3">
+                <ul>
+                  <li>Going - 23456</li>
+                  <li>May be - 10006</li>
+                  <li>Event Reach - 23347899</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div> 
+        <!--filter results section end--> 
+
+        <!--googlead start-->
+        <div class='col-md-3'><div class='home_vertical_google_ads'><img src="<%= asset_path('googleads.png') %>"></div></div>
+        <!--googlead end-->
+      
+      </div>
+    </div>
+  </div>
