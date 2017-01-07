@@ -12,6 +12,8 @@ gem 'cocoon', '~> 1.2.6'
 gem 'paperclip', '~> 5.1'
 gem 'will_paginate', '~> 3.1.0'
 gem 'city-state'
+gem 'rails_12factor'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
