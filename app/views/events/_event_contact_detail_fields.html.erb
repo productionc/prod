@@ -1,30 +1,22 @@
 <div class="form-inline clearfix">
   <div class="nested-fields">
-   <p>
-    <%= f.label :designation %><br>
-    <%= f.text_field :designation %>
-   </p>
-
-   <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-   </p>
-
-   <p>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-   </p>
-
-    <p>
-    <%= f.label :phone_no %><br>
-    <%= f.text_field :phone_no %>
-   </p>
-
-   <p>
-    <%= f.label :general_support %><br>
-    <%= f.text_field :general_support %>
-   </p>
-
-    <%= link_to_remove_association "Remove contact", f, class: "btn btn-default form-button" %>
+    <div class='col-md-6 form-group'>
+      <%= f.text_field :designation, placeholder: "Designation", class: "form-control" %>
+    </div>
+    <div class='col-md-6 form-group'>
+      <%= f.text_field :name, placeholder: "Name", class: "form-control" %>
+    </div>
+    <div class='col-md-6 form-group'>
+      <%= f.text_field :email, placeholder: "Email Id", class: "form-control"%>
+    </div>
+    <div class='col-md-6 form-group'>
+      <%= f.text_field :phone_no, placeholder: "Mobile No", class: "form-control"%>
+    </div>
+    <div class='col-md-12 form-group'>
+      <%= f.text_field :general_support, placeholder: "General support or helpdesk email address - if any",class: "form-control"%>
+    </div>
+    <div class='col-md-12 form-group'>
+      <%= link_to_remove_association "Remove contact", f, class: "btn btn-default form-button" %>
+    </div>
   </div>
 </div>

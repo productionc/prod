@@ -1,34 +1,26 @@
-<p>
-	<%= f.label :web_link %><br>
-	<%= f.text_field :web_link %>
-</p>
-
-<p>
-	<%= f.label :registration_link %><br>
-	<%= f.text_field :registration_link %>
-</p>
-
-<p>
-	<%= f.label :college_link %><br>
-	<%= f.text_field :college_link %>
-</p>
-
-<p>
-	<%= f.label :facebook_link %><br>
-	<%= f.text_field :facebook_link %>
-</p>
-
-<p>
-	<%= f.label :twitter_link %><br>
-	<%= f.text_field :twitter_link %>
-</p>
-
-<p>
-	<%= f.label :youtube_link %><br>
-	<%= f.text_field :youtube_link %>
-</p>
-
-<p>
-	<%= f.label :apps_link %><br>
-	<%= f.text_field :apps_link %>
-</p>
+<div class='urls'>
+	<h3>Url Details</h3>
+	<div class='row'>
+		<div class='col-md-3 form-group'>
+			<%= f.text_field :web_link, placeholder: "Event Website Link", class: "form-control"%>
+		</div>
+		<div class='col-md-3 form-group'>
+			<%= f.text_field :registration_link , placeholder: "Event Registration Link", class: "form-control"%>
+		</div>
+		<div class='col-md-3 form-group'>
+			<%= f.text_field :college_link, placeholder: "College Website Link", class: "form-control" %>
+		</div>
+		<div class='col-md-3 form-group'>
+			<%= f.text_field :facebook_link, placeholder: "Facebook Event Link", class: "form-control"%>
+		</div>
+		<div class='col-md-3 form-group'>
+			<%= f.text_field :twitter_link, placeholder: "Twitter Event Link", class: "form-control" %>
+		</div>
+		<div class='col-md-3 form-group'>
+			<%= f.text_field :youtube_link, placeholder: "Youtube Event Link", class: "form-control" %>
+		</div>
+		<div class='col-md-3 form-group'>
+			<%= f.text_field :apps_link, placeholder: "Event Link for Apps Android / IOS / Windows", class:"form-control"%>
+		</div>
+	</div>
+</div>

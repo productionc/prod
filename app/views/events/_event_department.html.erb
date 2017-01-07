@@ -1,9 +1,15 @@
- <div class="field">
-  <%= f.label "All Departments" %><br />
-  <%= f.collection_check_boxes :event_department_ids, EventDepartment.all, :id, :name do |b| %>
-    <div class="collection-check-box">
-      <%= b.check_box %>
-      <%= b.label %>
+<div class='department_info'>
+  <h3>Departments</h3>
+  <div class='row'>
+    <% EventDepartment.all.each_slice(3) do |event_department| %>
+    <div class='col-md-3'>
+    <%= f.collection_check_boxes :event_department_ids, event_department , :id, :name do |b| %>
+      <div class="collection-check-box">
+        <%= b.check_box %>
+        <%= b.label %>
+      </div>
+      <% end %>
     </div>
-  <% end %>
+   <% end %> 
   </div>
+</div>

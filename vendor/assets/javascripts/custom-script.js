@@ -26,18 +26,18 @@ $(window).load(function(){
   
 $(function () {
   $('#event_filter_form #date').datetimepicker({
-    format: 'YYYY-MM-DD'
+    format: 'DD-MM-YYYY'
   });
   $('#eventregistrationform #eventstartdate').datetimepicker({
-    format: 'YYYY-MM-DD'
+    format: 'DD-MM-YYYY'
   });
   $('#eventregistrationform #eventenddate').datetimepicker({
-    format: 'YYYY-MM-DD'
+    format: 'DD-MM-YYYY'
   });
   $('#eventregistrationform #event_reg_opens').datetimepicker({
-    format: 'YYYY-MM-DD'
+    format: 'DD-MM-YYYY'
   });
   $('#eventregistrationform #event_reg_closed').datetimepicker({
-    format: 'YYYY-MM-DD'
+    format: 'DD-MM-YYYY'
   });
 });

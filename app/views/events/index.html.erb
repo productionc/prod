@@ -14,15 +14,16 @@
 
               <div class="form-group">
                 <label class='customlabel'>Event Type</label>
-                <select name="eventtype" class="eventtype form-control">
-                  <option value="" selected="selected">Select event Type</option>
-                </select>
+                <%= select_tag "search_from", "<option>Technical Event</option><option>Symposium</option><option>Cultural Event</option><option>Management Event</option><option>Literary Event</option><option>Sports Event</option>Conference</option><option>Online Event</option><option>Seminar</option><option>Workshops</option>".html_safe %>
               </div>
 
               <div class="form-group">
                 <label class='customlabel'>Country</label>
                 <select name="country" class="country form-control">
                   <option value="" selected="selected">Select Country</option>
+                  <% CS.countries.each do |item| %>
+                    <option value="<%= item[0] %>"><%= item[1] %></option>
+                  <% end %>
                 </select>
               </div>
 
@@ -43,36 +44,11 @@
               <div class="departments">
                 <label class='customlabel'>Department</label>
                 <div class='department_checkbox'>
+                  <% EventDepartment.all.each_with_index do |dept, index| %>
                   <label>
-                    <input class='department' type='checkbox' name='department' value='1'>Department1
+                    <input class='department' type='checkbox' name='department' value='<%= index %>'><%= dept.name %>
                   </label>
-                  <label>
-                    <input class='department' type='checkbox' name='department' value='2'>Department2
-                  </label> 
-                  <label>
-                    <input class='department' type='checkbox' name='department' value='1'>Department1
-                  </label>
-                  <label>
-                    <input class='department' type='checkbox' name='department' value='2'>Department2
-                  </label>
-                  <label>
-                    <input class='department' type='checkbox' name='department' value='1'>Department1
-                  </label>
-                  <label>
-                    <input class='department' type='checkbox' name='department' value='2'>Department2
-                  </label>
-                  <label>
-                    <input class='department' type='checkbox' name='department' value='1'>Department1
-                  </label>
-                  <label>
-                    <input class='department' type='checkbox' name='department' value='2'>Department2
-                  </label>
-                  <label>
-                    <input class='department' type='checkbox' name='department' value='1'>Department1
-                  </label>
-                  <label>
-                    <input class='department' type='checkbox' name='department' value='2'>Department2
-                  </label>
+                  <% end %>
                 </div>
               </div>
           
@@ -93,61 +69,38 @@
         <div class='col-md-6'>
           <div id="event_results" class="event_results">
             <h2 class="text-center">Search Results for Events</h2>
-            <div class="event_search_result">
-              <div class="section1">
-                <div class="section1_left">
-                  <h2 class="eventname"><a href="">eventname2</a></h2>
-                  <p class="colg_name">college2</p>
-                  <p class="locat">Madurai ,Tamil Nadu, India</p>
-                  <p class="event_typename">Technical Event, 8days</p>
+            <% if @events.count == 0 %><br/><p style="text-align: center;">First Event is yet to create !</p><% end %>
+            <% @events.each do |event| %>
+              <div class="event_search_result">
+                <div class="section1">
+                  <div class="section1_left">
+                    <h2 class="eventname"><%= link_to event.event_name, event %></h2>
+                    <p class="colg_name"><%= event.study_place %></p>
+                    <p class="locat"><%= event.district %>, <%= event.state %>, <%= event.country %></p>
+                    <p class="event_typename"><%= event.event_type %>, 8days</p>
+                  </div>
+                  <div class="section1_right">
+                    <%= image_tag event.event_college_banner.college_banner.url(:small) if event.event_college_banner.present? %>
+                  </div>
                 </div>
-                <div class="section1_right">
-                  <img src="<%= asset_path('dummy_college_logo.png') %>">
+                <div class="section2">
+                  <div class="dates">
+                    <p><b>Date: </b><%= event.event_detail.start_date.to_s.split(' ')[0] %><span></span> <%= event.event_detail.end_date.to_s.split(' ')[0] %></p>
+                  </div>
+                <%= link_to 'View Details', event, class: 'view_det_btn hvr-bubble-float-right', target: '_blank' %>
                 </div>
-              </div>
-              <div class="section2">
-                <div class="dates">
-                  <p><b>Date: </b>02-Dec-2016 <span></span> 10-Dec-2016</p>
-                </div>
-              <a href="event/7" class="view_det_btn hvr-bubble-float-right" target="_blank">View Details</a>
-              </div>
-              <div class="section3">
-                <ul>
-                <li>Going - 23456</li>
-                <li>May be - 10006</li>
-                <li>Event Reach - 23347899</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="event_search_result">
-              <div class="section1">
-                <div class="section1_left">
-                  <h2 class="eventname"><a href="">eventname2</a></h2>
-                  <p class="colg_name">college2</p>
-                  <p class="locat">Madurai ,Tamil Nadu, India</p>
-                  <p class="event_typename">Technical Event, 8days</p>
-                </div>
-                <div class="section1_right">
-                  <img src="<%= asset_path('dummy_college_logo.png') %>">
-                </div>
-              </div>
-              <div class="section2">
-                <div class="dates">
-                  <p><b>Date: </b>02-Dec-2016 <span></span> 10-Dec-2016</p>
-                </div>
-              <a href="event/7" class="view_det_btn hvr-bubble-float-right" target="_blank">View Details</a>
-              </div>
-              <div class="section3">
-                <ul>
+                <div class="section3">
+                  <ul>
                   <li>Going - 23456</li>
                   <li>May be - 10006</li>
                   <li>Event Reach - 23347899</li>
-                </ul>
+                  </ul>
+                </div>
               </div>
-            </div>
+            <% end %>
+            <%= will_paginate @events %>
           </div>
-        </div> 
+        </div>
         <!--filter results section end--> 
 
         <!--googlead start-->

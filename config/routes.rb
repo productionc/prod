@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   get 'events/welcome' => 'events#welcome'
   resources :events
   
-  root 'events#index'
+  root 'events#welcome'
+
+  get 'states/:country', to: 'events#states'
+  get 'cities/:state/:country', to: 'events#cities'
+
+  get 'get_event_results/:query', to: 'events#get_event_results'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

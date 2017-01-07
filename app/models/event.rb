@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+
  belongs_to :event_detail
  belongs_to :event_registration
  has_and_belongs_to_many :event_departments
@@ -22,4 +23,8 @@ class Event < ActiveRecord::Base
  accepts_nested_attributes_for :event_college_banner, reject_if: :all_blank, allow_destroy: true
  accepts_nested_attributes_for :event_broucher, reject_if: :all_blank, allow_destroy: true
  accepts_nested_attributes_for :event_sponsor, reject_if: :all_blank, allow_destroy: true
+
+  def to_param
+    [id, event_name.parameterize, study_place.parameterize, district.parameterize].join("-")
+  end
 end

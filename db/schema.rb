@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230195947) do
+ActiveRecord::Schema.define(version: 20170101060436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,9 @@ ActiveRecord::Schema.define(version: 20161230195947) do
     t.text     "conference_topics"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.datetime "reg_start_date"
+    t.datetime "reg_end_date"
+    t.text     "reg_fee"
   end
 
   create_table "event_extras", force: :cascade do |t|
@@ -102,14 +105,6 @@ ActiveRecord::Schema.define(version: 20161230195947) do
     t.integer  "event_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-  end
-
-  create_table "event_registrations", force: :cascade do |t|
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.text     "fee"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "event_sponsors", force: :cascade do |t|
@@ -149,7 +144,6 @@ ActiveRecord::Schema.define(version: 20161230195947) do
     t.integer  "event_detail_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-    t.integer  "event_registration_id"
     t.integer  "event_url_id"
     t.integer  "event_accomodation_id"
     t.integer  "event_banner_id"

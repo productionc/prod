@@ -1,673 +1,190 @@
 <style>
 body {
-    background: #f7f7f7;
-    min-height: 100vh;
+background: #f7f7f7;
+min-height: 100vh;
 }
 </style>
 <!--event registration start-->
-  <div id='event_reg_body_container'>
-    <div class='container-fluid'>
+<div id='event_reg_body_container'>
+  <div class='container-fluid'>
     <h2 class='text-center title'>Event Registration</h2>
-    <form name='eventregistrationform' id='eventregistrationform' action='' method='post' enctype="multipart/form-data">
-      <div class='basic_info'>
-        <h3>Basic Details</h3>
-        <div class='row'>
-          <div class='col-md-3 form-group'>
-            <input type='text' name='fname' class='form-control' placeholder='First Name' value=''>
-          </div>
+      <%= simple_form_for @event, html: { multipart: true } do |f| %>
+      <% if @event.errors.any? %>
+      <div id="errors">
+        <h3><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h3>
+        <ul>
+          <% @event.errors.full_messages.each do |msg| %>
+          <li>
+            <%= msg %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+     <div id="eventregistrationform">
+     <div class='basic_info'>
+      <h3>Basic Details</h3>
+      <div class='row'>
+        <div class='col-md-3 form-group'>
+          <%= f.text_field :first_name, class: 'form-control', placeholder: "First Name" %>
+        </div>
+        <div class='col-md-3 form-group'>
+          <%= f.text_field :last_name, class: 'form-control', placeholder: "Last Name" %>
+        </div>
+        <div class='col-md-3 form-group'>
+          <%= f.text_field :email, class: 'form-control', placeholder: "Email Id" %>
+        </div>
+        <div class='col-md-3 form-group'>
+          <%= f.text_field :phone_no, class: 'form-control', placeholder: "Mobile No *" %>
+        </div>
+        <div class='col-md-3 form-group'>
+          <%= f.text_field :event_name, class: 'form-control', placeholder: "Event Name" %>
+        </div>
+        <div class='col-md-3 form-group'>
+          <%= f.select :event_type, ['Technical Event', 'Symposium', 'Cultural Event', 'Management Event',
+      'Literary Event', 'Sports Event', 'Conference', 'Online Event', 'Seminar', 'Workshops'] %>
+        </div>
+        <div class='col-md-3 form-group'>
+          <%= f.text_field :study_place, class: 'form-control', placeholder: "College Name / University" %>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3 form-group'>
+          <select name="event[country]" class="country form-control">
+                  <option value="" selected="selected">Select Country</option>
+                  <% CS.countries.each do |item| %>
+                    <option value="<%= item[0] %>"><%= item[1] %></option>
+                  <% end %>
+          </select>
+        </div>
+        <div class='col-md-3 form-group'>
+          <select name="event[state]" class="state form-control">
+                  <option value="" selected="selected">Select State</option>
+          </select>
+        </div>
+        <div class='col-md-3 form-group'>
+          <select name="event[district]" class="city form-control">
+                  <option value="" selected="selected">Select City</option>
+          </select>
+        </div>
+        <div class='col-md-3 form-group'>
+              <%= f.text_field :zip, placeholder: 'Zip Code / Post Code' %>
+        </div>
+        <div class='col-md-3 form-group'>
+          <%= f.text_field :location, placeholder: 'Location' %>
+        </div>
+      </div>
+    </div>
 
-          <div class='col-md-3 form-group'>
-            <input type='text' name='lname' class='form-control' placeholder='Last Name' value=''>
-          </div>
+    <%= f.simple_fields_for :event_detail do |event_detail| %>
+      <%= render 'event_detail_fields', f: event_detail %>
+    <% end %>
 
-          <div class='col-md-3 form-group'>
-            <input type='text' name='emailid' class='form-control' placeholder='Email Id' value=''>
-          </div>
+    <%= render partial: 'event_department', locals: {f: f} %>
 
-          <div class='col-md-3 form-group'>
-            <input type='text' name='mobno' class='form-control' placeholder='Mobile No' value=''>
-          </div>
+    <%= f.simple_fields_for :event_url do |event_url| %>
+    <%= render 'event_url_detail_fields', f: event_url %>
+    <% end %>
 
-          <div class='col-md-3 form-group'>
-            <input type='text' name='eventname' class='form-control' placeholder='Event Name' value=''>
-          </div>
-
-          <div class='col-md-3 form-group'>
-            <select name="eventtype" class="form-control">
-              <option value="" selected="selected">Select Event Type</option>
-            </select>
-          </div>
-
-          <div class='col-md-3 form-group'>
-            <input type='text' name='collegename' class='form-control' placeholder='College Name / University' value=''>
+    <div class='contperson_and_guest'>
+      <div class='row'>
+        <div class='col-md-6 form-group'>
+          <div class='cont_persondetails'>
+            <h3>Contact Person Details</h3>
+            <%= f.simple_fields_for :event_contact_details do |event_contact_details| %>
+            <%= render 'event_contact_detail_fields', f: event_contact_details %>
+            <% end %>
+            <div class="links">&nbsp;
+              <%= link_to_add_association 'Add Contact', f, :event_contact_details, class: "btn btn-default add-button" %>
+            </div><br/>
           </div>
         </div>
-
-        <div class='row'>
-          <div class='col-md-3 form-group'>
-            <select name="country" class="form-control">
-              <option value="" selected="selected">Select Country</option>
-            </select>
-          </div>
-
-          <div class='col-md-3 form-group'>
-            <select name="state" class="form-control">
-              <option value="" selected="selected">Select State</option>
-            </select>
-          </div>
-
-          <div class='col-md-3 form-group'>
-            <select name="district" class="form-control">
-              <option value="" selected="selected">Select District</option>
-            </select>
-          </div>
-
-          <div class='col-md-3 form-group'>
-            <input type='text' name='zipcode' class='form-control' placeholder='Zip Code / Post Code' value=''>
-          </div>
-
-          <div class='col-md-3 form-group'>
-            <input type='text' name='location' class='form-control' placeholder='Location' value=''>
+      
+        <div class='col-md-6 form-group'>
+          <div class='cont_persondetails'>
+            <h3>Guest Details</h3>
+            <%= f.simple_fields_for :event_guest_details do |event_guest_details| %>
+            <%= render 'event_guest_detail_fields', f: event_guest_details %>
+            <% end %>
+            <div class="links">&nbsp;
+              <%= link_to_add_association 'Add Guest', f, :event_guest_details, class: "btn btn-default add-button" %>
+            </div><br/>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class='event_info'>
-      <h3>Event Details</h3>
-        <div class='row'>
-          <div class='col-md-6 form-group'>
+    <div class='lookfor_sponsors_accomodation'>
+      <div class='row'>
+        <div class='col-md-6'>
+          <div class='lookfor_sponsors'>
+            <h3>We are looking for</h3>
             <div class='row'>
-              <div class='col-md-6 form-group'>
-                <div class='input-group date' id='eventstartdate'>
-                  <label>Start Date</label>
-                  <input type="text" name="eventstartdate" value="" placeholder="Start Date" class="form-control"/>
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                </div>
+              <div class='col-md-12'>
+                <%= render partial: 'event_extra', locals: {f: f} %>
               </div>
-
-              <div class='col-md-6 form-group'>
-                <div class='input-group date' id='eventenddate'>
-                  <label>End Date</label>
-                  <input type="text" name="eventenddate" value="" placeholder="End Date" class="form-control"/>
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                </div>
-              </div>
-
-              <div class='col-md-12 form-group'>
-                <label>Event Description</label>
-                <div class='event_description'>
-                  <p class='pull-right' data-toggle="modal" data-target="#eventdescription_popup">See Example</p>
-                  <textarea name='description' class='form-control' rows='11'></textarea>
-                </div>
-              </div> 
-
-              <div class='col-md-6 form-group'>
-                <label>Sub Events</label>
-                <div class='subevents'>
-                  <p class='pull-right' data-toggle="modal" data-target="#subevents_popup">See Example</p>
-                  <textarea name='subevents' class='form-control' rows='8'></textarea>
-                </div>
-              </div>
-
-              <div class='col-md-6 form-group'>
-                <label>Workshops</label>
-                <div class='workshops'>
-                  <p class='pull-right' data-toggle="modal" data-target="#workshops_popup">See Example</p>
-                  <textarea name='workshops' class='form-control' rows='8'></textarea>
-                </div>  
-              </div>
-
-              <div class='col-md-6 form-group'>
-                <label>Paper Presentation Topics</label>
-                <div class='paper_presen_topics'>
-                  <p class='pull-right' data-toggle="modal" data-target="#papertopics_popup">See Example</p>
-                  <textarea name='paper_pres_topics' class='form-control' rows='8'></textarea>
-                </div>  
-              </div>
-              
-              <div class='col-md-6 form-group'>
-                <label>Conference Topics</label>
-                <div class='conf_topics'>
-                  <p class='pull-right' data-toggle="modal" data-target="#conferencetopics_popup">See Example</p>
-                  <textarea name='conf_topics' class='form-control' rows='8'></textarea>
-                </div>  
-              </div>     
+              <p>* Conditions Apply</p>
             </div>
           </div>
-
-          <div class='col-md-6 form-group'>
-            <div class='row registration_details'>
-              <h3>Registration Details</h3>
-              <div class='col-md-6 form-group'>
-                <div class='input-group date' id='event_reg_opens'>
-                  <label>Registration Opens On</label>
-                  <input type="text" name="event_reg_opens" value="" placeholder="Registration Opens On" class="form-control"/>
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+        <div class='col-md-6'>
+          <div class='accomodations'>
+            <h3>Accomodation</h3>
+            <div class='row'>
+              <div class='col-md-12'>
+                <%= f.simple_fields_for :event_accomodation do |event_accomodation| %>
+                <div class="field">
+                  <%= event_accomodation.label :accomodation, "Yes", :value => "true"  %>
+                  <%= event_accomodation.radio_button :accomodation, true %>
+                  <%= event_accomodation.label :accomodation, "No", :value => "false" %>
+                  <%= event_accomodation.radio_button :accomodation, false%>
                 </div>
-              </div>
-
-              <div class='col-md-6 form-group'>
-                <div class='input-group date' id='event_reg_closed'>
-                  <label>Registration Closes On</label>
-                  <input type="text" name="event_reg_closed" value="" placeholder="Registration Closes On" class="form-control"/>
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                </div>
-              </div>
-
-              <div class='col-md-12 form-group'>
-                <label>Registration Fees</label>
-                <div class='reg_fees'>
-                  <p class='pull-right' data-toggle="modal" data-target="#registrationfees_popup">See Example</p>
-                  <textarea name='regfees' class='form-control' rows='8'></textarea>
-                </div>
+                <% end %>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class='department_info'>
-      <h3>Departments</h3>
-        <div class='row'>
-          <div class='col-md-3'>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-          </div>
-          <div class='col-md-3'>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-          </div>
-          <div class='col-md-3'>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-          </div>
-          <div class='col-md-3'>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-            <label><input class='department' type='checkbox' name='department' value='1'>Department1</label>
-          </div>
-        </div>
-      </div>
-
-      <div class='urls'>
-      <h3>Url Details</h3>
-        <div class='row'>
-          <div class='col-md-3 form-group'>
-            <input type="text" name="event_web_link" value="" placeholder="Event Website Link" class="form-control"/>
-          </div>
-          <div class='col-md-3 form-group'>
-            <input type="text" name="event_reg_link" value="" placeholder="Event Registration Link" class="form-control"/>
-          </div>
-          <div class='col-md-3 form-group'>
-            <input type="text" name="college_web_link" value="" placeholder="College Website Link" class="form-control"/>
-          </div>
-          <div class='col-md-3 form-group'>
-            <input type="text" name="fb_link" value="" placeholder="Facebook Event Link" class="form-control"/>
-          </div>
-          <div class='col-md-3 form-group'>
-            <input type="text" name="twitter_link" value="" placeholder="Twitter Event Link" class="form-control"/>
-          </div>
-          <div class='col-md-3 form-group'>
-            <input type="text" name="youtube_link" value="" placeholder="Youtube Event Link" class="form-control"/>
-          </div>
-          <div class='col-md-3 form-group'>
-            <input type="text" name="android_app_link" value="" placeholder="Event Link for Apps Android / IOS / Windows" class="form-control"/>
-          </div>
-        </div>
-      </div>
-
-      <div class='contperson_and_guest'>
-        <div class='row'>
-          <div class='col-md-6 form-group'>
-            <div class='cont_persondetails'>
-              <h3>Contact Person Details</h3>
-              <div class='row'>
-                <div class='col-md-6 form-group'>
-                  <input type="text" name="person_desig" value="" placeholder="Designation" class="form-control"/>
-                </div>
-                <div class='col-md-6 form-group'>
-                  <input type="text" name="person_name" value="" placeholder="Name" class="form-control"/>
-                </div>
-                <div class='col-md-6 form-group'>
-                  <input type="text" name="person_emailid" value="" placeholder="Email Id" class="form-control"/>
-                </div>
-                <div class='col-md-6 form-group'>
-                  <input type="text" name="person_mobno" value="" placeholder="Mobile No" class="form-control"/>
-                </div>
-                <div class='col-md-12'>
-                  <input type='submit' name='person_add' class='person_add' value='Add'>
-                </div>
-                <div class='col-md-12 form-group'>
-                  <input type="text" name="generalsupport_email" value="" placeholder="General support or helpdesk email address - if any" class="form-control"/>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class='col-md-6 form-group'>
-            <div class='guest_details'>
-              <h3>Guest Details</h3>
-              <div class='row'>
-                <div class='col-md-6 form-group'>
-                  <input type="text" name="guest_name" value="" placeholder="Guest Name" class="form-control"/>
-                </div>
-                <div class='col-md-6 form-group'>
-                  <input type="text" name="guest_desig" value="" placeholder="Guest Designation" class="form-control"/>
-                </div>
-                <div class='col-md-6 form-group form-group'>
-                  <input type="text" name="guest_companyname" value="" placeholder="Guest Company Name" class="form-control"/>
-                </div>
-                <div class='col-md-6 form-group'>
-                  <input type="text" name="guest_deligation" value="" placeholder="Guest Deligation" class="form-control"/>
-                </div>
-                <input type='submit' name='guest_add' class='guestadd' value='Add'>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class='lookfor_sponsors_accomodation'>
-        <div class='row'>
-          <div class='col-md-6'>
-            <div class='lookfor_sponsors'>
-              <h3>We are looking for</h3>
-              <div class='row'>
-                <div class='col-md-12'>
-                  <label><input class='sponsors' type='checkbox' name='sponsors' value='1'>Sponsors</label>
-                  <label><input class='sponsors' type='checkbox' name='sponsors' value='1'>Workshops</label>
-                  <label><input class='sponsors' type='checkbox' name='sponsors' value='1'>Celebrities</label>
-                </div>
-                <p>* Conditions Apply</p>
-              </div>
-            </div>
-          </div>
-
-          <div class='col-md-6'>
-            <div class='accomodations'>
-              <h3>Accomodation</h3>
-              <div class='row'>
-                <div class='col-md-12'>
-                  <label><input type='radio' name='sponsors' value='1'>Yes</label>
-                  <label><input type='radio' name='sponsors' value='0'>No</label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class='fileuploads'>
+    <div class='fileuploads'>
       <h3>File Uploads</h3>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Banner Image</label>
           <div class="col-sm-10">
-            <input type="file" class="" value="" name="banner_image">
+            <%= f.simple_fields_for :event_banner do |event_banner| %>
+            <%= render 'event_banner_fields', f: event_banner %>
+            <% end %>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">College Logo / Event Logo</label>
           <div class="col-sm-10">
-            <input type="file" class="" value="" name="college_event_logo">
+            <%= f.simple_fields_for :event_college_banner do |event_college_banner| %>
+            <%= render 'event_college_banner_fields', f: event_college_banner %>
+            <% end %>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Broucher</label>
           <div class="col-sm-10">
-            <input type="file" class="" value="" name="broucher">
+            <%= f.simple_fields_for :event_broucher do |event_broucher| %>
+            <%= render 'event_broucher_fields', f: event_broucher %>
+            <% end %>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Sponsors Logo</label>
           <div class="col-sm-10">
-            <input type="file" class="" value="" name="sponsors_logo">
-            <p>Add upto 25 sponsor logos</p>
+            <%= f.simple_fields_for :event_sponsor do |event_sponsor| %>
+            <%= render 'event_sponsor_fields', f: event_sponsor %>
+            <% end %>
           </div>
         </div>
-
       </div>
-
-      <div class='notes'>
-      <h3>Notes</h3>
-        <div class="row">
-          <div class='col-md-12'>
-            <ul>
-              <li>College logo and Sponsor logo size should be less than 100kb</li>
-              <li>College logo and Sponsor logo size should be less than 100kb</li>
-              <li>College logo and Sponsor logo size should be less than 100kb</li>
-              <li>College logo and Sponsor logo size should be less than 100kb</li>
-            </ul>
-          </div>    
-        </div>
-      </div>
-
-      <input type='submit' name='event_registration_submit' class='event_registration_submit' value='Submit'>
-
-
-
-    </form>
+          
+    <%= f.button :submit, class: "btn btn-primary event_registration_submit", value: "Submit" %><br/>
     </div>
-  </div>  
-<!--event registration end-->        
-
-
-<!--event description popups start-->
-<div class="modal fade" id="eventdescription_popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Example for Event Description</h4>
-      </div>
-      <div class="modal-body">
-        <p>Get set to witness India's largest student-run fest in this country. Wherever you are, 'Texconhorn' and reach IIT to see the forest come alive. The enchantment shall be open to viewing from 4th January, 2017 to 8th January, 2017...</p>
-      </div>
-    </div>
-  </div>
-</div>
-<!--event description popups end-->
-<!--sub events popups start-->
-<div class="modal fade" id="subevents_popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Example for Sub-Events</h4>
-      </div>
-      <div class="modal-body">
-        <ul>
-          <li>Technical quiz</li>
-          <li>Circuit Debugging</li>
-          <li>Coding contest</li>
-          <li>.....</li>
-        </ul>
-        <p>Likewise add topics so on</p>
-      </div>
-    </div>
-  </div>
-</div>
-<!--sub events popups start end-->
-<!--workshops popups start-->
-<div class="modal fade" id="workshops_popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Example for Workshops</h4>
-      </div>
-      <div class="modal-body">
-        <ul>
-          <li>Robotics</li>
-          <li>Web development</li>
-          <li>Internet of Things</li>
-          <li>.....</li>
-        </ul>
-        <p>Likewise add topics so on</p>
-      </div>
-    </div>
-  </div>
-</div>
-<!--workshops popups end-->
-<!--paper presentation topics popups start-->
-<div class="modal fade" id="papertopics_popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Example for Paper Presentation Topics</h4>
-      </div>
-      <div class="modal-body">
-        <ul>
-          <li>Fuzzy Logic</li>
-          <li>Neural networks</li>
-          <li>.....</li>
-        </ul>
-        <p>Likewise add topics so on</p>
-      </div>
-    </div>
-  </div>
-</div>
-<!--paper presentation topics popups end-->
-<!--conference topics popups start-->
-<div class="modal fade" id="conferencetopics_popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Example for Conference Topics</h4>
-      </div>
-      <div class="modal-body">
-        <ul>
-          <li>Hyper-Threading Technology</li>
-          <li>Hadoop Technology</li>
-          <li>Image processing and applications</li>
-          <li>Improving TCP performance over mobile ad hoc network</li>
-          <li>.....</li>
-        </ul>
-        <p>Likewise add topics so on</p>
-      </div>
-    </div>
-  </div>
-</div>
-<!--conference topics popups end-->
-<!--registration fees popups start-->
-<div class="modal fade" id="registrationfees_popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Example for Registration Fees</h4>
-      </div>
-      <div class="modal-body">
-        <ul>
-          <li>Paper Presentation – Free</li>
-          <li>Web development workshop – Free</li>
-          <li>Python workshop – Rs 750 per head / Rs 2000 per team</li>
-          <li>Arduino - 750 per head / Rs 2000 per team</li>
-        </ul>
-        <p>Likewise add registration fees so on</p>
-      </div>
-    </div>
-  </div>
-</div>
-<!--registration fees popups end-->
-
-
-<%= simple_form_for @event, html: { multipart: true } do |f| %>
-  <% if @event.errors.any? %>
-    <div id="errors">
-      <p>
-        <%= @event.errors.count %>
-        Prevented this event froms saving
-      </p>
-      <ul>
-        <% @event.errors.full_messages.each do |msg| %>
-          <li>
-            <%= msg %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="panel-body">
-   
-   <p>
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-   </p>
-
-   <p>
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-   </p>
-   
-   <p>
-    <%= f.label :email %><br>
-    <%= f.email_field :email %>
-   </p>
-
-   <p>
-    <%= f.label :phone_no %><br>
-    <%= f.text_field :phone_no %>
-   </p>
-
-   <p>
-    <%= f.label :event_name %><br>
-    <%= f.text_field :event_name %>
-   </p>
-
-   <p>
-    <%= f.label :event_type %><br>
-    <%= f.select :event_type, ['Technical Event', 'Symposium', 'Cultural Event', 'Management Event',
-      'Literary Event', 'Sports Event', 'Conference', 'Online Event', 'Seminar', 'Workshops'] %>
-   </p>
-
-   <p>
-    <%= f.label :study_place %><br>
-    <%= f.text_field :study_place %>
-   </p>
-
-   <p>
-    <%= f.label :country %><br>
-    <%= f.select :country, ['India', 'US'] %>
-   </p>
-
-   <p>
-    <%= f.label :state %><br>
-    <%= f.select :state, ['Tamilnadu', 'Andhra'] %>
-   </p>
-
-   <p>
-    <%= f.label :district %><br>
-    <%= f.select :district, ['Chennai', 'Tiruvallur'] %>
-   </p>
-
-   <p>
-    <%= f.label :zip %><br>
-    <%= f.text_field :zip %>
-   </p>
-   
-   <p>
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
-   </p>
-
-   <div class="row">
-      <div class="col-md-6">
-        <h3>Event details</h3>
-        <div id="event_details">
-          <%= f.simple_fields_for :event_detail do |event_detail| %>
-            <%= render 'event_detail_fields', f: event_detail %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <h3>Event Reg details</h3>
-        <div id="event_reg_details">
-          <%= f.simple_fields_for :event_registration do |event_registration| %>
-            <%= render 'event_registration_fields', f: event_registration %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <h3>Event Url details</h3>
-        <div id="event_url_details">
-          <%= f.simple_fields_for :event_url do |event_url| %>
-          <%= render 'event_url_detail_fields', f: event_url %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-
-   <h3>Event Departments</h3>
-   <%= render partial: 'event_department', locals: {f: f} %>
-
-   <div class="col-md-6">
-        <h3>Event contact details</h3>
-        <div id="directions">
-          <%= f.simple_fields_for :event_contact_details do |event_contact_details| %>
-            <%= render 'event_contact_detail_fields', f: event_contact_details %>
-          <% end %>
-          <div class="links"><br/>
-            <%= link_to_add_association 'Add Contact', f, :event_contact_details, class: "btn btn-default add-button" %>
-          </div>
-        </div>
-   </div>
-
-   <div class="col-md-6">
-        <h3>Event guest contact details</h3>
-        <div id="directions">
-          <%= f.simple_fields_for :event_guest_details do |event_guest_details| %>
-            <%= render 'event_guest_detail_fields', f: event_guest_details %>
-          <% end %>
-          <div class="links"><br/>
-            <%= link_to_add_association 'Add Contact', f, :event_guest_details, class: "btn btn-default add-button" %>
-          </div>
-        </div>
-   </div>
-
-   <br/><h3>Looking for</h3>
-   <%= render partial: 'event_extra', locals: {f: f} %>
-
-   <h3>Accomodation</h3>
-    <%= f.simple_fields_for :event_accomodation do |event_accomodation| %>
-      <div class="field">
-      <%= event_accomodation.label :accomodation %><br />
-      <%= event_accomodation.label :accomodation, "Yes", :value => "true"  %>
-      <%= event_accomodation.radio_button :accomodation, true %>
-      <%= event_accomodation.label :accomodation, "No", :value => "false" %>
-      <%= event_accomodation.radio_button :accomodation, false%>
-      </div>
     <% end %>
   </div>
-
-
-  <h1>Event Attachments</h1>
-  <%= f.simple_fields_for :event_banner do |event_banner| %>
-  <%= render 'event_banner_fields', f: event_banner %>
-  <% end %>
-
-   <%= f.simple_fields_for :event_college_banner do |event_college_banner| %>
-  <%= render 'event_college_banner_fields', f: event_college_banner %>
-  <% end %>
-
-  <%= f.simple_fields_for :event_broucher do |event_broucher| %>
-  <%= render 'event_broucher_fields', f: event_broucher %>
-  <% end %>
-
-  <%= f.simple_fields_for :event_sponsor do |event_sponsor| %>
-  <%= render 'event_sponsor_fields', f: event_sponsor %>
-  <% end %>
-
-
-    
-  </div>
-
-  <%= f.button :submit, class: "btn btn-primary" %>
-<% end %>
+</div>
