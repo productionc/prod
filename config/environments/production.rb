@@ -78,6 +78,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.raise_delivery_errors = true
+  
   config.action_mailer.default_url_options = {:host => 'collegeda.herokuapp.com'}
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
