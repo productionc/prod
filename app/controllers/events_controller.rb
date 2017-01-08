@@ -61,8 +61,24 @@ before_action :authenticate_user!, only: [:show, :new]
   end
 
   def event_going
-   binding.pry
-   redirect_to :back, notice: "Your response is recorded !"
+   event_id = params[:event_id].to_i
+   user_id = current_user.id
+   event_going = EventGoing.find_by(event_id: event_id, user_id: user_id)
+   
+   if(current_user && params[:going_count].present? && event_going.nil?)
+    if params[:going_count] == '1'
+      count = event_going.nil? ? 1 : event_going.going_count + 1 
+      EventGoing.create(event_id: event_id, user_id: user_id, going_count: count )
+    else
+      count = event_going.nil? ? 1 : event_going.may_be_count + 1 
+      EventGoing.create(event_id: event_id, user_id: user_id, may_be_count: count )
+    end
+    msg = "Your response is recorded !"
+   else
+     msg = "Your response is already recorded !"
+   end
+
+   redirect_to :back, notice: msg
   end
 
 	private

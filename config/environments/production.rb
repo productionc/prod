@@ -82,9 +82,9 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {:host => 'collegeda.herokuapp.com'}
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    :user_name => 'testapp_acc',
-    :password => 'SMACKTHAT2',
-    :domain => 'collegeda.herokuapp.com',
+    :user_name => 'lakshmananm',
+    :password => 'smackthat2',
+    :domain => 'herokuapp.com',
     :address => 'smtp.sendgrid.net',
     :port => 587,
     :authentication => :plain,

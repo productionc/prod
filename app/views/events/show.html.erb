@@ -150,7 +150,8 @@
                 <form name='areugoingforevent' action='' id='areugoingforevent'>
                   <p>Are you going for the event?</p>
                   <label><input type='radio' name='going_count' value='1'><span>Going</span></label>
-                  <label><input type='radio' name='may_be_count' value='1'><span>May be</span></label>
+                  <label><input type='radio' name='going_count' value='0'><span>May be</span></label>
+                  <input type="hidden" name="event_id" value="<%= @event.id %>" />
                   <input type='submit' class='btn' value='Submit' />
                 </form>
               </div>
