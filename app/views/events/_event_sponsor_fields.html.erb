@@ -1,3 +1,10 @@
-<div class="fallback">
-    <%= f.file_field :sponsor %><br>
+<div class="form-inline clearfix">
+  <div class="nested-fields">
+    <div class="fallback">
+      <%= f.file_field :sponsor %><br>
+    </div>
+    <div class='col-md-12 form-group'>
+      <%= link_to_remove_association "Remove Sponsor", f, class: "btn btn-default form-button" %>
+    </div>
+  </div>
 </div>

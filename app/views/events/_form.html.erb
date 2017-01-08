@@ -176,9 +176,12 @@ min-height: 100vh;
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Sponsors Logo</label>
           <div class="col-sm-10">
-            <%= f.simple_fields_for :event_sponsor do |event_sponsor| %>
-            <%= render 'event_sponsor_fields', f: event_sponsor %>
+            <%= f.simple_fields_for :event_sponsors do |event_sponsors| %>
+            <%= render 'event_sponsor_fields', f: event_sponsors %>
             <% end %>
+            <div class="links">&nbsp;
+              <%= link_to_add_association 'Add Sponsor', f, :event_sponsors, class: "btn btn-default add-button" %>
+            </div><br/>
           </div>
         </div>
       </div>

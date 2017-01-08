@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170101060436) do
+ActiveRecord::Schema.define(version: 20170108084938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,16 @@ ActiveRecord::Schema.define(version: 20170101060436) do
     t.integer "event_extra_id", null: false
   end
 
+  create_table "event_goings", force: :cascade do |t|
+    t.integer  "event__id"
+    t.integer  "user_id"
+    t.integer  "may_be_count"
+    t.integer  "going_count"
+    t.integer  "reach_count"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "event_guest_details", force: :cascade do |t|
     t.string   "name"
     t.string   "designation"
@@ -114,6 +124,14 @@ ActiveRecord::Schema.define(version: 20170101060436) do
     t.datetime "sponsor_updated_at"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.integer  "event_id"
+  end
+
+  create_table "event_subscriptions", force: :cascade do |t|
+    t.string   "email_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "event_urls", force: :cascade do |t|
@@ -177,6 +195,9 @@ ActiveRecord::Schema.define(version: 20170101060436) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "registration_type"
+    t.string   "dept"
+    t.string   "official_email_id"
+    t.string   "company"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

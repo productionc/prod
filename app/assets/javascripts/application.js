@@ -23,6 +23,30 @@
 //= require custom_validation
 
 $(document).ready(function() {
+
+$('#user_registration_type').change(function () {
+  
+  $('#user_dept, #user_dept_label').css('display','none');
+  $('#user_passed_out_year, #user_passed_out_year_label').css('display','none');
+  $('#user_place_of_study, #user_place_of_study_label').css('display','none');
+  $('#user_official_email_id, #user_official_email_id_label').css('display','none');
+  $('#user_company, #user_company_label').css('display','none');
+      
+  if($(this).val() == "Student"){
+    $('#user_dept, #user_dept_label').css('display','block');
+    $('#user_passed_out_year, #user_passed_out_year_label').css('display','block');
+    $('#user_place_of_study, #user_place_of_study_label').css('display','block');
+  }
+  else if($(this).val() == "Teacher"){
+    $('#user_dept, #user_dept_label').css('display','block');
+    $('#user_place_of_study, #user_place_of_study_label').css('display','block');
+  }
+  else if($(this).val() == "Employer"){
+    $('#user_official_email_id, #user_official_email_id_label').css('display','block');
+    $('#user_company, #user_company_label').css('display','block');
+  }
+});
+
 $('.country').change(function () {
   var input_state = $('.state');
   $.getJSON('/states/' + $(this).val(), function (data) {

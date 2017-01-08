@@ -7,8 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Collegedaa</title>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
     <%= csrf_meta_tags %>
   </head>
@@ -48,7 +48,7 @@
         <div class='row'>
           <div class='col-md-4'>
             <div class="logo">
-              <a href='#'>COLLEGEDA</a>
+              <a href='/events'>COLLEGEDA</a>
             </div>    
           </div>
           <div class="col-md-8">
@@ -104,13 +104,27 @@
           <div class='col-md-3'>
             <div class='footer_sec4'>
               <!--<h2>Connect</h2>-->
-              <form name='subscribe_email' action='' id='subscribe_email'>
+             <!--  <form name='subscribe_email' action='' id='subscribe_email'>
                 <h3><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp; Subscribe to our newsletter</h3>
                 <div class='fields'>
                   <input type="text" name="subscribe" value="" placeholder="Email Address" class="form-control"/>
                   <input type='submit' class='btn' value='Go'>
                 </div>
-              </form>
+              </form> -->
+
+              <%= form_tag  events_event_subscription_path, {:class => 'form-horizontal', role: "form"} do %>
+                 <h3><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp; Subscribe to our newsletter</h3>
+                <div class='fields'>
+                  <input type="email" required="required" name="subscribe_email" value="" placeholder="Email Address" class="form-control"/>
+                  <% if current_user %>
+                    <input type='submit' class='btn' value='Go'>
+                  <% else %>
+                    <input type='submit' class='btn' value='Go' disabled="disabled">
+                  <% end %>
+                </div>
+              <% end %>
+
+
               <ul>
                 <li><a href='#'><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                 <li><a href='#'><i class="fa fa-twitter" aria-hidden="true"></i></a></li>

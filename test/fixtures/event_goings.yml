@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event__id: 1
+  user_id: 1
+  may_be_count: 1
+  going_count: 1
+  reach_count: 1
+
+two:
+  event__id: 1
+  user_id: 1
+  may_be_count: 1
+  going_count: 1
+  reach_count: 1

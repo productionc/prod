@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   
   get 'events/welcome' => 'events#welcome'
+  post 'events/event_subscription' => 'events#event_subscription'
+  post 'events/event_going' => 'events#event_going'
   resources :events
   
   root 'events#welcome'

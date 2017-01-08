@@ -1,5 +1,5 @@
 class EventSponsor < ActiveRecord::Base
-  has_one :event
+ belongs_to :event
 
  has_attached_file :sponsor, :styles => { :small => "150x150>" },
                   :url  => "/assets/attachments/:id/:style/:basename.:extension",

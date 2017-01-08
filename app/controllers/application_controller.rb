@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
 protected
 	def configure_permitted_parameters
-	  devise_parameter_sanitizer.for(:sign_up).push(:name, :phone_no, :place_of_study, :passed_out_year, :registration_type)
-	  devise_parameter_sanitizer.for(:account_update).push(:name, :phone_no, :place_of_study, :passed_out_year, :registration_type)
+	  devise_parameter_sanitizer.for(:sign_up).push(:name, :phone_no, :place_of_study, :passed_out_year, :registration_type, :dept, :official_email_id, :company)
+	  devise_parameter_sanitizer.for(:account_update).push(:name, :phone_no, :place_of_study, :passed_out_year, :registration_type, :dept, :official_email_id, :company)
 	end
 end

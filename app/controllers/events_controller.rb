@@ -4,7 +4,7 @@ before_action :authenticate_user!, only: [:show, :new]
 
 	def index
 		if true
-     @events = Event.where(country: 'India').paginate(:page => params[:page], :per_page => 2).order("created_at DESC")
+     @events = Event.where(country: 'IN').paginate(:page => params[:page], :per_page => 2).order("created_at DESC")
      # binding.pry
     else
      @events = Event.paginate(:page => params[:page], :per_page => 1).order("created_at DESC")
@@ -19,7 +19,6 @@ before_action :authenticate_user!, only: [:show, :new]
     @event.build_event_banner
     @event.build_event_college_banner
     @event.build_event_broucher
-    @event.build_event_sponsor
 	end
 
 	def create
@@ -50,6 +49,22 @@ before_action :authenticate_user!, only: [:show, :new]
     render json: @results.to_json
   end
 
+  def event_subscription
+    if current_user
+      @subscribe = EventSubscription.create(email_id: params[:subscribe_email], user_id: current_user.id)
+      if @subscribe.present?
+        redirect_to :back, notice: "Successfully you are subscribed !" 
+      else
+        redirect_to :back, notice: "Subscription failed !"
+      end
+    end
+  end
+
+  def event_going
+   binding.pry
+   redirect_to :back, notice: "Your response is recorded !"
+  end
+
 	private
 
   def event_params
@@ -67,7 +82,7 @@ before_action :authenticate_user!, only: [:show, :new]
       event_banner_attributes: [:banner, :id],
       event_college_banner_attributes: [:college_banner, :id],
       event_broucher_attributes: [:broucher, :id],
-      event_sponsor_attributes: [:sponsor, :id]
+      event_sponsors_attributes: [:sponsor, :id, :_destroy]
 			).tap do |attributes|
 				attributes[:event_detail_attributes][:start_date] = parse_time(attributes[:event_detail_attributes][:start_date]) if attributes[:event_detail_attributes].present?
 				attributes[:event_detail_attributes][:end_date] = parse_time(attributes[:event_detail_attributes][:end_date]) if attributes[:event_detail_attributes].present?

@@ -123,7 +123,12 @@
 
               <div role="tabpanel" class="tab-pane fade" id="sponsors_tab">
                 <div class='row'>
-                  <div class='col-md-3'><%= image_tag @event.event_sponsor.sponsor.url(:small), width: '100px', height: '100px' %></div>
+                  <div class='col-md-3'>
+                  <% @event.event_sponsors.each do |sponsor_image| %>
+                    <p><%= sponsor_image.sponsor_file_name %></p>
+                    <%= image_tag sponsor_image.sponsor, width: '100px', height: '100px' %>
+                  <% end %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -138,14 +143,19 @@
               <li><a href="#"><i aria-hidden="true" class="fa fa-linkedin"></i></a></li>
               <li><a href="#"><i aria-hidden="true" class="fa fa-whatsapp"></i></a></li>
             </ul>
-            <div class='goingforevent'>
-              <h2>Help the Organizers<br>Take only 5 Seconds</h2>
-              <form name='areugoingforevent' action='' id='areugoingforevent'>
-                <p>Are you going for the event?</p>
-                <label><input type='radio' name='goingforevent' value='1'><span>Yes</span></label>
-                <label><input type='radio' name='goingforevent' value='0'><span>No</span></label>
-              </form>
-            </div>
+            
+            <%= form_tag  events_event_going_path, {:class => 'form-horizontal', role: "form"} do %>
+              <div class='goingforevent'>
+                <h2>Help the Organizers<br>Take only 5 Seconds</h2>
+                <form name='areugoingforevent' action='' id='areugoingforevent'>
+                  <p>Are you going for the event?</p>
+                  <label><input type='radio' name='going_count' value='1'><span>Going</span></label>
+                  <label><input type='radio' name='may_be_count' value='1'><span>May be</span></label>
+                  <input type='submit' class='btn' value='Submit' />
+                </form>
+              </div>
+            <% end %>
+          
           </div>
         </div>
 
