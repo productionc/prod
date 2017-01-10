@@ -4,7 +4,7 @@ before_action :authenticate_user!, only: [:show, :new]
 
 	def index
 		if true
-     @events = Event.where(country: 'IN').paginate(:page => params[:page], :per_page => 2).order("created_at DESC")
+     @events = Event.paginate(:page => params[:page], :per_page => 2).order("created_at DESC")
      # binding.pry
     else
      @events = Event.paginate(:page => params[:page], :per_page => 1).order("created_at DESC")
@@ -31,6 +31,10 @@ before_action :authenticate_user!, only: [:show, :new]
 	end
 
 	def show
+    event_id = @event.id
+    user_id = current_user.id
+    event_going = EventGoing.find_by(event_id: event_id, user_id: user_id)
+    EventService.new().event_going_reach_count(event_going, event_id, user_id)
 	end
 
   def welcome
@@ -64,21 +68,7 @@ before_action :authenticate_user!, only: [:show, :new]
    event_id = params[:event_id].to_i
    user_id = current_user.id
    event_going = EventGoing.find_by(event_id: event_id, user_id: user_id)
-   
-   if(current_user && params[:going_count].present? && event_going.nil?)
-    if params[:going_count] == '1'
-      count = event_going.nil? ? 1 : event_going.going_count + 1 
-      EventGoing.create(event_id: event_id, user_id: user_id, going_count: count )
-    else
-      count = event_going.nil? ? 1 : event_going.may_be_count + 1 
-      EventGoing.create(event_id: event_id, user_id: user_id, may_be_count: count )
-    end
-    msg = "Your response is recorded !"
-   else
-     msg = "Your response is already recorded !"
-   end
-
-   redirect_to :back, notice: msg
+   redirect_to :back, notice: EventService.new().going_and_may_be_count(event_going, params)
   end
 
 	private

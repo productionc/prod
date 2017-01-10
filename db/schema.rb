@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108123206) do
+ActiveRecord::Schema.define(version: 20170110174148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,11 +100,11 @@ ActiveRecord::Schema.define(version: 20170108123206) do
   create_table "event_goings", force: :cascade do |t|
     t.integer  "event_id"
     t.integer  "user_id"
-    t.integer  "may_be_count"
-    t.integer  "going_count"
-    t.integer  "reach_count"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "may_be_count", default: 0
+    t.integer  "going_count",  default: 0
+    t.integer  "reach_count",  default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "event_guest_details", force: :cascade do |t|

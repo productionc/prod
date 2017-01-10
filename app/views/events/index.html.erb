@@ -91,9 +91,9 @@
                 </div>
                 <div class="section3">
                   <ul>
-                  <li>Going - 23456</li>
-                  <li>May be - 10006</li>
-                  <li>Event Reach - 23347899</li>
+                  <li>Going - <%= !EventGoing.find_by(event_id: event.id).nil? ? EventGoing.where(event_id: event.id).sum(:going_count) : 0 %></li>
+                  <li>May be - <%= !EventGoing.find_by(event_id: event.id).nil? ? EventGoing.where(event_id: event.id).sum(:may_be_count) : 0 %></li>
+                  <li>Event Reach - <%= !EventGoing.find_by(event_id: event.id).nil? ? EventGoing.where(event_id: event.id).sum(:reach_count) : 0 %></li>
                   </ul>
                 </div>
               </div>

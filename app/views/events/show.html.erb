@@ -23,6 +23,7 @@
               <li role="presentation"><a href="#register_tab" aria-controls="messages" role="tab" data-toggle="tab">Register</a></li>
               <li role="presentation"><a href="#contactus_tab" aria-controls="settings" role="tab" data-toggle="tab">Contact Us</a></li>
               <li role="presentation"><a href="#sponsors_tab" aria-controls="settings" role="tab" data-toggle="tab">Sponsors</a></li>
+              <li role="presentation"><a href="#reports_tab" aria-controls="settings" role="tab" data-toggle="tab">Event Report</a></li>
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="aboutus_tab">
@@ -131,6 +132,23 @@
                   </div>
                 </div>
               </div>
+
+              <div role="tabpanel" class="tab-pane fade" id="reports_tab">
+                <div class='row'>
+                  <div class='col-md-6'>
+                  <% EventGoing.where(event_id: @event.id).each do |event_going| %>
+                    <p>EventName: <%= @event.event_name %></p>
+                    <p>Name: <%= event_going.user.name %></p>
+                    <p>Email: <%= event_going.user.email %></p>
+                    <p>Phone: <%= event_going.user.phone_no %></p>
+                    <p>Status: <%= event_going.going_count == 1 ? "Going" : "May be" %></p>
+                    <p>View count: <%= event_going.reach_count %></p>
+                    <hr/>
+                  <% end %>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
