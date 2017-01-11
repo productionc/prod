@@ -1,0 +1,4 @@
+<% Event.all.each do |event| %>
+<p><%= event.event_name %></p>
+<p><%= link_to 'Make it live', admins_publish_event_path(event_id: event.id), disabled: admins_publish_event_path(event_id: event.id) %>
+<% end %>

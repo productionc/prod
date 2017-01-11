@@ -4,7 +4,7 @@ before_action :authenticate_user!, only: [:show, :new]
 
 	def index
 		if true
-     @events = Event.paginate(:page => params[:page], :per_page => 2).order("created_at DESC")
+     @events = Event.where(is_published: true).paginate(:page => params[:page], :per_page => 2).order("created_at DESC")
      # binding.pry
     else
      @events = Event.paginate(:page => params[:page], :per_page => 1).order("created_at DESC")
@@ -70,6 +70,8 @@ before_action :authenticate_user!, only: [:show, :new]
    event_going = EventGoing.find_by(event_id: event_id, user_id: user_id)
    redirect_to :back, notice: EventService.new().going_and_may_be_count(event_going, params)
   end
+
+  
 
 	private
 

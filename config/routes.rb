@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   get 'cities/:state/:country', to: 'events#cities'
 
   get 'get_event_results/:query', to: 'events#get_event_results'
+  get '/collegeda_admins', to: 'admins#collegeda_admins'
+  get '/collegeda_users', to: 'admins#collegeda_users'
+  get '/collegeda_events_moderation', to: 'admins#collegeda_events_moderation'
+  get '/admins/publish_event', to: 'admins#publish_event'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
