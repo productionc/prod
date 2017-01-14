@@ -14,7 +14,7 @@
 
               <div class="form-group">
                 <label class='customlabel'>Event Type</label>
-                 <select name="event_type" class="form-control">
+                 <select name="event_type" class="event_type form-control">
                   <option value="" selected="selected">Select Type</option>
                   <% EventType.all.each do |event_type| %>
                     <option value="<%= event_type.name %>"><%= event_type.name %></option>
@@ -60,12 +60,12 @@
               <div class="form-group">
                 <label class='customlabel'>Date</label>
                 <div class='input-group date' id='date'>
-                  <input type="text" name="date" value="" placeholder="Date" class="form-control"/>
+                  <input type="text" name="search_date" value="" placeholder="Date" id="filter_date" class="form-control"/>
                   <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 </div>
               </div>
               
-              <%= submit_tag "Search", :name => nil %>
+              <%= submit_tag "Search", :name => nil, class: "filter_result hide" %>
             <% end %>  
           </div>
         </div>

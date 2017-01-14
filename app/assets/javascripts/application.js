@@ -47,6 +47,10 @@ $('#user_registration_type').change(function () {
   }
 });
 
+$('.event_type').change(function () {
+   $('.filter_result').click();
+});
+
 $('.country').change(function () {
   var input_state = $('.state');
   $.getJSON('/states/' + $(this).val(), function (data) {
@@ -58,6 +62,7 @@ $('.country').change(function () {
       input_state.append(opt);
     });
   });
+  $('.filter_result').click();
 });
 
 $('.state').change(function () {
@@ -71,6 +76,15 @@ $('.state').change(function () {
       input_state.append(opt);
     });
   });
+  $('.filter_result').click();
+});
+
+$('.city').change(function () {
+  $('.filter_result').click();
+});
+
+$("#event_filter_form #date").on("dp.change", function (e) {
+  $('.filter_result').click();
 });
 
 });
