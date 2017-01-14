@@ -58,17 +58,6 @@ $('.country').change(function () {
       input_state.append(opt);
     });
   });
-
-  $.ajax({
-    url: '/events',
-    success: function(result) {
-      // alert(JSON.stringify(result));
-      // var event_results = $("#event_results");
-      // event_results.empty();
-      // event_results.html('<%= will_paginate(@results) %>');
-    }
-  });
-
 });
 
 $('.state').change(function () {

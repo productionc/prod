@@ -3,9 +3,9 @@ before_filter :set_event, only: [:show]
 before_action :authenticate_user!, only: [:show, :new]
 
 	def index
-		if true
-     @events = Event.where(is_published: true).paginate(:page => params[:page], :per_page => 2).order("created_at DESC")
-     # binding.pry
+    if params[:utf8].present?
+     query = "event_type = '#{params[:event_type]}' OR country = '#{params[:country]}' OR state = '#{params[:state]}' OR district = '#{params[:city]}' OR created_at > ?", Date.parse(params[:date])
+     @events = Event.where(query).paginate(:page => params[:page], :per_page => 1).order("created_at DESC")
     else
      @events = Event.paginate(:page => params[:page], :per_page => 1).order("created_at DESC")
     end

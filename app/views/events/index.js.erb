@@ -1,0 +1,5 @@
+$("#events").html("<%= escape_javascript(render("events")) %>");
+$('.pagination a').attr('data-remote', 'true');
+$('.pagination a').on('click', function() {
+  $('html, body').animate({ scrollTop: $('#events').offset().top }, 'slow');
+});

@@ -1,0 +1,37 @@
+<!--filter results section start-->
+        <div class='col-md-6'>
+          <div id="event_results" class="event_results">
+            <h2 class="text-center">Search Results for Events</h2>
+            <% if @events.count == 0 %><br/><p style="text-align: center;">First Event is yet to create !</p><% end %>
+            <% @events.each do |event| %>
+              <div class="event_search_result">
+                <div class="section1">
+                  <div class="section1_left">
+                    <h2 class="eventname"><%= link_to event.event_name, event %></h2>
+                    <p class="colg_name"><%= event.study_place %></p>
+                    <p class="locat"><%= event.district %>, <%= event.state %>, <%= event.country %></p>
+                    <p class="event_typename"><%= event.event_type %>, 8days</p>
+                  </div>
+                  <div class="section1_right">
+                    <%= image_tag event.event_college_banner.college_banner.url(:small) if event.event_college_banner.present? %>
+                  </div>
+                </div>
+                <div class="section2">
+                  <div class="dates">
+                    <p><b>Date: </b><%= event.event_detail.start_date.to_s.split(' ')[0] %><span></span> <%= event.event_detail.end_date.to_s.split(' ')[0] %></p>
+                  </div>
+                <%= link_to 'View Details', event, class: 'view_det_btn hvr-bubble-float-right', target: '_blank' %>
+                </div>
+                <div class="section3">
+                  <ul>
+                  <li>Going - <%= !EventGoing.find_by(event_id: event.id).nil? ? EventGoing.where(event_id: event.id).sum(:going_count) : 0 %></li>
+                  <li>May be - <%= !EventGoing.find_by(event_id: event.id).nil? ? EventGoing.where(event_id: event.id).sum(:may_be_count) : 0 %></li>
+                  <li>Event Reach - <%= !EventGoing.find_by(event_id: event.id).nil? ? EventGoing.where(event_id: event.id).sum(:reach_count) : 0 %></li>
+                  </ul>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <%= will_paginate @events %>
+        </div>
+        <!--filter results section end--> 

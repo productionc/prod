@@ -10,11 +10,16 @@
         <!--filter section start-->
         <div class='col-md-3'>
           <div class='event_filter'>
-            <form action="#" id="event_filter_form" method="post" accept-charset="utf-8">
+            <%= form_tag events_path, :method => 'get',remote: true, :id => "event_filter_form" do %>
 
               <div class="form-group">
                 <label class='customlabel'>Event Type</label>
-                <%= select_tag "search_from", "<option>Technical Event</option><option>Symposium</option><option>Cultural Event</option><option>Management Event</option><option>Literary Event</option><option>Sports Event</option>Conference</option><option>Online Event</option><option>Seminar</option><option>Workshops</option>".html_safe %>
+                 <select name="event_type" class="form-control">
+                  <option value="" selected="selected">Select Type</option>
+                  <% EventType.all.each do |event_type| %>
+                    <option value="<%= event_type.name %>"><%= event_type.name %></option>
+                  <% end %>
+                </select>
               </div>
 
               <div class="form-group">
@@ -59,49 +64,14 @@
                   <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 </div>
               </div>
-
-            </form>  
+              
+              <%= submit_tag "Search", :name => nil %>
+            <% end %>  
           </div>
         </div>
         <!--filter section end-->
-
-        <!--filter results section start-->
-        <div class='col-md-6'>
-          <div id="event_results" class="event_results">
-            <h2 class="text-center">Search Results for Events</h2>
-            <% if @events.count == 0 %><br/><p style="text-align: center;">First Event is yet to create !</p><% end %>
-            <% @events.each do |event| %>
-              <div class="event_search_result">
-                <div class="section1">
-                  <div class="section1_left">
-                    <h2 class="eventname"><%= link_to event.event_name, event %></h2>
-                    <p class="colg_name"><%= event.study_place %></p>
-                    <p class="locat"><%= event.district %>, <%= event.state %>, <%= event.country %></p>
-                    <p class="event_typename"><%= event.event_type %>, 8days</p>
-                  </div>
-                  <div class="section1_right">
-                    <%= image_tag event.event_college_banner.college_banner.url(:small) if event.event_college_banner.present? %>
-                  </div>
-                </div>
-                <div class="section2">
-                  <div class="dates">
-                    <p><b>Date: </b><%= event.event_detail.start_date.to_s.split(' ')[0] %><span></span> <%= event.event_detail.end_date.to_s.split(' ')[0] %></p>
-                  </div>
-                <%= link_to 'View Details', event, class: 'view_det_btn hvr-bubble-float-right', target: '_blank' %>
-                </div>
-                <div class="section3">
-                  <ul>
-                  <li>Going - <%= !EventGoing.find_by(event_id: event.id).nil? ? EventGoing.where(event_id: event.id).sum(:going_count) : 0 %></li>
-                  <li>May be - <%= !EventGoing.find_by(event_id: event.id).nil? ? EventGoing.where(event_id: event.id).sum(:may_be_count) : 0 %></li>
-                  <li>Event Reach - <%= !EventGoing.find_by(event_id: event.id).nil? ? EventGoing.where(event_id: event.id).sum(:reach_count) : 0 %></li>
-                  </ul>
-                </div>
-              </div>
-            <% end %>
-            <%= will_paginate @events %>
-          </div>
-        </div>
-        <!--filter results section end--> 
+        
+        <div id="events"><%= render 'events' %></div>
 
         <!--googlead start-->
         <div class='col-md-3'><div class='home_vertical_google_ads'><img src="<%= asset_path('googleads.png') %>"></div></div>
@@ -110,3 +80,11 @@
       </div>
     </div>
   </div>
+  <script>
+$(function(){
+   $('.pagination a').attr('data-remote', 'true')
+   $('.pagination a').on('click', function() {
+    $('html, body').animate({ scrollTop: $('#events').offset().top }, 'slow');
+   });
+});
+</script>
