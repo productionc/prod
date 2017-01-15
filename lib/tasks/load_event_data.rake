@@ -12,6 +12,10 @@ namespace :load_event_data do
     event_department_data
   end
 
+  task event_types: :environment  do
+    event_type_data
+  end
+
   def registration_type_data
    types = ["Student-Studying", "Student-Passout", "Teacher", "Employer"]
    types.each do |item|
@@ -87,6 +91,14 @@ namespace :load_event_data do
     ]
     data.each do |item|
       EventDepartment.create(name: item)
+    end
+  end
+
+  def event_type_data
+    data = ["Technical Event", "Symposium", "Cultural Event", "Management Event", 
+      "Literary Event", "Sports Event", "Conference", "Online Event", "Seminar", "Workshops", "Faculty Development Program", "IEEE Conference"]
+    data.each do |item|
+      EventType.create(name: item)
     end
   end
 
