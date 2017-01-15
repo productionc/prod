@@ -112,10 +112,10 @@
                 </div>
               </form> -->
 
-              <%= form_tag  events_event_subscription_path, {:class => 'form-horizontal', role: "form"} do %>
+              <%= form_tag  events_event_subscription_path, {:id => 'event_subscription_form', :class => 'form-horizontal', role: "form"} do %>
                  <h3><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp; Subscribe to our newsletter</h3>
                 <div class='fields'>
-                  <input type="email" required="required" name="subscribe_email" value="" placeholder="Email Address" class="form-control"/>
+                  <input type="email" name="subscribe_email" value="" placeholder="Email Address" class="form-control validate[required]"/>
                   <% if current_user %>
                     <input type='submit' class='btn' value='Go'>
                   <% else %>
@@ -147,3 +147,9 @@
 
   </body>
 </html>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#event_subscription_form").validationEngine();
+});
+</script>

@@ -64,10 +64,10 @@ before_action :authenticate_user!, only: [:show, :new]
   def event_subscription
     if current_user
       @subscribe = EventSubscription.create(email_id: params[:subscribe_email], user_id: current_user.id)
-      if @subscribe.present?
-        redirect_to :back, notice: "Successfully you are subscribed !" 
+      if @subscribe.id.present?
+        redirect_to :back, notice: "Successfully, You are subscribed !" 
       else
-        redirect_to :back, notice: "Subscription failed !"
+        redirect_to :back, notice: "You are already subscribed !"
       end
     end
   end

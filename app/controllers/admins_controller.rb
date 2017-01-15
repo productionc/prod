@@ -14,4 +14,8 @@ class AdminsController < ApplicationController
     redirect_to :back, notice: 'Event Published successfully !'
   end
 
+  def events_subscriber
+    @event_subscribers = EventSubscription.all.order('created_at DESC')
+  end
+
 end

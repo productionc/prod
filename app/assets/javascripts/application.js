@@ -35,12 +35,15 @@ $('#user_registration_type').change(function () {
   $('#user_company, #user_company_label').css('display','none');
       
   if($(this).val() == "Student-Passout"){
+    $("#user_passed_out_year_label").text("Passed out year");
     $('#user_dept, #user_dept_label').css('display','block');
     $('#user_passed_out_year, #user_passed_out_year_label').css('display','block');
     $('#user_place_of_study, #user_place_of_study_label').css('display','block');
   }
   else if($(this).val() == "Student-Studying"){
+    $("#user_passed_out_year_label").text("Current year");
     $('#user_dept, #user_dept_label').css('display','block');
+    $('#user_passed_out_year, #user_passed_out_year_label').css('display','block');
     $('#user_place_of_study, #user_place_of_study_label').css('display','block');
   }
   else if($(this).val() == "Teacher"){
