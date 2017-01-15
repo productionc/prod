@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170114112028) do
+ActiveRecord::Schema.define(version: 20170115080949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,6 +175,12 @@ ActiveRecord::Schema.define(version: 20170114112028) do
     t.integer  "event_broucher_id"
     t.integer  "event_sponsor_id"
     t.boolean  "is_published",            default: false
+  end
+
+  create_table "registration_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
