@@ -4,6 +4,7 @@ class AdminsController < ApplicationController
   end
 
   def collegeda_users
+    @users = User.all.order('created_at DESC')
   end
 
   def collegeda_events_moderation
