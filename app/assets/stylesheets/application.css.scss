@@ -17,10 +17,9 @@
  *= require component
  *= require style
  */
-
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import 'bootstrap/theme';
+@import "bootstrap/theme";
 
 .alert-alert {
   @extend .alert-warning;
