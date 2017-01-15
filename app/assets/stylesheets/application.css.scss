@@ -11,12 +11,13 @@
  * file per style scope.
  *
  *= require bootstrap.min
- *= require bootstrapValidator.min
  *= require bootstrap-datetimepicker.min
  *= require validationEngine.jquery
  *= require flexslider
+ *= require component
  *= require style
  */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import 'bootstrap/theme';

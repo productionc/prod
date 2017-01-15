@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link type="image/png" href="<%= asset_path('favicon.png')%>" rel="shortcut icon">
     <title>Collegedaa</title>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
@@ -19,21 +20,37 @@
   <header class='first_section'>
     <div class='top_head'>
       <div class='container-fluid'>
-        <div class="dropdown pull-right">
-          <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-            <span><%= user_signed_in? ? current_user.name+" " : "Guest " %></span><span class="caret"></span></button>
-          <ul class="dropdown-menu">
-           <% if user_signed_in? %> 
-            <li><%= link_to "Settings", edit_user_registration_path %></li>
-            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-           <% else %>
-            <li><%= link_to "Sign In", new_user_session_path %></li>
-            <li><%= link_to "Sign Up", new_user_registration_path %></li>
-           <% end %>
-          </ul>
+        <div id="top_head_menu" class="dl-menuwrapper">
+          <button class="dl-trigger">Open Menu</button>
+          <ul class="dl-menu">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Campus Ambassador</a></li>
+            <li><a href="#">Support</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms & Condition</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <div class='topheadmenu_social_icons'>
+              <div class='socicons fb'><a href='#'><i class="fa fa-facebook" aria-hidden="true"></i></a></div>
+              <div class='socicons twit'><a href='#'><i class="fa fa-twitter" aria-hidden="true"></i></a></div>
+              <div class='socicons gp'><a href='#'><i class="fa fa-google-plus" aria-hidden="true"></i></a></div>
+              <div class='socicons lin'><a href='#'><i class="fa fa-linkedin" aria-hidden="true"></i></a></div>
+              <div class='socicons ins'><a href='#'><i class="fa fa-instagram" aria-hidden="true"></i></a></div>
+              
+            </div>    
+
+           </ul>
+
+        </div>
+
+        <div class="topheadmenu_social_icons_right pull-right">
+          <div class='socicons fb'><a href='#'><i class="fa fa-facebook" aria-hidden="true"></i></a></div>
+          <div class='socicons twit'><a href='#'><i class="fa fa-twitter" aria-hidden="true"></i></a></div>
+          <div class='socicons gp'><a href='#'><i class="fa fa-google-plus" aria-hidden="true"></i></a></div>
+          <div class='socicons lin'><a href='#'><i class="fa fa-linkedin" aria-hidden="true"></i></a></div>
+          <div class='socicons ins'><a href='#'><i class="fa fa-instagram" aria-hidden="true"></i></a></div>
         </div>
       </div>
-    </div>    
+    </div>
 
     <div class="container">
       <% flash.each do |key, value| %>
@@ -41,21 +58,38 @@
         <%= value %>
       </div>
       <% end %>
-    </div>
+    </div>    
 
     <div class='menu_logo_sec'>
       <div class="container-fluid">
         <div class='row'>
           <div class='col-md-4'>
             <div class="logo">
-              <a href='/events'>COLLEGEDA</a>
+              <a href='/events' title='Home'><img class='img-responsive' src='<%= asset_path('logo.png')%>'></a>
             </div>    
           </div>
           <div class="col-md-8">
             <nav class='menu pull-right'>
               <ul>
-                <li><%= link_to 'Post Events', new_event_path %></a></li>
-                <li><a href="#">Post Internships</a></li>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">Message Us</a></li>
+                <li><a href="#">Campus Ambassador</a></li>
+                <li><%= link_to 'Post Events', new_event_path %></li>
+                <li>
+                <div class="dropdown">
+                  <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                  <span><%= user_signed_in? ? current_user.name+" " : "Guest " %></span><span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <% if user_signed_in? %>
+                    <li><%= link_to "Settings", edit_user_registration_path %></li>
+                    <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+                    <% else %>
+                    <li><%= link_to "Sign In", new_user_session_path %></li>
+                    <li><%= link_to "Sign Up", new_user_registration_path %></li>
+                    <% end %>
+                  </ul>
+                </div>
+                </li>
               </ul>
             </nav>
           </div>
@@ -103,16 +137,8 @@
           </div>
           <div class='col-md-3'>
             <div class='footer_sec4'>
-              <!--<h2>Connect</h2>-->
-             <!--  <form name='subscribe_email' action='' id='subscribe_email'>
-                <h3><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp; Subscribe to our newsletter</h3>
-                <div class='fields'>
-                  <input type="text" name="subscribe" value="" placeholder="Email Address" class="form-control"/>
-                  <input type='submit' class='btn' value='Go'>
-                </div>
-              </form> -->
 
-              <%= form_tag  events_event_subscription_path, {:id => 'event_subscription_form', :class => 'form-horizontal', role: "form"} do %>
+              <%= form_tag  events_event_subscription_path, {:id => 'subscribe_email', :class => 'form-horizontal', role: "form"} do %>
                  <h3><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp; Subscribe to our newsletter</h3>
                 <div class='fields'>
                   <input type="email" name="subscribe_email" value="" placeholder="Email Address" class="form-control validate[required]"/>
@@ -150,6 +176,6 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-    $("#event_subscription_form").validationEngine();
+    $("#subscribe_email").validationEngine();
 });
 </script>

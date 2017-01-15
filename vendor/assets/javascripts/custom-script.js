@@ -1,3 +1,7 @@
+$(function() {
+  $( '#top_head_menu' ).dlmenu();
+});
+
 $(window).load(function(){
   $('#event_slider .flexslider').flexslider({
     animation: "slide",

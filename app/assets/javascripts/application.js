@@ -14,15 +14,15 @@
 //= require jquery_ujs
 //= require cocoon
 //= require bootstrap.min
-//= require bootstrapValidator.min
 //= require moment
 //= require bootstrap-datetimepicker.min
 //= require modernizr
+//= require modernizr.custom
 //= require jquery.flexslider
 //= require jquery.validationEngine
 //= require jquery.validationEngine-en
 //= require custom-script
-//= require custom_validation
+//= require jquery.dlmenu
 
 $(document).ready(function() {
 

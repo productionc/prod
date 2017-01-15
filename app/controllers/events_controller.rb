@@ -6,16 +6,17 @@ before_action :authenticate_user!, only: [:show, :new]
     if params[:utf8].present?
 
      query ||= []
+     query << "is_published = true"
      query << "event_type = '#{params[:event_type]}'" if params[:event_type].present?
      query << "country = '#{params[:country]}'" if params[:country].present?
      query << "state = '#{params[:state]}'" if params[:state].present?
      query << "district = '#{params[:city]}'" if params[:city].present?
      query << "event_details.start_date >= '#{Date.parse(params[:search_date]).beginning_of_day}'" if params[:search_date].present?
 
-     @events = Event.joins(:event_detail).where(query.join(" AND ")).paginate(:page => params[:page], :per_page => 4).order("event_details.start_date ASC")
+     @events = Event.joins(:event_detail).where(query.join(" AND ")).paginate(:page => params[:page], :per_page => 1).order("event_details.start_date ASC")
      # binding.pry
     else
-     @events = Event.paginate(:page => params[:page], :per_page => 4).order("created_at DESC")
+     @events = Event.where(is_published: true).paginate(:page => params[:page], :per_page => 1).order("created_at DESC")
     end
 	end
 
