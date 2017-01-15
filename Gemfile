@@ -13,7 +13,6 @@ gem 'paperclip', '~> 5.1'
 gem 'will_paginate', '~> 3.1.0'
 gem 'city-state'
 gem 'rails_12factor'
-gem "font-awesome-rails"
 
 
 # Use SCSS for stylesheets
