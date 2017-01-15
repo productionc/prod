@@ -19,6 +19,8 @@
 //= require bootstrap-datetimepicker.min
 //= require modernizr
 //= require jquery.flexslider
+//= require jquery.validationEngine
+//= require jquery.validationEngine-en
 //= require custom-script
 //= require custom_validation
 

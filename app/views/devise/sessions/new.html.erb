@@ -4,12 +4,12 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, class: "validate[required]", autofocus: true %>
   </div>
 
   <div class="field">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, class: "validate[required]", autocomplete: "off" %>
   </div>
 
   <% if devise_mapping.rememberable? -%>
@@ -21,7 +21,16 @@
 
   <div class="actions">
     <%= f.submit "Log in" %>
-  </div>
+  </div><br/>
 <% end %>
 
+<%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+<%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#new_user").validationEngine();
+});
+</script>

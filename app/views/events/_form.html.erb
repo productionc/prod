@@ -26,7 +26,7 @@ min-height: 100vh;
       <h3>Basic Details</h3>
       <div class='row'>
         <div class='col-md-3 form-group'>
-          <%= f.text_field :first_name, class: 'form-control', placeholder: "First Name" %>
+          <%= f.text_field :first_name, class: 'form-control validate[required]', placeholder: "First Name" %>
         </div>
         <div class='col-md-3 form-group'>
           <%= f.text_field :last_name, class: 'form-control', placeholder: "Last Name" %>
@@ -186,8 +186,21 @@ min-height: 100vh;
         </div>
       </div>
           
-    <%= f.button :submit, class: "btn btn-primary event_registration_submit", value: "Submit" %><br/>
+    <%= f.button :submit, name: "event_registration_submit", class: "btn btn-primary event_registration_submit", value: "Submit" %><br/>
     </div>
     <% end %>
   </div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#new_event").validationEngine({
+    promptPosition : "bottomLeft",
+    autoHidePrompt: true,
+    autoHideDelay: 3000,
+    fadeDuration: 0.3,
+    scroll: false,
+    maxErrorsPerField:1
+    });
+});
+</script>

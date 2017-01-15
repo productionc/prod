@@ -40,4 +40,5 @@ $(function () {
   $('#eventregistrationform #event_reg_closed').datetimepicker({
     format: 'DD-MM-YYYY'
   });
+
 });

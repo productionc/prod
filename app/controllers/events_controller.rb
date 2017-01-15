@@ -12,10 +12,10 @@ before_action :authenticate_user!, only: [:show, :new]
      query << "district = '#{params[:city]}'" if params[:city].present?
      query << "event_details.start_date >= '#{Date.parse(params[:search_date]).beginning_of_day}'" if params[:search_date].present?
 
-     @events = Event.joins(:event_detail).where(query.join(" AND ")).paginate(:page => params[:page], :per_page => 1).order("event_details.start_date ASC")
+     @events = Event.joins(:event_detail).where(query.join(" AND ")).paginate(:page => params[:page], :per_page => 4).order("event_details.start_date ASC")
      # binding.pry
     else
-     @events = Event.paginate(:page => params[:page], :per_page => 1).order("created_at DESC")
+     @events = Event.paginate(:page => params[:page], :per_page => 4).order("created_at DESC")
     end
 	end
 
