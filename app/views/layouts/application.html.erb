@@ -78,7 +78,7 @@
                 <li>
                 <div class="dropdown">
                   <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                  <span><%= user_signed_in? ? current_user.name+" " : "Guest " %></span><span class="caret"></span></button>
+                  <span><%= user_signed_in? ? current_user.name+" " : "Sign In " %></span><span class="caret"></span></button>
                   <ul class="dropdown-menu">
                     <% if user_signed_in? %>
                     <li><%= link_to "Settings", edit_user_registration_path %></li>
