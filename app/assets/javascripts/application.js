@@ -96,4 +96,8 @@ $("#event_filter_form #date").on("dp.change", function (e) {
   $('.filter_result').click();
 });
 
+$('.department').change(function () {
+  $('.filter_result').click();
+});
+
 });

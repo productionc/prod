@@ -13,24 +13,26 @@
                     <p class="event_typename"><%= event.event_type %>, 8days</p>
                   </div>
                   <div class="section1_right">
-                    <%= image_tag event.event_college_banner.college_banner.url(:small) if event.event_college_banner.present? %>
+                    <%= image_tag EventCollegeBanner.find(event.college_banner_id).college_banner.url if event.college_banner_id.present? %>
                   </div>
                 </div>
                 <div class="section2">
                   <div class="dates">
-                    <p><b>Date: </b><%= event.event_detail.start_date.to_s.split(' ')[0] %><span></span> <%= event.event_detail.end_date.to_s.split(' ')[0] %></p>
+                    <p><b>Date: </b><%= event.start_date.to_s.split(' ')[0] %><span></span> <%= event.end_date.to_s.split(' ')[0] %></p>
                   </div>
                 <%= link_to 'View Details', event, class: 'view_det_btn hvr-bubble-float-right', target: '_blank' %>
                 </div>
                 <div class="section3">
                   <ul>
-                  <li>Going - <%= !EventGoing.find_by(event_id: event.id).nil? ? EventGoing.where(event_id: event.id).sum(:going_count) : 0 %></li>
-                  <li>May be - <%= !EventGoing.find_by(event_id: event.id).nil? ? EventGoing.where(event_id: event.id).sum(:may_be_count) : 0 %></li>
-                  <li>Event Reach - <%= !EventGoing.find_by(event_id: event.id).nil? ? EventGoing.where(event_id: event.id).sum(:reach_count) : 0 %></li>
+                  <% event_going = EventGoing.find_by(event_id: event.id) %>
+                  <li>Going - <%= !event_going.nil? ? EventGoing.where(event_id: event.id).sum(:going_count) : 0 %></li>
+                  <li>May be - <%= !event_going.nil? ? EventGoing.where(event_id: event.id).sum(:may_be_count) : 0 %></li>
+                  <li>Event Reach - <%= !event_going.nil? ? EventGoing.where(event_id: event.id).sum(:reach_count) : 0 %></li>
                   </ul>
                 </div>
               </div>
             <% end %>
+
           </div>
           <%= will_paginate @events %>
         </div>

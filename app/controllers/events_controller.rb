@@ -12,11 +12,13 @@ before_action :authenticate_user!, only: [:show, :new]
      query << "state = '#{params[:state]}'" if params[:state].present?
      query << "district = '#{params[:city]}'" if params[:city].present?
      query << "event_details.start_date >= '#{Date.parse(params[:search_date]).beginning_of_day}'" if params[:search_date].present?
+     query << "event_departments.id IN (#{params[:department].join(",")})" if params[:department].present?
 
-     @events = Event.joins(:event_detail).where(query.join(" AND ")).paginate(:page => params[:page], :per_page => 1).order("event_details.start_date ASC")
+     @events = Event.joins(:event_departments, :event_college_banner, :event_detail).where(query.join(" AND ")).paginate(:page => params[:page], :per_page => 4).order("event_details.start_date ASC").select("event_name, study_place, country, state, district, event_type, event_details.start_date as start_date, event_details.end_date as end_date, event_college_banners.id as college_banner_id").uniq
      # binding.pry
     else
-     @events = Event.where(is_published: true).paginate(:page => params[:page], :per_page => 1).order("created_at DESC")
+     @events = Event.joins(:event_departments, :event_college_banner, :event_detail).where(is_published: true).paginate(:page => params[:page], :per_page => 4).order("event_details.start_date ASC").select("event_name, study_place, country, state, district, event_type, event_details.start_date as start_date, event_details.end_date as end_date, event_college_banners.id as college_banner_id").uniq
+     # binding.pry
     end
 	end
 

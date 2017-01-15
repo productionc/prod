@@ -78,7 +78,7 @@
                 <div class='department_checkbox'>
                   <% EventDepartment.all.each_with_index do |dept, index| %>
                   <label>
-                    <input class='department' type='checkbox' name='department' value='<%= index %>'><%= dept.name %>
+                    <input class='department' type='checkbox' name='department[]' value='<%= index %>'><%= dept.name %>
                   </label>
                   <% end %>
                 </div>

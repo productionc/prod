@@ -8,7 +8,7 @@ namespace :load_event_data do
     event_extra_data
   end
 
-  task event_deparments: :environment do
+  task event_departments: :environment do
     event_department_data
   end
 
