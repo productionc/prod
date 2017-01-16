@@ -41,7 +41,7 @@ min-height: 100vh;
           <%= f.text_field :event_name, class: 'form-control validate[required]', placeholder: "Event Name" %>
         </div>
         <div class='col-md-3 form-group'>
-          <select name="event_type" class="event_type form-control validate[required]">
+          <select name="event[event_type]" class="event_type form-control validate[required]">
             <option value="" selected="selected">Select Type</option>
             <% EventType.all.each do |event_type| %>
             <option value="<%= event_type.name %>"><%= event_type.name %></option>
