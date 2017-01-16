@@ -1,7 +1,8 @@
 <div class="form-inline clearfix">
   <div class="nested-fields">
     <div class="fallback">
-      <%= f.file_field :sponsor %><br>
+      <%= f.file_field :sponsor, class: 'validate[checkFileType[jpg|jpeg|JPG|png|PNG]' %>
+      <p>Allowed file formats: jpg, png</p><br>
     </div>
     <div class='col-md-12 form-group'>
       <%= link_to_remove_association "Remove Sponsor", f, class: "btn btn-default form-button" %>

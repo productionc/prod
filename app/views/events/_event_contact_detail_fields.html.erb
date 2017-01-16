@@ -1,19 +1,19 @@
 <div class="form-inline clearfix">
   <div class="nested-fields">
     <div class='col-md-6 form-group'>
-      <%= f.text_field :designation, placeholder: "Designation", class: "form-control" %>
+      <%= f.text_field :designation, placeholder: "Designation", class: "form-control validate[required]" %>
     </div>
     <div class='col-md-6 form-group'>
-      <%= f.text_field :name, placeholder: "Name", class: "form-control" %>
+      <%= f.text_field :name, placeholder: "Name", class: "form-control validate[required]" %>
     </div>
     <div class='col-md-6 form-group'>
-      <%= f.text_field :email, placeholder: "Email Id", class: "form-control"%>
+      <%= f.text_field :email, placeholder: "Email Id", class: "form-control validate[required,custom[email]]"%>
     </div>
     <div class='col-md-6 form-group'>
-      <%= f.text_field :phone_no, placeholder: "Mobile No", class: "form-control"%>
+      <%= f.text_field :phone_no, placeholder: "Mobile No", class: "form-control validate[required,custom[number]]"%>
     </div>
     <div class='col-md-12 form-group'>
-      <%= f.text_field :general_support, placeholder: "General support or helpdesk email address - if any",class: "form-control"%>
+      <%= f.text_field :general_support, placeholder: "General support or helpdesk email address - if any",class: "form-control validate[custom[email]]"%>
     </div>
     <div class='col-md-12 form-group'>
       <%= link_to_remove_association "Remove contact", f, class: "btn btn-default form-button" %>

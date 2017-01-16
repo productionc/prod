@@ -2,25 +2,25 @@
 	<h3>Url Details</h3>
 	<div class='row'>
 		<div class='col-md-3 form-group'>
-			<%= f.text_field :web_link, placeholder: "Event Website Link", class: "form-control"%>
+			<%= f.text_field :web_link, placeholder: "Event Website Link", class: "form-control validate[custom[url]]"%>
 		</div>
 		<div class='col-md-3 form-group'>
-			<%= f.text_field :registration_link , placeholder: "Event Registration Link", class: "form-control"%>
+			<%= f.text_field :registration_link , placeholder: "Event Registration Link", class: "form-control validate[custom[url]]"%>
 		</div>
 		<div class='col-md-3 form-group'>
-			<%= f.text_field :college_link, placeholder: "College Website Link", class: "form-control" %>
+			<%= f.text_field :college_link, placeholder: "College Website Link", class: "form-control validate[custom[url]]" %>
 		</div>
 		<div class='col-md-3 form-group'>
-			<%= f.text_field :facebook_link, placeholder: "Facebook Event Link", class: "form-control"%>
+			<%= f.text_field :facebook_link, placeholder: "Facebook Event Link", class: "form-control validate[custom[url]]"%>
 		</div>
 		<div class='col-md-3 form-group'>
-			<%= f.text_field :twitter_link, placeholder: "Twitter Event Link", class: "form-control" %>
+			<%= f.text_field :twitter_link, placeholder: "Twitter Event Link", class: "form-control validate[custom[url]]" %>
 		</div>
 		<div class='col-md-3 form-group'>
-			<%= f.text_field :youtube_link, placeholder: "Youtube Event Link", class: "form-control" %>
+			<%= f.text_field :youtube_link, placeholder: "Youtube Event Link", class: "form-control validate[custom[url]]" %>
 		</div>
 		<div class='col-md-3 form-group'>
-			<%= f.text_field :apps_link, placeholder: "Event Link for Apps Android / IOS / Windows", class:"form-control"%>
+			<%= f.text_field :apps_link, placeholder: "Event Link for Apps Android / IOS / Windows", class: "form-control validate[custom[url]]"%>
 		</div>
 	</div>
 </div>

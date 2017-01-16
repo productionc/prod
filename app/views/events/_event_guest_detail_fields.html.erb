@@ -1,16 +1,16 @@
 <div class="form-inline clearfix">
   <div class="nested-fields">
     <div class='col-md-6 form-group'>
-      <%= f.text_field :name, placeholder: "Guest Name", class: "form-control" %>
+      <%= f.text_field :name, placeholder: "Guest Name", class: "form-control validate[required]" %>
     </div>
     <div class='col-md-6 form-group'>
-      <%= f.text_field :designation, placeholder: "Guest Designation", class: "form-control" %>
+      <%= f.text_field :designation, placeholder: "Guest Designation", class: "form-control validate[required]" %>
     </div>
     <div class='col-md-6 form-group'>
-      <%= f.text_field :company, placeholder: "Guest Company Name", class: "form-control"%>
+      <%= f.text_field :company, placeholder: "Guest Company Name", class: "form-control validate[required]"%>
     </div>
     <div class='col-md-6 form-group'>
-      <%= f.text_field :delegation, placeholder: "Guest deligation", class: "form-control"%>
+      <%= f.text_field :delegation, placeholder: "Guest deligation", class: "form-control validate[required]"%>
     </div>
     <div class='col-md-12 form-group'>
       <%= link_to_remove_association "Remove contact", f, class: "btn btn-default form-button" %>

@@ -8,7 +8,7 @@ min-height: 100vh;
 <div id='event_reg_body_container'>
   <div class='container-fluid'>
     <h2 class='text-center title'>Event Registration</h2>
-      <%= simple_form_for @event, html: { multipart: true } do |f| %>
+      <%= simple_form_for @event,validate: true, html: { multipart: true } do |f| %>
       <% if @event.errors.any? %>
       <div id="errors">
         <h3><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h3>
@@ -29,28 +29,32 @@ min-height: 100vh;
           <%= f.text_field :first_name, class: 'form-control validate[required]', placeholder: "First Name" %>
         </div>
         <div class='col-md-3 form-group'>
-          <%= f.text_field :last_name, class: 'form-control', placeholder: "Last Name" %>
+          <%= f.text_field :last_name, class: 'form-control validate[required]', placeholder: "Last Name" %>
         </div>
         <div class='col-md-3 form-group'>
-          <%= f.text_field :email, class: 'form-control', placeholder: "Email Id" %>
+          <%= f.text_field :email, class: 'form-control validate[required,custom[email]]', placeholder: "Email Id" %>
         </div>
         <div class='col-md-3 form-group'>
-          <%= f.text_field :phone_no, class: 'form-control', placeholder: "Mobile No *" %>
+          <%= f.text_field :phone_no, class: 'form-control validate[required,custom[number]]', 'data-errormessage': "Enter valid phone no", placeholder: "Mobile No *" %>
         </div>
         <div class='col-md-3 form-group'>
-          <%= f.text_field :event_name, class: 'form-control', placeholder: "Event Name" %>
+          <%= f.text_field :event_name, class: 'form-control validate[required]', placeholder: "Event Name" %>
         </div>
         <div class='col-md-3 form-group'>
-          <%= f.select :event_type, ['Technical Event', 'Symposium', 'Cultural Event', 'Management Event',
-      'Literary Event', 'Sports Event', 'Conference', 'Online Event', 'Seminar', 'Workshops'] %>
+          <select name="event_type" class="event_type form-control validate[required]">
+            <option value="" selected="selected">Select Type</option>
+            <% EventType.all.each do |event_type| %>
+            <option value="<%= event_type.name %>"><%= event_type.name %></option>
+            <% end %>
+          </select>
         </div>
         <div class='col-md-3 form-group'>
-          <%= f.text_field :study_place, class: 'form-control', placeholder: "College Name / University" %>
+          <%= f.text_field :study_place, class: 'form-control validate[required]', placeholder: "College Name / University" %>
         </div>
       </div>
       <div class='row'>
         <div class='col-md-3 form-group'>
-          <select name="event[country]" class="country form-control">
+          <select name="event[country]" class="country form-control validate[required]">
                   <option value="" selected="selected">Select Country</option>
                   <% CS.countries.each do |item| %>
                     <option value="<%= item[0] %>"><%= item[1] %></option>
@@ -58,20 +62,20 @@ min-height: 100vh;
           </select>
         </div>
         <div class='col-md-3 form-group'>
-          <select name="event[state]" class="state form-control">
+          <select name="event[state]" class="state form-control validate[required]">
                   <option value="" selected="selected">Select State</option>
           </select>
         </div>
         <div class='col-md-3 form-group'>
-          <select name="event[district]" class="city form-control">
+          <select name="event[district]" class="city form-control validate[required]">
                   <option value="" selected="selected">Select City</option>
           </select>
         </div>
         <div class='col-md-3 form-group'>
-              <%= f.text_field :zip, placeholder: 'Zip Code / Post Code' %>
+              <%= f.text_field :zip, placeholder: 'Zip Code / Post Code', class: "form-control validate[required,custom[number]]",'data-errormessage': "Enter valid zip code" %>
         </div>
         <div class='col-md-3 form-group'>
-          <%= f.text_field :location, placeholder: 'Location' %>
+          <%= f.text_field :location, placeholder: 'Location', class: "form-control validate[required]" %>
         </div>
       </div>
     </div>

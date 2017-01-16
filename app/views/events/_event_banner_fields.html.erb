@@ -1,3 +1,4 @@
 <div class="fallback">
-    <%= f.file_field :banner %><br>
+    <%= f.file_field :banner, class: 'validate[checkFileType[jpg|jpeg|JPG|png|PNG]]' %>
+    <p>Allowed file formats: jpg, png</p><br>
 </div>

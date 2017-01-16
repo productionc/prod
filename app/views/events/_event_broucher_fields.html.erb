@@ -1,3 +1,4 @@
 <div class="fallback">
-    <%= f.file_field :broucher %><br>
+    <%= f.file_field :broucher, class: 'validate[checkFileType[pdf|PDF]' %>
+    <p>Allowed file formats: pdf</p><br>
 </div>
