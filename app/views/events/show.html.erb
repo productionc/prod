@@ -1,5 +1,5 @@
 <!--banner start-->
-<div class='eventview_banner img-responsive' style='background-image: url("<%= asset_path('dummy_event_banner.png') %>")'>
+<div class='eventview_banner img-responsive' style='background-image: url("<%= @event.event_college_banner.college_banner.url(:small) %>")'>
   <%= image_tag @event.event_banner.banner.url(:small), class: 'text-center img-responsive eventlogo' if @event.event_banner.present? %>
   <h2 class='eventname'><%= @event.event_name %></h2>
   <p class='location'><%= @event.location %>, <%= @event.district %>, <%= @event.state %> <%= @event.zip %>, <%= CS.states("IN").select { |key,value| key == @event.country } %></p>
@@ -23,7 +23,7 @@
               <li role="presentation"><a href="#register_tab" aria-controls="messages" role="tab" data-toggle="tab">Register</a></li>
               <li role="presentation"><a href="#contactus_tab" aria-controls="settings" role="tab" data-toggle="tab">Contact Us</a></li>
               <li role="presentation"><a href="#sponsors_tab" aria-controls="settings" role="tab" data-toggle="tab">Sponsors</a></li>
-              <li role="presentation"><a href="#reports_tab" aria-controls="settings" role="tab" data-toggle="tab">Event Report</a></li>
+              <li style="display: none;" role="presentation"><a href="#reports_tab" aria-controls="settings" role="tab" data-toggle="tab">Event Report</a></li>
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="aboutus_tab">
@@ -38,6 +38,7 @@
                 </div>
                 <div class='clear-fix'></div>
                 <div class='eventwebsite_accomodation'>
+                  <a target="_blank" href="<%= @event.event_broucher.broucher.url %>">Download Broucher</a>
                   <a target="_blank" href='<%= @event.event_url.college_link.present? ? @event.event_url.college_link : '#' %>'>College Website</a>
                   <a><%= @event.event_accomodation.accomodation == true ? 'Yes' : 'No' %> Accomodation Provided</a>
                 </div>
@@ -153,14 +154,6 @@
           </div>
 
           <div class='col-md-4 share_middlesec'>
-           <!--  <ul class='socialicons'>
-              <li><a href="#"><i aria-hidden="true" class="fa fa-share-alt"></i></a></li>
-              <li><a href="#"><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
-              <li><a href="#"><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
-              <li><a href="#"><i aria-hidden="true" class="fa fa-google-plus"></i></a></li>
-              <li><a href="#"><i aria-hidden="true" class="fa fa-linkedin"></i></a></li>
-              <li><a href="#"><i aria-hidden="true" class="fa fa-whatsapp"></i></a></li>
-            </ul> -->
 
            <div class='socialicons'>
               <div class='fbshare'>
