@@ -1,7 +1,7 @@
 <!--filter results section start-->
         <div class='col-md-6'>
           <div id="event_results" class="event_results">
-            <h2 class="text-center">Search Results for Events</h2>
+            <h2 class="text-center"><%= @result_msg %></h2>
             <% if @events.count == 0 %><br/><p style="text-align: center;">First Event is yet to create !</p><% end %>
             <% @events.each do |event| %>
               <div class="event_search_result">

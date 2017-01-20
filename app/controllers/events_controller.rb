@@ -20,6 +20,13 @@ before_action :authenticate_user!, only: [:show, :new]
      @events = Event.joins(:event_departments, :event_college_banner, :event_detail).where(is_published: true).paginate(:page => params[:page], :per_page => 4).order("event_details.start_date ASC").select("event_name, study_place, country, state, district, event_type, event_details.start_date as start_date, event_details.end_date as end_date, event_college_banners.id as college_banner_id, events.id as id").uniq
      # binding.pry
     end
+
+   if params[:event_type].present?
+     @result_msg = "Search Results for #{params[:event_type]}" 
+   else
+    @result_msg = "Search Results for Events" 
+   end
+
 	end
 
 	def new
