@@ -152,15 +152,43 @@
             </div>
           </div>
 
-          <div class='col-md-4'>
-            <ul class='socialicons'>
+          <div class='col-md-4 share_middlesec'>
+           <!--  <ul class='socialicons'>
               <li><a href="#"><i aria-hidden="true" class="fa fa-share-alt"></i></a></li>
               <li><a href="#"><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
               <li><a href="#"><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
               <li><a href="#"><i aria-hidden="true" class="fa fa-google-plus"></i></a></li>
               <li><a href="#"><i aria-hidden="true" class="fa fa-linkedin"></i></a></li>
               <li><a href="#"><i aria-hidden="true" class="fa fa-whatsapp"></i></a></li>
-            </ul>
+            </ul> -->
+
+           <div class='socialicons'>
+              <div class='fbshare'>
+              <!--facebook like and share start-->
+              <div class="fb-like" data-href="http://techvisible.com/" data-layout="button" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+              
+              <div class="fb-share-button" data-href="http://techvisible.com/" data-layout="button" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://techvisible.com/&amp;src=sdkpreparse">Share</a></div>
+              <!--facebook like and share end-->
+              </div>
+
+
+              <div class='link_twit_ggl'>
+              <!--linkedin share start-->
+              <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+              <script type="IN/Share" data-url="http://google.co.in"></script>
+              <!--linkedin share end-->
+              <!--twitter share start-->
+              <a href="https://twitter.com/share" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+              <!--twitter share end-->
+              <!--google plus share start-->
+              <script src="https://apis.google.com/js/platform.js" async defer></script>
+              <div class="g-plus" data-action="share" data-annotation="none" data-href="http://google.co.in" data-size="tall"></div>
+              <!--google plus share end-->
+              </div>
+
+            </div>
+
+
             
             <%= form_tag  events_event_going_path, {:class => 'form-horizontal', role: "form"} do %>
               <div class='goingforevent'>
@@ -186,3 +214,15 @@
   </div>
 </section> 
 
+  <!--facebook share script start-->
+  <div id="fb-root"></div>
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8&appId=1813450082240094";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+  <!--facebook share script end-->
