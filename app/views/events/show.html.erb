@@ -38,7 +38,7 @@
                 </div>
                 <div class='clear-fix'></div>
                 <div class='eventwebsite_accomodation'>
-                  <a target="_blank" href="<%= @event.event_broucher.broucher.url %>">Download Broucher</a>
+                  <a target="_blank" href="<%= @event.event_broucher.present? ? @event.event_broucher.broucher.url : "#" %>">Download Broucher</a>
                   <a target="_blank" href='<%= @event.event_url.college_link.present? ? @event.event_url.college_link : '#' %>'>College Website</a>
                   <a><%= @event.event_accomodation.accomodation == true ? 'Yes' : 'No' %> Accomodation Provided</a>
                 </div>
