@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get 'states/:country', to: 'events#states'
   get 'cities/:state/:country', to: 'events#cities'
+  get 'departments/:stream_id', to: 'events#departments'
 
   get 'get_event_results/:query', to: 'events#get_event_results'
   get '/collegeda_admins', to: 'admins#collegeda_admins'

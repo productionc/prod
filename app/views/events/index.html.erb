@@ -1,21 +1,24 @@
 <style>
+.pagination{
+  margin-left: 38% !important;
+}
 .pagination span.disabled {
 border: 1px solid #eee;
 color: #ddd;
 margin: 2px;
-padding: 4px 9px;
+padding: 8px 9px;
 }
 .pagination .current {
 background: #784cab none repeat scroll 0 0;
 border: 1px solid #784cab;
 color: #ffffff;
 font-style: normal;
-padding: 4px 9px;
+padding: 8px 9px;
 }
 .pagination a {
 border: 1px solid #784cab;
 color: #784cab;
-padding: 4px 9px;
+padding: 8px 9px;
 text-decoration: none;
 }
 .pagination a:hover {
@@ -36,7 +39,6 @@ color: #fff;
         <div class='col-md-3'>
           <div class='event_filter'>
             <%= form_tag events_path, :method => 'get',remote: true, :id => "event_filter_form" do %>
-              <span style="font-size: 19px;font-style: italic;">&nbsp;Hint: Search with appropriate/near city for Best results.</span>
               <div class="form-group">
                 <label class='customlabel'>Event Type</label>
                  <select name="event_type" class="event_type form-control">
@@ -71,15 +73,20 @@ color: #fff;
                 </select>
               </div>
 
-              <div class="departments">
-                <label class='customlabel'>Department</label>
-                <div class='department_checkbox'>
-                  <% EventDepartment.all.each_with_index do |dept, index| %>
-                  <label>
-                    <input class='department' type='checkbox' name='department[]' value='<%= index %>'><%= dept.name %>
-                  </label>
+              <div class="form-group">
+              <label class='customlabel'>Department Stream</label>
+                <select name="department_streams" class="event_type department_stream form-control">
+                  <option value="" selected="selected">Select Stream</option>
+                  <% EventDepartmentStream.all.each do |stream| %>
+                  <option value="<%= stream.id %>"><%= stream.name %></option>
                   <% end %>
-                </div>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class='customlabel'>Departments</label>
+                <select name="department[]" class="event_dept department form-control" multiple="multiple">
+                </select>
               </div>
           
               <div class="form-group">

@@ -96,6 +96,19 @@ $("#event_filter_form #date").on("dp.change", function (e) {
   $('.filter_result').click();
 });
 
+$('.department_stream').change(function () {
+  var input_state = $('.department');
+  $.getJSON('/departments/' + $(this).val(), function (data) {
+    input_state.empty();
+    var initial = "<option value=''>Select Department</option>";
+    input_state.append(initial);
+    $.each(data, function (i,j) {
+     var opt = '<option value='+ j["id"] +'>' + j["name"] + '</option>';
+      input_state.append(opt);
+    });
+  });
+});
+
 $('.department').change(function () {
   $('.filter_result').click();
 });

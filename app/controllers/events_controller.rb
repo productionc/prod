@@ -66,6 +66,10 @@ before_action :authenticate_user!, only: [:show, :new]
     render json: CS.cities(params[:state], params[:country]).to_json
   end
 
+  def departments
+    render json: EventDepartment.where(stream_id: params[:stream_id]).to_json
+  end
+
   def get_event_results
     @results = Event.where(country: params[:query]).paginate(:page => params[:page], :per_page => 2).order("created_at DESC")
     render json: @results.to_json
