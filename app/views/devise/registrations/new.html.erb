@@ -58,13 +58,13 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :official_email_id, id: 'user_official_email_id_label' %>
-    <%= f.text_field :official_email_id, class: 'form-control validate[required]' %>
+    <%= f.label :company, id: 'user_company_label' %>
+    <%= f.text_field :company, class: 'form-control validate[required]' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :company, id: 'user_company_label' %>
-    <%= f.text_field :company, class: 'form-control validate[required]' %>
+    <%= f.label :official_email_id, id: 'user_official_email_id_label' %>
+    <%= f.text_field :official_email_id, class: 'form-control validate[required,funcCall[checkCompanyEmail]]' %>
   </div>
 
   <div class="actions">
@@ -75,6 +75,12 @@
 </div>
 
 <script type="text/javascript">
+function checkCompanyEmail(field, rules, i, options){
+    if (!String(field.val().split('@')[1]).startsWith($("#user_company").val().toLowerCase()[0])) {
+    return "Please provide your company official email Id";
+    }
+}
+
 $(document).ready(function(){
     $("#new_user").validationEngine();
 });

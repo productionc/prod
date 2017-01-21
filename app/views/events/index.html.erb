@@ -36,7 +36,7 @@ color: #fff;
         <div class='col-md-3'>
           <div class='event_filter'>
             <%= form_tag events_path, :method => 'get',remote: true, :id => "event_filter_form" do %>
-
+              <span style="font-size: 19px;font-style: italic;">&nbsp;Hint: Search with appropriate/near city for Best results.</span>
               <div class="form-group">
                 <label class='customlabel'>Event Type</label>
                  <select name="event_type" class="event_type form-control">
