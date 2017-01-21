@@ -4,34 +4,19 @@
   <div class="row">
 
   <div class='col-md-4'>
-    <select name="event_type" class="event_type form-control">
+    <select name="event_type" class="event_type form-control department_stream">
       <option value="" selected="selected">Select Stream</option>
       <% EventDepartmentStream.all.each do |stream| %>
-      <option value="<%= stream.name %>"><%= stream.name %></option>
+      <option value="<%= stream.id %>"><%= stream.name %></option>
       <% end %>
     </select>
   </div>
 
   <div class='col-md-6'>
-  <select name="event[event_department_ids][]" class="event_dept form-control" multiple="multiple">
-     <% EventDepartment.all.each do |event_department| %>
-    <option value="<%= event_department.id %>"><%= event_department.name %></option>
-    <% end %>
+  <select name="event[event_department_ids][]" class="event_dept department form-control" multiple="multiple">
   </select>
   </div>
 
   </div>
 
- <!--  <div class='row'>
-    <% EventDepartment.all.each_slice(3) do |event_department| %>
-    <div class='col-md-3'>
-    <%= f.collection_check_boxes :event_department_ids, event_department , :id, :name do |b| %>
-      <div class="collection-check-box">
-        <%= b.check_box %>
-        <%= b.label %>
-      </div>
-      <% end %>
-    </div>
-   <% end %> 
-  </div> -->
 </div>
