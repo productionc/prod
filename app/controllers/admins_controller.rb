@@ -23,4 +23,9 @@ class AdminsController < ApplicationController
     @all_events = Event.all.order('created_at DESC')
   end
 
+  def hide_events
+    Event.find_by(id: params[:event_id]).update(is_published: false)
+    redirect_to :back, notice: 'Event has been hidden successfully !'
+  end
+
 end

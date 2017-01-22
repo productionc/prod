@@ -7,6 +7,7 @@
       <tr>
         <th>Event Name</th>
         <th>Update Event</th>
+        <th>Hide Event</th>
       </tr>
     </thead>
     <tbody>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= event.event_name %></td>
         <td><button type="button" class="btn btn-green"><strong><%= link_to 'Update', edit_event_path(event) %></strong></button></td>
+        <td><button type="button" <%= disable_event_hide_btn(event.id) %> class="btn btn-info"><strong><%= link_to 'Hide', collegeda_hide_events_path(event_id: event.id) %></strong></button></td>
       </tr>
       <% end %>
       
