@@ -6,7 +6,7 @@
   <div class='dates'>
     <div class='startdate'><p><%= @event.event_detail.start_date.present? ? @event.event_detail.start_date.strftime("%a, %d %b %y") : '' %></p><p><%= @event.event_detail.start_date.present? ? @event.event_detail.start_date.strftime("%I:%M %P") : '' %></p></div>
     <div class='enddate'><p><%= @event.event_detail.end_date.present? ? @event.event_detail.end_date.strftime("%a, %d %b %y") : '' %></p><p><%= @event.event_detail.end_date.present? ? @event.event_detail.end_date.strftime("%I:%M %P") : '' %></p></div>
-    <div class='totaldays'><p><%= (Date.parse(Event.last.event_detail.end_date.to_s.split(' ')[0]) - Date.parse(Event.last.event_detail.start_date.to_s.split(' ')[0])).to_i+1 %> days</p></div>
+    <div class='totaldays'><p><%= (Date.parse(@event.event_detail.end_date.to_s.split(' ')[0]) - Date.parse(@event.event_detail.start_date.to_s.split(' ')[0])).to_i+1 %> days</p></div>
   </div>
   
 </div>
