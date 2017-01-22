@@ -37,7 +37,7 @@ ul a{
 
 #home{
 	margin-top: 50px;
-	background: url('univ.jpg');
+	background-image: url('<%= asset_path('univ.jpg') %>');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
