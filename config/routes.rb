@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get '/collegeda_events_subscriber', to: 'admins#events_subscriber'
   get '/collegeda_events_action', to: 'admins#events_action'
   get '/collegeda_hide_events', to: 'admins#hide_events'
+  get '/campus_ambassador', to: 'events#campus_ambassador'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,0 +1,176 @@
+
+h1{
+	text-align: center;
+	font-family: 'Rancho', Serif;
+	font-size: 70px;
+	font-weight: bold;
+}
+
+h2{
+	text-align: center;
+	font-family: 'Rancho', Serif;
+	font-size: 50px;
+	font-weight: normal;
+}
+
+h3{
+	text-align: center;
+	font-family: 'Alegreya', serif;
+	font-size: 30px;
+}
+
+a{
+	font-variant: small-caps;
+	color: #fff !important;
+	font-style: oblique;
+	font-weight: bolder;
+	font-size: 25px !important;
+}
+
+ul a{
+	font-variant: small-caps;
+	color: #fff !important;
+	font-style: normal;
+	font-size: 22px !important;
+	font-weight: normal;
+}
+
+#home{
+	margin-top: 50px;
+	background: url('univ.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	height: 650px;
+	width: 100%;
+	color: #fff;
+	padding-top: 100px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#about{
+	background-color: #6ed3cf;
+}
+
+.h{
+	text-align: center;
+	color: #fff;
+	font-size: 30px;
+	padding: 50px;
+	font-family: 'Lora', serif;
+}
+
+.c{
+	padding-right: 40px;
+	padding-left: 40px;
+	padding-top: 10px;
+	padding-bottom: 10px; 
+	color: #fff;
+	font-size: 24px;
+	font-family: 'Satisfy', cursive;
+}
+
+.c1{
+	padding-right: 40px;
+	padding-left: 40px;
+	padding-top: 10px;
+	padding-bottom: 10px; 
+	color: #fff;
+	text-align: center;
+	font-size: 24px;
+	font-family: 'Satisfy', cursive;
+}
+
+.f{
+	text-align: center;
+	padding: 20px;
+	font-family: 'Lora', serif;
+}
+
+#resp{
+	background-color: #e1e8f0;
+	padding: 10px;
+}
+
+p{
+	font-family: 'Rancho', Serif;
+	text-align: center;
+	font-size: 25px;
+}
+
+.i{
+	font-size: 40px !important;
+}
+
+hr{
+	border-top: 2px solid #6ed3cf;
+	width: 150px;
+}
+
+#incentives{
+	background-color: #6ed3cf;
+	padding: 10px;
+	color: #fff;
+}
+
+img{
+	text-align: center;
+	width: 350px;
+	height: 200px !important;
+}
+
+#join{
+	background-color: #283593;
+	color: #fff;
+}
+
+}
+.btng {
+  background-color: #004A7F;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial;
+  font-size: 20px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+}
+@-webkit-keyframes glowing {
+  0% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; -webkit-box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
+}
+
+@-moz-keyframes glowing {
+  0% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; -moz-box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
+}
+
+@-o-keyframes glowing {
+  0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+}
+
+@keyframes glowing {
+  0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+}
+
+.btng {
+  -webkit-animation: glowing 1500ms infinite;
+  -moz-animation: glowing 1500ms infinite;
+  -o-animation: glowing 1500ms infinite;
+  animation: glowing 1500ms infinite;
+}
+
+header.collegeda_strip{
+  background: #784CAB;
+}

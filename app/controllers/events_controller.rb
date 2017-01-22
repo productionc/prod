@@ -104,7 +104,9 @@ before_action :authenticate_user!, only: [:show, :new]
    redirect_to :back, notice: EventService.new().going_and_may_be_count(event_going, params)
   end
 
-  
+  def campus_ambassador
+    render layout: false
+  end
 
 	private
 
