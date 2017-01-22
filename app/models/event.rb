@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
  belongs_to :event_registration
  has_and_belongs_to_many :event_departments
  has_many :event_contact_details
- has_many :event_guest_details
+ has_many :event_guest_details, dependent: :destroy
  belongs_to :event_url
  has_and_belongs_to_many :event_extras
  belongs_to :event_accomodation

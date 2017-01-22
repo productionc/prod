@@ -10,7 +10,7 @@
                     <h2 class="eventname"><%= link_to event.event_name, event %></h2>
                     <p class="colg_name"><%= event.study_place %></p>
                     <p class="locat"><%= event.district %>, <%= event.state %>, <%= event.country %></p>
-                    <p class="event_typename"><%= event.event_type %>, 8days</p>
+                    <p class="event_typename"><%= event.event_type %>, <%= (Date.parse(Event.last.event_detail.end_date.to_s.split(' ')[0]) - Date.parse(Event.last.event_detail.start_date.to_s.split(' ')[0])).to_i+1 %> days</p>
                   </div>
                   <div class="section1_right">
                     <%= image_tag EventCollegeBanner.find(event.college_banner_id).college_banner.url if event.college_banner_id.present? %>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="section2">
                   <div class="dates">
-                    <p><b>Date: </b><%= event.start_date.to_s.split(' ')[0] %><span></span> <%= event.end_date.to_s.split(' ')[0] %></p>
+                    <p><b>Date: </b><%= event.start_date.strftime("%d-%b-%Y") %><span></span> <%= event.end_date.strftime("%d-%b-%Y") %></p>
                   </div>
                 <%= link_to 'View Details', event, class: 'view_det_btn hvr-bubble-float-right', target: '_blank' %>
                 </div>

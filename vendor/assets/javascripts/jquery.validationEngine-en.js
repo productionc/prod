@@ -267,6 +267,10 @@
                     "alertText": "* Invalid URL"
 
                 },
+                "onlyLetters":{
+                   "regex": /^[a-zA-Z ]*$/,
+                   "alertText": "* Alphabets only"
+                },
 
                 "onlyNumberSp": {
 

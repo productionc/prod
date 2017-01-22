@@ -129,13 +129,13 @@ before_action :authenticate_user!, only: [:show, :new]
 			).tap do |attributes|
 				attributes[:event_detail_attributes][:start_date] = parse_time(attributes[:event_detail_attributes][:start_date]) if attributes[:event_detail_attributes].present?
 				attributes[:event_detail_attributes][:end_date] = parse_time(attributes[:event_detail_attributes][:end_date]) if attributes[:event_detail_attributes].present?
-				attributes[:event_registration_attributes][:start_date] = parse_time(attributes[:event_registration_attributes][:start_date]) if attributes[:event_registration_attributes].present?
-				attributes[:event_registration_attributes][:end_date] = parse_time(attributes[:event_registration_attributes][:end_date]) if attributes[:event_registration_attributes].present?
+				attributes[:event_detail_attributes][:reg_start_date] = parse_time(attributes[:event_detail_attributes][:reg_start_date]) if attributes[:event_detail_attributes].present?
+				attributes[:event_detail_attributes][:reg_end_date] = parse_time(attributes[:event_detail_attributes][:reg_end_date]) if attributes[:event_detail_attributes].present?
 		end
   end
 
   def parse_time time
-    Time.zone.parse(time).utc if time.present?
+    Time.zone.parse(DateTime.strptime(time,"%m/%d/%Y %I:%M %P").to_s) if time.present?
   end
 
   def set_event

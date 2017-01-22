@@ -32,17 +32,27 @@ $(function () {
   $('#event_filter_form #date').datetimepicker({
     format: 'DD-MM-YYYY'
   });
-  $('#eventregistrationform #eventstartdate').datetimepicker({
-    format: 'DD-MM-YYYY'
-  });
+  $('#eventregistrationform #eventstartdate').datetimepicker();
   $('#eventregistrationform #eventenddate').datetimepicker({
-    format: 'DD-MM-YYYY'
+    useCurrent: false
   });
-  $('#eventregistrationform #event_reg_opens').datetimepicker({
-    format: 'DD-MM-YYYY'
+  $("#eventregistrationform #eventstartdate").on("dp.change", function (e) {
+    $('#eventregistrationform #eventenddate').data("DateTimePicker").minDate(e.date);
   });
+  $("#eventregistrationform #eventenddate").on("dp.change", function (e) {
+    $('#eventregistrationform #eventstartdate').data("DateTimePicker").maxDate(e.date);
+  });
+
+
+  $('#eventregistrationform #event_reg_opens').datetimepicker();
   $('#eventregistrationform #event_reg_closed').datetimepicker({
-    format: 'DD-MM-YYYY'
+    useCurrent: false
+  });
+  $("#eventregistrationform #event_reg_opens").on("dp.change", function (e) {
+    $('#eventregistrationform #event_reg_closed').data("DateTimePicker").minDate(e.date);
+  });
+  $("#eventregistrationform #event_reg_closed").on("dp.change", function (e) {
+    $('#eventregistrationform #event_reg_opens').data("DateTimePicker").maxDate(e.date);
   });
 
 });

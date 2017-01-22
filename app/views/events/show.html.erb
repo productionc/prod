@@ -1,12 +1,12 @@
 <!--banner start-->
-<div class='eventview_banner img-responsive' style='background-image: url("<%= @event.event_college_banner.college_banner.url(:small) %>")'>
+<div class='eventview_banner img-responsive' style='background-image: url("<%= @event.event_college_banner.present? ? @event.event_college_banner.college_banner.url(:small) : "" %>")'>
   <%= image_tag @event.event_banner.banner.url(:small), class: 'text-center img-responsive eventlogo' if @event.event_banner.present? %>
   <h2 class='eventname'><%= @event.event_name %></h2>
-  <p class='location'><%= @event.location %>, <%= @event.district %>, <%= @event.state %> <%= @event.zip %>, <%= CS.states("IN").select { |key,value| key == @event.country } %></p>
+  <p class='location'><%= @event.location %>, <%= @event.district %>, <%= @event.state %> <%= @event.zip %>, <%= @event.country %></p>
   <div class='dates'>
-    <div class='startdate'><p><%= @event.event_detail.start_date.present? ? @event.event_detail.start_date.to_s.split(' ')[0] : '' %></p></div>
-    <div class='enddate'><p><%= @event.event_detail.end_date.present? ? @event.event_detail.end_date.to_s.split(' ')[0] : '' %></p></div>
-    <div class='totaldays'><p>2days</p></div>
+    <div class='startdate'><p><%= @event.event_detail.start_date.present? ? @event.event_detail.start_date.strftime("%a, %d %b %y") : '' %></p><p><%= @event.event_detail.start_date.present? ? @event.event_detail.start_date.strftime("%I:%M %P") : '' %></p></div>
+    <div class='enddate'><p><%= @event.event_detail.end_date.present? ? @event.event_detail.end_date.strftime("%a, %d %b %y") : '' %></p><p><%= @event.event_detail.end_date.present? ? @event.event_detail.end_date.strftime("%I:%M %P") : '' %></p></div>
+    <div class='totaldays'><p><%= (Date.parse(Event.last.event_detail.end_date.to_s.split(' ')[0]) - Date.parse(Event.last.event_detail.start_date.to_s.split(' ')[0])).to_i+1 %> days</p></div>
   </div>
   
 </div>
@@ -38,9 +38,15 @@
                 </div>
                 <div class='clear-fix'></div>
                 <div class='eventwebsite_accomodation'>
-                  <a target="_blank" href="<%= @event.event_broucher.present? ? @event.event_broucher.broucher.url : "#" %>">Download Broucher</a>
-                  <a target="_blank" href='<%= @event.event_url.college_link.present? ? @event.event_url.college_link : '#' %>'>College Website</a>
-                  <a><%= @event.event_accomodation.accomodation == true ? 'Yes' : 'No' %> Accomodation Provided</a>
+                  <% if @event.event_broucher.present? %>
+                   <a target="_blank" href="<%= @event.event_broucher.broucher.url %>">Download Broucher</a>
+                  <% end %>
+                  <% if @event.event_url.college_link.present? %>
+                    <a target="_blank" href='<%= @event.event_url.college_link %>'>College Website</a>
+                  <% end %>
+                  <% if @event.event_accomodation.accomodation.present? %>
+                   <a><%= @event.event_accomodation.accomodation == true ? 'Yes' : 'No' %> Accomodation Provided</a>
+                  <% end %>
                 </div>
                 <div class='clear-fix'></div>
                 <div class='eventwebsite'><span>Event:</span><a href='<%= @event.event_url.web_link.present? ? @event.event_url.web_link : '#' %>'><%= @event.event_url.web_link.present? ? @event.event_url.web_link : 'N/A' %></a></div>
@@ -49,7 +55,7 @@
                   <ul class='socialicons'>
                     <li><a target="_blank" href='<%= @event.event_url.facebook_link.present? ? @event.event_url.facebook_link : '#' %>'><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
                     <li><a target="_blank" href='<%= @event.event_url.twitter_link.present? ? @event.event_url.twitter_link : '#' %>'><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
-                    <li><a target="_blank" href='<%= @event.event_url.youtube_link.present? ? @event.event_url.youtube_link : '#' %>'><i aria-hidden="true" class="fa fa-youtube"></i></a></li>
+                    <li><a target="_blank" href='<%= @event.event_url.youtube_link.present? ? @event.event_url.youtube_link : '#' %>'><i aria-hidden="true" class="fa fa-youtube-play"></i></a></li>
                     <li><a target="_blank" href='<%= @event.event_url.apps_link.present? ? @event.event_url.apps_link : '#' %>'><i aria-hidden="true" class="fa fa-mobile"></i></a></li>
                   </ul>
                 </div>

@@ -6,12 +6,17 @@
 
    <div class="form-group">
     <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control' %>
+    <%= f.text_field :name, class: 'form-control validate[required]' %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+    <%= f.email_field :email, autofocus: true, class: 'form-control validate[required, custom[email]]' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :phone_no %>
+    <%= f.text_field :phone_no, class: 'form-control validate[required]' %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -28,25 +33,41 @@
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
+  <div class="form-group">
+    <br/><%= f.label :registration_type %><br/>
+    <select name="user[registration_type]" id="user_registration_type" class="registration_type form-control validate[required]">
+      <option value="" selected="selected">Select Type</option>
+      <% RegistrationType.all.each do |item| %>
+       <option value="<%= item.name %>"><%= item.name %></option>
+      <% end %>
+    </select>
   </div>
 
    <div class="form-group">
-    <%= f.label :phone_no %>
-    <%= f.text_field :phone_no, class: 'form-control' %>
+    <%= f.label :'Dept', id: 'user_dept_label' %>
+    <%= f.text_field :dept, class: 'form-control validate[required]' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :place_of_study %>
-    <%= f.text_field :place_of_study, class: 'form-control' %>
+    <%= f.label :'college / university', id: 'user_place_of_study_label' %>
+    <%= f.text_field :place_of_study, class: 'form-control validate[required]' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :passed_out_year %>
-    <%= f.text_field :passed_out_year, class: 'form-control' %>
+    <%= f.label :passed_out_year, id: 'user_passed_out_year_label' %>
+    <%= f.text_field :passed_out_year, class: 'form-control validate[required]' %>
   </div>
+
+  <div class="form-group">
+    <%= f.label :company, id: 'user_company_label' %>
+    <%= f.text_field :company, class: 'form-control validate[required]' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :official_email_id, id: 'user_official_email_id_label' %>
+    <%= f.text_field :official_email_id, class: 'form-control validate[required,funcCall[checkCompanyEmail]]' %>
+  </div>
+
 
   <div class="actions">
     <%= f.submit "Update" %>
@@ -54,3 +75,15 @@
 <% end %>
 
 </div>
+
+<script type="text/javascript">
+function checkCompanyEmail(field, rules, i, options){
+    if (!String(field.val().split('@')[1]).startsWith($("#user_company").val().toLowerCase()[0])) {
+    return "Please provide your company official email Id";
+    }
+}
+
+$(document).ready(function(){
+    $("#edit_user").validationEngine();
+});
+</script>

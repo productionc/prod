@@ -4,11 +4,11 @@
   <div class="row">
 
   <div class='col-md-4'>
-     <%= f.collection_select :dept_stream, EventDepartmentStream.all, :id, :name, {selected: @event.dept_stream, prompt: true}, class: "select2-size form-control select2-offscreen department_stream", placeholder: "Select Event Type" %>
+     <%= f.collection_select :dept_stream, EventDepartmentStream.all, :id, :name, {selected: @event.dept_stream, prompt: true}, class: "select2-size form-control select2-offscreen validate[required] department_stream", placeholder: "Select Event Type" %>
   </div>
 
   <div class='col-md-6'>
-   <%= select_tag "event[event_department_ids][]", options_for_select(@event.event_departments.present? ? @event.event_departments.map(&:name) : []),selected: true, multiple: "multiple", class: "select2-size form-control select2-offscreen event_dept department" %>
+   <%= select_tag "event[event_department_ids][]", options_for_select(@event.event_departments.present? ? @event.event_departments.map(&:name) : []),selected: true, multiple: "multiple", class: "select2-size validate[required] form-control select2-offscreen event_dept department" %>
   </div>
 
   </div>

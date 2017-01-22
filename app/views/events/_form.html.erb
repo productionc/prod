@@ -26,22 +26,22 @@ min-height: 100vh;
       <h3>Basic Details</h3>
       <div class='row'>
         <div class='col-md-3 form-group'>
-          <%= f.text_field :first_name, class: 'form-control validate[required]', placeholder: "First Name" %>
+          <%= f.text_field :first_name, class: 'form-control validate[required, custom[onlyLetters]]', placeholder: "First Name" %>
         </div>
         <div class='col-md-3 form-group'>
-          <%= f.text_field :last_name, class: 'form-control validate[required]', placeholder: "Last Name" %>
+          <%= f.text_field :last_name, class: 'form-control validate[required, custom[onlyLetters]]', placeholder: "Last Name" %>
         </div>
         <div class='col-md-3 form-group'>
           <%= f.text_field :email, class: 'form-control validate[required,custom[email]]', placeholder: "Email Id" %>
         </div>
         <div class='col-md-3 form-group'>
-          <%= f.text_field :phone_no, class: 'form-control validate[required,custom[number]]', 'data-errormessage': "Enter valid phone no", placeholder: "Mobile No *" %>
+          <%= f.text_field :phone_no, class: 'form-control validate[required,custom[onlyNumber],minSize[10]]', 'data-errormessage': "Enter valid phone no", placeholder: "Mobile No *" %>
         </div>
         <div class='col-md-3 form-group'>
-          <%= f.text_field :event_name, class: 'form-control validate[required]', placeholder: "Event Name" %>
+          <%= f.text_field :event_name, class: 'form-control validate[required, custom[onlyLetters]]', placeholder: "Event Name" %>
         </div>
         <div class='col-md-3 form-group'>
-          <%= f.collection_select :event_type, EventType.all, :id, :name, {selected: @event.event_type, prompt: true}, class: "select2-size form-control select2-offscreen", placeholder: "Select Event Type" %>
+          <%= f.collection_select :event_type, EventType.all, :name, :name, {selected: @event.event_type, prompt: true}, class: "select2-size form-control validate[required] select2-offscreen", placeholder: "Select Event Type" %>
         </div>
         <div class='col-md-3 form-group'>
           <%= f.text_field :study_place, class: 'form-control validate[required]', placeholder: "College Name / University" %>
@@ -49,16 +49,16 @@ min-height: 100vh;
       </div>
       <div class='row'>
         <div class='col-md-3 form-group'>
-         <%= select_tag "event[country]", options_for_select(CS.countries.map { |obj| [obj[1], obj[0]] }, @event.country), class: "select2-size form-control select2-offscreen country", prompt: "Select Country" %>
+         <%= select_tag "event[country]", options_for_select(CS.countries.map { |obj| [obj[1], obj[0]] }, @event.country), class: "select2-size form-control validate[required] select2-offscreen country", prompt: "Select Country" %>
         </div>
         <div class='col-md-3 form-group'>
-          <%= select_tag "event[state]", options_for_select(@event.state.present? ? [@event.state] : [], @event.state), prompt: "Select State", class: "select2-size form-control select2-offscreen state" %>
+          <%= select_tag "event[state]", options_for_select(@event.state.present? ? [@event.state] : [], @event.state), prompt: "Select State", class: "select2-size form-control validate[required] select2-offscreen state" %>
         </div>
         <div class='col-md-3 form-group'>
-           <%= select_tag "event[district]", options_for_select(@event.district.present? ? [@event.district] : [], @event.district), prompt: "Select City", class: "select2-size form-control select2-offscreen city" %>
+           <%= select_tag "event[district]", options_for_select(@event.district.present? ? [@event.district] : [], @event.district), prompt: "Select City", class: "select2-size validate[required] form-control select2-offscreen city" %>
         </div>
         <div class='col-md-3 form-group'>
-              <%= f.text_field :zip, placeholder: 'Zip Code / Post Code', class: "form-control validate[required,custom[number]]",'data-errormessage': "Enter valid zip code" %>
+              <%= f.text_field :zip, placeholder: 'Zip Code / Post Code', class: "form-control validate[required,custom[onlyNumber]]",'data-errormessage': "Enter valid zip code" %>
         </div>
         <div class='col-md-3 form-group'>
           <%= f.text_field :location, placeholder: 'Location', class: "form-control validate[required]" %>
@@ -67,7 +67,7 @@ min-height: 100vh;
     </div>
 
      <%= f.simple_fields_for :event_detail do |event_detail| %>
-      <%= render 'event_detail_fields', f: event_detail %>
+      <%= render 'event_detail_fields', f: event_detail, event: @event %>
     <% end %>
 
     <%= render partial: 'event_department', locals: {f: f} %>
@@ -124,7 +124,7 @@ min-height: 100vh;
               <div class='col-md-12'>
                 <%= f.simple_fields_for :event_accomodation do |event_accomodation| %>
                 <div class="field">
-                  <%= event_accomodation.label :accomodation, "Yes", :value => "true"  %>
+                  <%= event_accomodation.label :accomodation, "Yes", :value => "true" %>
                   <%= event_accomodation.radio_button :accomodation, true %>
                   <%= event_accomodation.label :accomodation, "No", :value => "false" %>
                   <%= event_accomodation.radio_button :accomodation, false%>
@@ -176,6 +176,7 @@ min-height: 100vh;
         </div>
       </div>
 
+    
            
     <%= f.button :submit, name: "event_registration_submit", class: "btn btn-primary event_registration_submit", value: "Submit" %><br/>
     </div>
