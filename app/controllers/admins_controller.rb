@@ -19,4 +19,8 @@ class AdminsController < ApplicationController
     @event_subscribers = EventSubscription.all.order('created_at DESC')
   end
 
+  def events_action
+    @all_events = Event.all.order('created_at DESC')
+  end
+
 end

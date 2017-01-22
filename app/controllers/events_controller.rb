@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-before_filter :set_event, only: [:show]
+before_filter :set_event, only: [:show, :edit, :update]
 before_action :authenticate_user!, only: [:show, :new]
 
 	def index
@@ -55,6 +55,17 @@ before_action :authenticate_user!, only: [:show, :new]
     EventService.new().event_going_reach_count(event_going, event_id, user_id)
 	end
 
+  def edit
+  end
+
+  def update
+    if @event.update(event_params)
+      redirect_to @event
+    else
+      render 'edit'
+    end
+  end
+
   def welcome
   end
 
@@ -99,7 +110,7 @@ before_action :authenticate_user!, only: [:show, :new]
 
   def event_params
 		params.require(:event).permit(:first_name, :last_name, :email, :phone_no, 
-			:event_name, :event_type, :study_place, :country, :state, :district, :zip,
+			:event_name, :event_type, :study_place, :dept_stream, :country, :state, :district, :zip,
 			:location, :event_detail_id, :id, 
 			event_detail_attributes: [:start_date, :end_date,
 			 :event_description, :sub_events, :workshops, :paper_presentation_topics, :conference_topics, :reg_start_date, :reg_end_date, :reg_fee, :id],

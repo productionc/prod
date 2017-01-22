@@ -41,12 +41,7 @@ min-height: 100vh;
           <%= f.text_field :event_name, class: 'form-control validate[required]', placeholder: "Event Name" %>
         </div>
         <div class='col-md-3 form-group'>
-          <select name="event[event_type]" class="event_type form-control validate[required]">
-            <option value="" selected="selected">Select Type</option>
-            <% EventType.all.each do |event_type| %>
-            <option value="<%= event_type.name %>"><%= event_type.name %></option>
-            <% end %>
-          </select>
+          <%= f.collection_select :event_type, EventType.all, :id, :name, {selected: @event.event_type, prompt: true}, class: "select2-size form-control select2-offscreen", placeholder: "Select Event Type" %>
         </div>
         <div class='col-md-3 form-group'>
           <%= f.text_field :study_place, class: 'form-control validate[required]', placeholder: "College Name / University" %>
@@ -54,22 +49,13 @@ min-height: 100vh;
       </div>
       <div class='row'>
         <div class='col-md-3 form-group'>
-          <select name="event[country]" class="country form-control validate[required]">
-                  <option value="" selected="selected">Select Country</option>
-                  <% CS.countries.each do |item| %>
-                    <option value="<%= item[0] %>"><%= item[1] %></option>
-                  <% end %>
-          </select>
+         <%= select_tag "event[country]", options_for_select(CS.countries.map { |obj| [obj[1], obj[0]] }, @event.country), class: "select2-size form-control select2-offscreen country", prompt: "Select Country" %>
         </div>
         <div class='col-md-3 form-group'>
-          <select name="event[state]" class="state form-control validate[required]">
-                  <option value="" selected="selected">Select State</option>
-          </select>
+          <%= select_tag "event[state]", options_for_select(@event.state.present? ? [@event.state] : [], @event.state), prompt: "Select State", class: "select2-size form-control select2-offscreen state" %>
         </div>
         <div class='col-md-3 form-group'>
-          <select name="event[district]" class="city form-control validate[required]">
-                  <option value="" selected="selected">Select City</option>
-          </select>
+           <%= select_tag "event[district]", options_for_select(@event.district.present? ? [@event.district] : [], @event.district), prompt: "Select City", class: "select2-size form-control select2-offscreen city" %>
         </div>
         <div class='col-md-3 form-group'>
               <%= f.text_field :zip, placeholder: 'Zip Code / Post Code', class: "form-control validate[required,custom[number]]",'data-errormessage': "Enter valid zip code" %>
@@ -80,7 +66,7 @@ min-height: 100vh;
       </div>
     </div>
 
-    <%= f.simple_fields_for :event_detail do |event_detail| %>
+     <%= f.simple_fields_for :event_detail do |event_detail| %>
       <%= render 'event_detail_fields', f: event_detail %>
     <% end %>
 
@@ -189,7 +175,8 @@ min-height: 100vh;
           </div>
         </div>
       </div>
-          
+
+           
     <%= f.button :submit, name: "event_registration_submit", class: "btn btn-primary event_registration_submit", value: "Submit" %><br/>
     </div>
     <% end %>

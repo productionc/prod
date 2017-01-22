@@ -4,17 +4,11 @@
   <div class="row">
 
   <div class='col-md-4'>
-    <select name="event_type" class="event_type form-control department_stream">
-      <option value="" selected="selected">Select Stream</option>
-      <% EventDepartmentStream.all.each do |stream| %>
-      <option value="<%= stream.id %>"><%= stream.name %></option>
-      <% end %>
-    </select>
+     <%= f.collection_select :dept_stream, EventDepartmentStream.all, :id, :name, {selected: @event.dept_stream, prompt: true}, class: "select2-size form-control select2-offscreen department_stream", placeholder: "Select Event Type" %>
   </div>
 
   <div class='col-md-6'>
-  <select name="event[event_department_ids][]" class="event_dept department form-control" multiple="multiple">
-  </select>
+   <%= select_tag "event[event_department_ids][]", options_for_select(@event.event_departments.present? ? @event.event_departments.map(&:name) : []),selected: true, multiple: "multiple", class: "select2-size form-control select2-offscreen event_dept department" %>
   </div>
 
   </div>
