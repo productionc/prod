@@ -42,7 +42,7 @@ before_action :authenticate_user!, only: [:show, :new]
 	def create
 		@event = Event.new(event_params)
   	if @event.save
-  		redirect_to @event, notice: "Successfully created event"
+  		redirect_to @event, flash: { success: "Successfully created event" }
   	else
   		render 'new'
   	end
@@ -90,9 +90,9 @@ before_action :authenticate_user!, only: [:show, :new]
     if current_user
       @subscribe = EventSubscription.create(email_id: params[:subscribe_email], user_id: current_user.id)
       if @subscribe.id.present?
-        redirect_to :back, notice: "Successfully, You are subscribed !" 
+        redirect_to :back, flash: { success: "Successfully, You are subscribed !" }
       else
-        redirect_to :back, notice: "You are already subscribed !"
+        redirect_to :back, flash: { success: "You are already subscribed !" }
       end
     end
   end
@@ -101,7 +101,7 @@ before_action :authenticate_user!, only: [:show, :new]
    event_id = params[:event_id].to_i
    user_id = current_user.id
    event_going = EventGoing.find_by(event_id: event_id, user_id: user_id)
-   redirect_to :back, notice: EventService.new().going_and_may_be_count(event_going, params)
+   redirect_to :back, flash: { success: EventService.new().going_and_may_be_count(event_going, params) }
   end
 
   def campus_ambassador

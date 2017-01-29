@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require cocoon
 //= require bootstrap.min
+//= require toastr
 //= require moment
 //= require bootstrap-datetimepicker.min
 //= require modernizr
@@ -23,6 +24,8 @@
 //= require jquery.validationEngine-en
 //= require custom-script
 //= require jquery.dlmenu
+//= require application_helper
+
 
 $(document).ready(function() {
 

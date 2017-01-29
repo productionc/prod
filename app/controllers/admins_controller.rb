@@ -12,7 +12,7 @@ class AdminsController < ApplicationController
 
   def publish_event
     Event.find_by(id: params[:event_id]).update(is_published: true)
-    redirect_to :back, notice: 'Event Published successfully !'
+    redirect_to :back, flash: { success: 'Event Published successfully !' }
   end
 
   def events_subscriber
@@ -25,7 +25,7 @@ class AdminsController < ApplicationController
 
   def hide_events
     Event.find_by(id: params[:event_id]).update(is_published: false)
-    redirect_to :back, notice: 'Event has been hidden successfully !'
+    redirect_to :back, flash: { success: 'Event has been hidden successfully !' }
   end
 
 end
