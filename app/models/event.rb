@@ -1,20 +1,18 @@
 class Event < ActiveRecord::Base
 
- belongs_to :event_detail
- belongs_to :event_registration
- has_and_belongs_to_many :event_departments
- has_many :event_contact_details
+ belongs_to :event_detail, dependent: :destroy
+ has_and_belongs_to_many :event_departments, dependent: :destroy
+ has_many :event_contact_details, dependent: :destroy
  has_many :event_guest_details, dependent: :destroy
- belongs_to :event_url
- has_and_belongs_to_many :event_extras
- belongs_to :event_accomodation
- belongs_to :event_banner
- belongs_to :event_college_banner
- belongs_to :event_broucher
- has_many :event_sponsors
+ belongs_to :event_url, dependent: :destroy
+ has_and_belongs_to_many :event_extras, dependent: :destroy
+ belongs_to :event_accomodation, dependent: :destroy
+ belongs_to :event_banner, dependent: :destroy
+ belongs_to :event_college_banner, dependent: :destroy
+ belongs_to :event_broucher, dependent: :destroy
+ has_many :event_sponsors, dependent: :destroy
 
  accepts_nested_attributes_for :event_detail, reject_if: :all_blank, allow_destroy: true
- accepts_nested_attributes_for :event_registration, reject_if: :all_blank, allow_destroy: true
  accepts_nested_attributes_for :event_contact_details, reject_if: :all_blank, allow_destroy: true
  accepts_nested_attributes_for :event_guest_details, reject_if: :all_blank, allow_destroy: true
  accepts_nested_attributes_for :event_url, reject_if: :all_blank, allow_destroy: true

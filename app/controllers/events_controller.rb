@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-before_filter :set_event, only: [:show, :edit, :update]
+before_filter :set_event, only: [:show, :edit, :update, :destroy]
 before_action :authenticate_user!, only: [:show, :new]
 
 	def index
@@ -64,6 +64,12 @@ before_action :authenticate_user!, only: [:show, :new]
     else
       render 'edit'
     end
+  end
+
+
+  def destroy
+    @event.destroy
+    redirect_to :back, flash: { success: "The event has been destroyed successfully!" }
   end
 
   def welcome

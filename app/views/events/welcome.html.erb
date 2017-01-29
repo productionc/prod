@@ -1,15 +1,9 @@
 <!--banner start-->
   <div class='home_page_banner'><img class='text-center img-responsive' src='<%= asset_path('banner.png') %>'/></div>
 <!--banner end-->
-<br/>
-<div style="text-align: center;">
-  <button type="button" class="btn btn-warning btn-lg"><strong><%= link_to 'Click here for Events', events_path,target: '_blank' %></strong></button>
-</div>
-<br/>
-
 <section id='event_slider'>
   <div class='container'>
-    <h2 class='text-center'><a href='#'><span>Eve</span><span>nts</span></a></h2>
+    <h2 class='text-center'><a href='<%= events_path %>'><span>Eve</span><span>nts</span></a></h2>
     <div class="flexslider carousel">
       <ul class="slides">
         <li><img src="<%= asset_path('event_images/1-TECHNICAL- SCROLL IMAGE.jpg') %>" /></li>

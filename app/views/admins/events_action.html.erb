@@ -8,6 +8,7 @@
         <th>Event Name</th>
         <th>Update Event</th>
         <th>Hide Event</th>
+        <th>Destroy Event</th>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +17,11 @@
         <td><%= event.event_name %></td>
         <td><button type="button" class="btn btn-green"><strong><%= link_to 'Update', edit_event_path(event) %></strong></button></td>
         <td><button type="button" <%= disable_event_hide_btn(event.id) %> class="btn btn-info"><strong><%= link_to 'Hide', collegeda_hide_events_path(event_id: event.id) %></strong></button></td>
+        <td>
+          <button type="button" class="btn btn-danger"><strong><%= link_to 'Destroy', event_path(event),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></strong></button>
+        </td>
       </tr>
       <% end %>
       
