@@ -1,6 +1,6 @@
 <!--banner start-->
-<div class='eventview_banner img-responsive' style='background-image: url("<%= @event.event_college_banner.present? ? @event.event_college_banner.college_banner.url(:small) : "" %>")'>
-  <%= image_tag @event.event_banner.banner.url(:small), class: 'text-center img-responsive eventlogo' if @event.event_banner.present? %>
+<div class='eventview_banner img-responsive' style='background-image: url("<%= @event.event_college_banner.present? ? @event.event_college_banner.college_banner.url(:small) : "/assets/dummy_event_banner.png" %>")'>
+  <%= image_tag @event.event_banner.present? && @event.event_banner.banner.present? ? @event.event_banner.banner.url(:small) : "/assets/eventlogo.png", class: 'text-center img-responsive eventlogo' %>
   <h2 class='eventname'><%= @event.event_name %></h2>
   <p class='location'><%= @event.location %>, <%= @event.district %>, <%= @event.state %> <%= @event.zip %>, <%= @event.country %></p>
   <div class='dates'>
@@ -21,15 +21,15 @@
               <li role="presentation" class="active"><a href="#aboutus_tab" aria-controls="home" role="tab" data-toggle="tab">About</a></li>
               <li role="presentation"><a href="#event_tab" aria-controls="profile" role="tab" data-toggle="tab">Event</a></li>
               <li role="presentation"><a href="#register_tab" aria-controls="messages" role="tab" data-toggle="tab">Register</a></li>
-              <li role="presentation"><a href="#contactus_tab" aria-controls="settings" role="tab" data-toggle="tab">Contact Us</a></li>
-              <li role="presentation"><a href="#sponsors_tab" aria-controls="settings" role="tab" data-toggle="tab">Sponsors</a></li>
+              <% if @event.event_contact_details.count > 0 %><li role="presentation"><a href="#contactus_tab" aria-controls="settings" role="tab" data-toggle="tab">Contact Us</a></li><% end %>
+              <% if @event.event_sponsors.count > 0 %><li role="presentation"><a href="#sponsors_tab" aria-controls="settings" role="tab" data-toggle="tab">Sponsors</a></li><% end %>
               <li style="display: none;" role="presentation"><a href="#reports_tab" aria-controls="settings" role="tab" data-toggle="tab">Event Report</a></li>
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="aboutus_tab">
                 <p><%= @event.event_detail.event_description.present? ? @event.event_detail.event_description : "No Event Description" %></p>
                 <div class='guestspeaker'>
-                  <p><strong>Guest Speakers</strong></p>
+                  <% if @event.event_guest_details.count > 0 %><p><strong>Guest Speakers</strong></p><% end %>
                   <ol>
                     <% @event.event_guest_details.each do |guest| %>
                      <li><span><%= guest.name.titleize %></span><span><%= guest.designation %> - <%= guest.company %></span><span> <%= guest.delegation.titleize %></span></li>
@@ -41,22 +41,32 @@
                   <% if @event.event_broucher.present? %>
                    <a target="_blank" href="<%= @event.event_broucher.broucher.url %>">Download Broucher</a>
                   <% end %>
-                  <% if @event.event_url.college_link.present? %>
+                  <% if @event.event_url.present? && @event.event_url.college_link.present? %>
                     <a target="_blank" href='<%= @event.event_url.college_link %>'>College Website</a>
                   <% end %>
-                  <% if @event.event_accomodation.accomodation.present? %>
+                  <% if @event.event_accomodation.present? && @event.event_accomodation.accomodation.present? %>
                    <a><%= @event.event_accomodation.accomodation == true ? 'Yes' : 'No' %> Accomodation Provided</a>
                   <% end %>
                 </div>
                 <div class='clear-fix'></div>
-                <div class='eventwebsite'><span>Event:</span><a href='<%= @event.event_url.web_link.present? ? @event.event_url.web_link : '#' %>'><%= @event.event_url.web_link.present? ? @event.event_url.web_link : 'N/A' %></a></div>
+                <% if @event.event_url.present? && @event.event_url.web_link.present? %>
+                <div class='eventwebsite'><span>Event:</span><a href='<%= @event.event_url.web_link %>'><%= @event.event_url.web_link %></a></div>
+                <% end %>
                 <div class='followus'>
-                  <p>Follow Us</p>
+                  <% if @event.event_url.present? %><p>Follow Us</p><% end %>
                   <ul class='socialicons'>
-                    <li><a target="_blank" href='<%= @event.event_url.facebook_link.present? ? @event.event_url.facebook_link : '#' %>'><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
-                    <li><a target="_blank" href='<%= @event.event_url.twitter_link.present? ? @event.event_url.twitter_link : '#' %>'><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
-                    <li><a target="_blank" href='<%= @event.event_url.youtube_link.present? ? @event.event_url.youtube_link : '#' %>'><i aria-hidden="true" class="fa fa-youtube-play"></i></a></li>
-                    <li><a target="_blank" href='<%= @event.event_url.apps_link.present? ? @event.event_url.apps_link : '#' %>'><i aria-hidden="true" class="fa fa-mobile"></i></a></li>
+                    <% if @event.event_url.present? && @event.event_url.facebook_link.present? %>
+                    <li><a target="_blank" href='<%= @event.event_url.facebook_link %>'><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
+                    <% end %>
+                    <% if @event.event_url.present? && @event.event_url.twitter_link.present? %>
+                    <li><a target="_blank" href='<%= @event.event_url.twitter_link %>'><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
+                    <% end %>
+                    <% if @event.event_url.present? && @event.event_url.youtube_link.present? %>
+                    <li><a target="_blank" href='<%= @event.event_url.youtube_link%>'><i aria-hidden="true" class="fa fa-youtube-play"></i></a></li>
+                    <% end %>
+                    <% if @event.event_url.present? && @event.event_url.apps_link.present? %>
+                    <li><a target="_blank" href='<%= @event.event_url.apps_link %>'><i aria-hidden="true" class="fa fa-mobile"></i></a></li>
+                    <% end %>
                   </ul>
                 </div>
               </div>
@@ -112,6 +122,7 @@
                 </div>
               </div>
 
+              <% if @event.event_contact_details.count > 0 %>
               <div role="tabpanel" class="tab-pane fade" id="contactus_tab">
                 <h2>Event Coordinators</h2>
                 <div class='row'>
@@ -128,7 +139,9 @@
                   <% end %>
                 </div>
               </div>
+              <% end %>
 
+              <% if @event.event_sponsors.count > 0 %>
               <div role="tabpanel" class="tab-pane fade" id="sponsors_tab">
                 <div class='row'>
                   <div class='col-md-3'>
@@ -139,6 +152,7 @@
                   </div>
                 </div>
               </div>
+              <% end %>
 
               <div role="tabpanel" class="tab-pane fade" id="reports_tab">
                 <div class='row'>
@@ -192,13 +206,16 @@
             <%= form_tag  events_event_going_path, {:class => 'form-horizontal', role: "form"} do %>
               <div class='goingforevent'>
                 <h2>Help the Organizers<br>Take only 5 Seconds</h2>
-                <form name='areugoingforevent' action='' id='areugoingforevent'>
+                <form name='areugoingforevent' action='' id='areugoingforevent' >
+                  <div style="text-align: center;">
                   <p>Are you going for the event?</p>
                   <label><input type='radio' name='going_count' value='1'><span>Going</span></label>
                   <label><input type='radio' name='going_count' value='0'><span>May be</span></label>
                   <input type="hidden" name="event_id" value="<%= @event.id %>" />
-                  <input type='submit' class='btn' value='Submit' />
+                  <input type='submit' class='btn btn-primary' value='Submit' />
+                  </div>
                 </form>
+                <br/>
               </div>
             <% end %>
           

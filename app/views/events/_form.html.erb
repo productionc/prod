@@ -38,7 +38,7 @@ min-height: 100vh;
           <%= f.text_field :phone_no, class: 'form-control validate[required,custom[onlyNumber],minSize[10]]', 'data-errormessage': "Enter valid phone no", placeholder: "Mobile No *" %>
         </div>
         <div class='col-md-3 form-group'>
-          <%= f.text_field :event_name, class: 'form-control validate[required, custom[onlyLetters]]', placeholder: "Event Name" %>
+          <%= f.text_field :event_name, class: 'form-control validate[required]', placeholder: "Event Name" %>
         </div>
         <div class='col-md-3 form-group'>
           <%= f.collection_select :event_type, EventType.all, :name, :name, {selected: @event.event_type, prompt: true}, class: "select2-size form-control validate[required] select2-offscreen", placeholder: "Select Event Type" %>

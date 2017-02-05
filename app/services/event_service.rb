@@ -12,7 +12,9 @@ class EventService
 
 
   def going_and_may_be_count event_going, params
-    if(params[:going_count] == '1')
+    if params[:going_count].blank?
+      msg = "Please provide your input !"
+    elsif(params[:going_count] == '1')
       event_going.update(going_count: 1 )
       event_going.update(may_be_count: 0 )
       msg = "Your response is recorded !"

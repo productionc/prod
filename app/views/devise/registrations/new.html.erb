@@ -3,20 +3,20 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-
+  <div class="col-md-4">
   <div class="form-group">
     <%= f.label :name %>
-    <%= f.text_field :name, autofocus: true, class: 'form-control validate[required]' %>
+    <%= f.text_field :name, autofocus: true, class: 'form-control validate[required, custom[onlyLetters]]' %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, class: 'form-control validate[required, custom[email]]' %>
+    <%= f.text_field :email, class: 'form-control validate[required, custom[email]]' %>
   </div>
 
   <div class="form-group">
     <%= f.label :phone_no %>
-    <%= f.text_field :phone_no, class: 'form-control validate[required]' %>
+    <%= f.text_field :phone_no, class: 'form-control validate[required, custom[onlyNumber],minSize[10]]' %>
   </div>
 
   <div class="field">
@@ -24,12 +24,12 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off", class: 'form-control validate[required]' %>
+    <%= f.password_field :password, autocomplete: "off", class: 'form-control validate[required,minSize[5]]' %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control validate[required]' %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control validate[required,minSize[5]]' %>
   </div>
 
   <div class="form-group">
@@ -44,31 +44,32 @@
 
   <div class="form-group">
     <%= f.label :'Dept', id: 'user_dept_label' %>
-    <%= f.text_field :dept, class: 'form-control validate[required]' %>
+    <%= f.text_field :dept, class: 'form-control validate[required,custom[onlyLetters]]' %>
   </div>
 
   <div class="form-group">
     <%= f.label :'college / university', id: 'user_place_of_study_label' %>
-    <%= f.text_field :place_of_study, class: 'form-control validate[required]' %>
+    <%= f.text_field :place_of_study, class: 'form-control validate[required, custom[onlyLetters]]' %>
   </div>
 
   <div class="form-group">
     <%= f.label :passed_out_year, id: 'user_passed_out_year_label' %>
-    <%= f.text_field :passed_out_year, class: 'form-control validate[required, custom[onlyNumber]]' %>
+    <%= f.text_field :passed_out_year, class: 'form-control validate[required, custom[onlyNumber], minSize[4]]' %>
   </div>
 
   <div class="form-group">
     <%= f.label :company, id: 'user_company_label' %>
-    <%= f.text_field :company, class: 'form-control validate[required]' %>
+    <%= f.text_field :company, class: 'form-control validate[required, custom[onlyLetters]]' %>
   </div>
 
   <div class="form-group">
     <%= f.label :official_email_id, id: 'user_official_email_id_label' %>
-    <%= f.text_field :official_email_id, class: 'form-control validate[required,funcCall[checkCompanyEmail]]' %>
+    <%= f.text_field :official_email_id, class: 'form-control validate[required,custom[email],funcCall[checkCompanyEmail]]' %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class: "btn btn-success" %>
+  </div><br/>
   </div>
 <% end %>
 
