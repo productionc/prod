@@ -3,6 +3,7 @@
   src: url(./fonts/roboto/Roboto-Light.ttf); 
 }
 */
+
 /*@font-face {
   font-family: 'FontAwesome';
   src: url('../fonts/fontawesome/fontawesome-webfont.eot?v=4.7.0');
@@ -29,22 +30,41 @@ body{
   right: -8px;
 }
 
-.eventview_banner {
+.eventbanner .eventview_banner {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: auto;
-  margin: 0 auto 3em;
+  clear: both;
+  color: #f8f8f8;
+  height: 290px;
+  margin: auto auto 3em;
   padding: 5em 0;
   text-align: center;
   width: 100%;
 }
-.eventview_banner img.eventlogo {
+.eventbanner .event-detail {
+  height: 290px;
+  min-height: 290px;
+  opacity: 0.7;
+  background-color: #000000;
+  margin: auto;
+  max-height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+.eventbanner .eventview_banner .eventbanner_cont {
+  position: relative;
+  z-index: 999;
+}
+.eventbanner .eventview_banner img.eventlogo {
+  background: #ffffff;
   clear: both;
   margin: 0 auto;
+  padding: 5px;
   width: 80px;
 }
-.eventview_banner .eventname {
+.eventbanner .eventview_banner .eventname {
   color: #ffffff;
   font-size: 26px;
   margin-bottom: 4px;
@@ -53,7 +73,6 @@ body{
   color: #ffffff;
   margin-bottom: 2px;
 }
-
 .eventview_banner .dates .startdate{
   display: inline-block;
   margin: 0 50px;
@@ -599,7 +618,7 @@ transform: rotate(135deg);
   padding: 17px 0 8px;
   background: #ffffff;
 }
-.menu_logo_sec .menu li {
+/*.menu_logo_sec .menu li {
   display: inline-block;
   list-style-type: none;
   margin-left: 20px;
@@ -611,6 +630,41 @@ transform: rotate(135deg);
 }
 .menu_logo_sec .menu li a:hover {
   border-bottom: 1px solid #784cab;
+}*/
+.menu_logo_sec .logo {
+  display: inline-block;
+  width: 30%;
+}
+.menu_logo_sec .mainmenu1 {
+  background: none;
+  border: none;
+  margin-bottom: 0;
+  min-height: 32px;
+  width: 70%;
+}
+.menu_logo_sec .mainmenu1 ul li a {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.menu_logo_sec .mainmenu1 ul .dropdown-menu {
+  left: auto;
+  margin: 4px 0 0;
+  padding: 0;
+  right: 0;
+  text-align: right;
+}
+.menu_logo_sec .mainmenu1 ul .dropdown-menu li a {
+  padding: 6px 12px;
+}
+
+.menu_logo_sec .mainmenu1.navbar-default .navbar-nav > .open > a, .menu_logo_sec .mainmenu1.navbar-default .navbar-nav > .open > a:focus, .menu_logo_sec .mainmenu1.navbar-default .navbar-nav > .open > a:hover {
+  background-color: transparent;
+  text-decoration: underline;
+}
+.menu_logo_sec .mainmenu1.navbar-default .navbar-nav > li > a:focus, .menu_logo_sec .mainmenu1.navbar-default .navbar-nav > li > a:hover {
+  background-color: none;
+  text-decoration: underline;
 }
 .menu_logo_sec .logo a {
   color: #000000;
@@ -746,7 +800,7 @@ transform: rotate(135deg);
   position: relative;
 }
 .event_search_result .section3 ul li:first-child::before {
-  background-image: url('<%= asset_path('doubletick.png') %>');
+  background-image: url("../images/doubletick.png");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 100% auto;
@@ -1160,7 +1214,6 @@ footer .footer_sec4 ul {
 }
 
 
-
 /*signup page*/
 
 #signup_page .signup {
@@ -1263,7 +1316,11 @@ section#signup_page input[type="submit"]:hover {
 #signinpopup label {
   font-weight: 100;
 }
-
+@media only screen and (max-width: 767px) {
+  .menu_logo_sec .navbar-header button.navbar-toggle {
+    margin-top: -6px;
+  }
+}
 /*custom css*/
 #eventview_gogleads .socialicons li .fa-youtube {
     .background-color: red;

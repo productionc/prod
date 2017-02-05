@@ -148,7 +148,7 @@ min-height: 100vh;
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label">College Logo / Event Logo</label>
+          <label class="col-sm-2 col-form-label">College Logo / Event Logo<sup>*</sup></label>
           <div class="col-sm-10">
             <%= f.simple_fields_for :event_college_banner do |event_college_banner| %>
             <%= render 'event_college_banner_fields', f: event_college_banner %>
@@ -172,7 +172,18 @@ min-height: 100vh;
             <div class="links">&nbsp;
               <%= link_to_add_association 'Add Sponsor', f, :event_sponsors, class: "btn btn-default add-button" %>
             </div><br/>
+            <% if @event.event_sponsors.count > 0 %>
+            <div class='row'>
+              <div class='col-md-3'>
+                <% @event.event_sponsors.each do |sponsor_image| %>
+                <p><%= sponsor_image.sponsor_file_name %></p>
+                <%= image_tag sponsor_image.sponsor, width: '100px', height: '100px' %>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
           </div>
+
         </div>
       </div>
 

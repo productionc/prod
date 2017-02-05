@@ -1,5 +1,8 @@
 <!--banner start-->
+<div class="eventbanner">
+<div class="col-lg-10 col-md-12 col-sm-12 event-detail">&nbsp;</div>
 <div class='eventview_banner img-responsive' style='background-image: url("<%= @event.event_college_banner.present? ? @event.event_college_banner.college_banner.url(:small) : "/assets/dummy_event_banner.png" %>")'>
+ <div class='eventbanner_cont'>
   <%= image_tag @event.event_banner.present? && @event.event_banner.banner.present? ? @event.event_banner.banner.url(:small) : "/assets/eventlogo.png", class: 'text-center img-responsive eventlogo' %>
   <h2 class='eventname'><%= @event.event_name %></h2>
   <p class='location'><%= @event.location %>, <%= @event.district %>, <%= @event.state %> <%= @event.zip %>, <%= @event.country %></p>
@@ -8,7 +11,8 @@
     <div class='enddate'><p><%= @event.event_detail.end_date.present? ? @event.event_detail.end_date.strftime("%a, %d %b %y") : '' %></p><p><%= @event.event_detail.end_date.present? ? @event.event_detail.end_date.strftime("%I:%M %P") : '' %></p></div>
     <div class='totaldays'><p><%= (Date.parse(@event.event_detail.end_date.to_s.split(' ')[0]) - Date.parse(@event.event_detail.start_date.to_s.split(' ')[0])).to_i+1 %> days</p></div>
   </div>
-  
+  </div>
+  </div>
 </div>
 <!--banner end-->
 <section id='eventview_gogleads'>
@@ -59,10 +63,10 @@
                     <li><a target="_blank" href='<%= @event.event_url.facebook_link %>'><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
                     <% end %>
                     <% if @event.event_url.present? && @event.event_url.twitter_link.present? %>
-                    <li><a target="_blank" href='<%= @event.event_url.twitter_link %>'><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
+                    <li><a target="_blank" href='<%= @event.event_url.twitter_link %>'><i aria-hidden="true" class= "fa fa-twitter"></i></a></li>
                     <% end %>
                     <% if @event.event_url.present? && @event.event_url.youtube_link.present? %>
-                    <li><a target="_blank" href='<%= @event.event_url.youtube_link%>'><i aria-hidden="true" class="fa fa-youtube-play"></i></a></li>
+                    <li><a target="_blank" href='<%= @event.event_url.youtube_link%>'><i aria-hidden="true"     class="fa fa-youtube-square"></i></a></li>
                     <% end %>
                     <% if @event.event_url.present? && @event.event_url.apps_link.present? %>
                     <li><a target="_blank" href='<%= @event.event_url.apps_link %>'><i aria-hidden="true" class="fa fa-mobile"></i></a></li>
@@ -73,6 +77,7 @@
 
               <div role="tabpanel" class="tab-pane fade" id="event_tab">
                 <div class='row'>
+                  <% if @event.event_detail.present? && @event.event_detail.sub_events.present? %>
                   <div class='col-md-6'>
                     <p>Sub Events</p>
                     <ul>
@@ -81,6 +86,8 @@
                       <% end %>
                     </ul>
                   </div>
+                  <% end %>
+                  <% if @event.event_detail.present? && @event.event_detail.workshops.present? %>
                   <div class='col-md-6'>
                     <p>Workshops</p>
                     <ul>
@@ -89,6 +96,8 @@
                       <% end %>
                     </ul>
                   </div>
+                  <% end %>
+                  <% if @event.event_detail.present? && @event.event_detail.paper_presentation_topics.present? %>
                   <div class='col-md-6'>
                     <p>Paper Presentations</p>
                     <ul>
@@ -97,6 +106,8 @@
                       <% end %>
                     </ul>
                   </div>
+                  <% end %>
+                  <% if @event.event_detail.present? && @event.event_detail.conference_topics.present? %>
                   <div class='col-md-6'>
                     <p>Conference Topics</p>
                     <ul>
@@ -105,12 +116,15 @@
                       <% end %>
                     </ul>
                   </div>
+                  <% end %>
                 </div>
               </div>
 
               <div role="tabpanel" class="tab-pane fade" id="register_tab">
                 <p><strong>Registration Opens - </strong> <%= @event.event_detail.reg_start_date.present? ? @event.event_detail.reg_start_date.to_s.split(' ')[0] : '' %></p>
                 <p><strong>Registration Closes - </strong> <%= @event.event_detail.reg_start_date.present? ? @event.event_detail.reg_end_date.to_s.split(' ')[0] : '' %></p>
+                
+                <% if @event.event_detail.present? && @event.event_detail.reg_fee.present? %>
                 <p><strong>Registration Fees Details</strong></p>
                 <div class='eventdet'>
                   <p><strong>Split ups</strong></p>
@@ -120,6 +134,7 @@
                     <% end %>
                   </ul>
                 </div>
+                <% end %>
               </div>
 
               <% if @event.event_contact_details.count > 0 %>
@@ -176,31 +191,32 @@
           <div class='col-md-4 share_middlesec'>
 
            <div class='socialicons'>
+              
               <div class='fbshare'>
               <!--facebook like and share start-->
-              <div class="fb-like" data-href="http://techvisible.com/" data-layout="button" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
-              
-              <div class="fb-share-button" data-href="http://techvisible.com/" data-layout="button" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://techvisible.com/&amp;src=sdkpreparse">Share</a></div>
+              <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="box_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+
+              <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="box_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
               <!--facebook like and share end-->
+              
               </div>
 
 
               <div class='link_twit_ggl'>
               <!--linkedin share start-->
               <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
-              <script type="IN/Share" data-url="http://google.co.in"></script>
+              <script type="IN/Share" data-counter="top"></script>
               <!--linkedin share end-->
               <!--twitter share start-->
-              <a href="https://twitter.com/share" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+              <a href="http://twitcount.com/btn" class="twitcount-button" data-count="vertical" data-size="small" data-text="" data-url="" data-via="" data-related="" data-hashtags="">TwitCount</a> <script type="text/javascript" src="https://static1.twitcount.com/js/button.js"></script>
               <!--twitter share end-->
               <!--google plus share start-->
+              <!-- Place this tag in your head or just before your close body tag. -->
               <script src="https://apis.google.com/js/platform.js" async defer></script>
-              <div class="g-plus" data-action="share" data-annotation="none" data-href="http://google.co.in" data-size="tall"></div>
+              <div class="g-plus" data-action="share" data-annotation="vertical-bubble" data-height="60"></div>
               <!--google plus share end-->
               </div>
-
-            </div>
-
+           </div>
 
             
             <%= form_tag  events_event_going_path, {:class => 'form-horizontal', role: "form"} do %>

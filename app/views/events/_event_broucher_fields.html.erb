@@ -1,4 +1,7 @@
 <div class="fallback">
     <%= f.file_field :broucher, class: 'validate[checkFileType[pdf|PDF]' %>
     <p>Allowed file formats: pdf</p><br>
+    <% if @event.event_broucher.present? && !@event.new_record? %>
+      <a target="_blank" href="<%= @event.event_broucher.broucher.url %>">Download Broucher</a>
+    <% end %>
 </div>
