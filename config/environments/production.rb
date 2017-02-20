@@ -99,5 +99,5 @@ Rails.application.configure do
     secret_access_key: "g1R7N9jiVPezeLNd3XDGlGlHMevKeX+4TZso+4yD",
     s3_region: "us-east-1",
   }
-
+}
 end
