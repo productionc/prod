@@ -79,7 +79,7 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
 
-  config.action_mailer.default_url_options = {:host => ENV["HOST_NAME"]}
+  config.action_mailer.default_url_options = {:host => ENV["HOST_NAME"] }
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :user_name => 'collegedaa',
@@ -99,5 +99,6 @@ Rails.application.configure do
     secret_access_key: "g1R7N9jiVPezeLNd3XDGlGlHMevKeX+4TZso+4yD",
     s3_region: "us-east-1",
   }
+}
 
 end
