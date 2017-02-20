@@ -49,4 +49,14 @@ Rails.application.configure do
       :enable_starttls_auto => true,
       :openssl_verify_mode => 'none'
   }
+
+  config.paperclip_defaults = {
+  storage: :s3,
+  s3_credentials: {
+    bucket: "collegedaa",
+    access_key_id: "AKIAJWTJIOJUNKMECU4A",
+    secret_access_key: "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",
+    s3_region: "us-east-1",
+  }
+}
 end

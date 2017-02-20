@@ -1,9 +1,7 @@
 class EventBroucher < ActiveRecord::Base
  has_one :event
 
- has_attached_file :broucher, :styles => { :small => "150x150>" },
-                  :url  => "/assets/attachments/:id/:style/:basename.:extension",
-                  :path => ":rails_root/public/assets/attachments/:id/:style/:basename.:extension"
+ has_attached_file :broucher
 
 validates_attachment_presence :broucher
 validates_attachment_size :broucher, :less_than => 30.megabytes

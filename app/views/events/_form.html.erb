@@ -177,7 +177,7 @@ min-height: 100vh;
               <div class='col-md-3'>
                 <% @event.event_sponsors.each do |sponsor_image| %>
                 <p><%= sponsor_image.sponsor_file_name %></p>
-                <%= image_tag sponsor_image.sponsor, width: '100px', height: '100px' %>
+                <%= image_tag sponsor_image.sponsor.url(:thumb), width: '100px', height: '100px' %>
                 <% end %>
               </div>
             </div>

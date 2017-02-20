@@ -1,9 +1,9 @@
 <!--banner start-->
 <div class="eventbanner">
 <div class="col-lg-10 col-md-12 col-sm-12 event-detail">&nbsp;</div>
-<div class='eventview_banner img-responsive' style='background-image: url("<%= @event.event_college_banner.present? ? @event.event_college_banner.college_banner.url(:small) : "/assets/dummy_event_banner.png" %>")'>
+<div class='eventview_banner img-responsive' style='background-image: url("<%= @event.event_college_banner.present? ? @event.event_college_banner.college_banner.url : "/assets/dummy_event_banner.png" %>")'>
  <div class='eventbanner_cont'>
-  <%= image_tag @event.event_banner.present? && @event.event_banner.banner.present? ? @event.event_banner.banner.url(:small) : "/assets/eventlogo.png", class: 'text-center img-responsive eventlogo' %>
+  <%= image_tag @event.event_banner.present? && @event.event_banner.banner.present? ? @event.event_banner.banner.url : "/assets/eventlogo.png", class: 'text-center img-responsive eventlogo' %>
   <h2 class='eventname'><%= @event.event_name %></h2>
   <p class='location'><%= @event.location %>, <%= @event.district %>, <%= @event.state %> <%= @event.zip %>, <%= @event.country %></p>
   <div class='dates'>

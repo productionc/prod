@@ -14,6 +14,7 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'city-state'
 gem 'rails_12factor'
 gem 'toastr-rails'
+gem 'aws-sdk', '~> 2.3'
 
 
 # Use SCSS for stylesheets
