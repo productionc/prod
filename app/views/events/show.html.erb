@@ -31,7 +31,7 @@
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="aboutus_tab">
-                <p><%= @event.event_detail.event_description.present? ? @event.event_detail.event_description : "No Event Description" %></p>
+                <p style="white-space: pre-line;"><%= @event.event_detail.event_description.present? ? @event.event_detail.event_description : "No Event Description" %></p>
                 <div class='guestspeaker'>
                   <% if @event.event_guest_details.count > 0 %><p><strong>Guest Speakers</strong></p><% end %>
                   <ol>
@@ -48,16 +48,20 @@
                   <% if @event.event_url.present? && @event.event_url.college_link.present? %>
                     <a target="_blank" href='<%= @event.event_url.college_link %>'>College Website</a>
                   <% end %>
-                  <% if @event.event_accomodation.present? && @event.event_accomodation.accomodation.present? %>
+                  <% if @event.event_accomodation.present? %>
                    <a><%= @event.event_accomodation.accomodation == true ? 'Yes' : 'No' %> Accomodation Provided</a>
                   <% end %>
                 </div>
                 <div class='clear-fix'></div>
                 <% if @event.event_url.present? && @event.event_url.web_link.present? %>
                 <div class='eventwebsite'><span>Event:</span><a href='<%= @event.event_url.web_link %>'><%= @event.event_url.web_link %></a></div>
+                <div class='eventwebsite'><span>Event Registration:</span><a href='<%= @event.event_url.registration_link %>'><%= @event.event_url.registration_link %></a></div>
                 <% end %>
                 <div class='followus'>
-                  <% if @event.event_url.present? %><p>Follow Us</p><% end %>
+                  <% if (@event.event_url.facebook_link.present? || 
+                  @event.event_url.twitter_link.present? ||
+                  @event.event_url.youtube_link.present? ||
+                  @event.event_url.apps_link.present?) %><p>Follow Us</p><% end %>
                   <ul class='socialicons'>
                     <% if @event.event_url.present? && @event.event_url.facebook_link.present? %>
                     <li><a target="_blank" href='<%= @event.event_url.facebook_link %>'><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
@@ -80,41 +84,25 @@
                   <% if @event.event_detail.present? && @event.event_detail.sub_events.present? %>
                   <div class='col-md-6'>
                     <p>Sub Events</p>
-                    <ul>
-                      <% @event.event_detail.sub_events.split("\r\n").each do |sub_event| %>
-                        <li><%= sub_event %></li>
-                      <% end %>
-                    </ul>
+                    <p class="format_textarea"><%= @event.event_detail.sub_events %></p>
                   </div>
                   <% end %>
                   <% if @event.event_detail.present? && @event.event_detail.workshops.present? %>
                   <div class='col-md-6'>
                     <p>Workshops</p>
-                    <ul>
-                      <% @event.event_detail.workshops.split("\r\n").each do |workshop| %>
-                        <li><%= workshop %></li>
-                      <% end %>
-                    </ul>
+                    <p class="format_textarea"><%= @event.event_detail.workshops %></p><br/>
                   </div>
                   <% end %>
                   <% if @event.event_detail.present? && @event.event_detail.paper_presentation_topics.present? %>
                   <div class='col-md-6'>
                     <p>Paper Presentations</p>
-                    <ul>
-                      <% @event.event_detail.paper_presentation_topics.split("\r\n").each do |paper_presentation| %>
-                        <li><%= paper_presentation %></li>
-                      <% end %>
-                    </ul>
+                    <p class="format_textarea"><%= @event.event_detail.paper_presentation_topics %></p>
                   </div>
                   <% end %>
                   <% if @event.event_detail.present? && @event.event_detail.conference_topics.present? %>
                   <div class='col-md-6'>
                     <p>Conference Topics</p>
-                    <ul>
-                      <% @event.event_detail.conference_topics.split("\r\n").each do |conference_topic| %>
-                        <li><%= conference_topic %></li>
-                      <% end %>
-                    </ul>
+                    <p class="format_textarea"><%= @event.event_detail.conference_topics %></p>
                   </div>
                   <% end %>
                 </div>
@@ -127,12 +115,7 @@
                 <% if @event.event_detail.present? && @event.event_detail.reg_fee.present? %>
                 <p><strong>Registration Fees Details</strong></p>
                 <div class='eventdet'>
-                  <p><strong>Split ups</strong></p>
-                  <ul>
-                    <% @event.event_detail.reg_fee.split("\r\n").each do |fee| %>
-                      <li><%= fee %></li>
-                    <% end %>
-                  </ul>
+                  <p class="format_textarea"><%= @event.event_detail.reg_fee %></p>
                 </div>
                 <% end %>
               </div>

@@ -8,7 +8,7 @@
 			<%= f.text_field :registration_link , placeholder: "Event Registration Link http://example.com", class: "form-control validate[custom[url]]"%>
 		</div>
 		<div class='col-md-3 form-group'>
-			<%= f.text_field :college_link, placeholder: "College Website Link http://example.com", class: "form-control validate[custom[url]]" %>
+			<%= f.text_field :college_link, placeholder: "College Website Link http://example.com", class: "form-control validate[required,custom[url]]" %>
 		</div>
 		<div class='col-md-3 form-group'>
 			<%= f.text_field :facebook_link, placeholder: "Facebook Event Link http://example.com", class: "form-control validate[custom[url]]"%>
