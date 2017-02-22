@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get '/collegeda_events_subscriber', to: 'admins#events_subscriber'
   get '/collegeda_events_action', to: 'admins#events_action'
   get '/collegeda_hide_events', to: 'admins#hide_events'
-  get '/campus_ambassador', to: 'events#campus_ambassador'
+  get '/student_partner', to: 'events#student_partner'
   get '/about_us', to: 'events#about_us'
   get '/services', to: 'events#services'
   get '/terms_and_conditions', to: 'events#terms_and_conditions'
