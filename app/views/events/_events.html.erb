@@ -13,7 +13,7 @@
                     <p class="event_typename"><%= event.event_type %>, <%= (Date.parse(event.end_date.to_s.split(' ')[0]) - Date.parse(event.start_date.to_s.split(' ')[0])).to_i+1 %> days</p>
                   </div>
                   <div class="section1_right">
-                    <%= image_tag EventCollegeBanner.find(event.college_banner_id).college_banner.url if event.college_banner_id.present? %>
+                    <%= image_tag EventCollegeBanner.find(event.college_banner_id).college_banner.url, size: "72x62" if event.college_banner_id.present? %>
                   </div>
                 </div>
                 <div class="section2">

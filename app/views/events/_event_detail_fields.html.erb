@@ -23,43 +23,28 @@
 
               <div class='col-md-12 form-group'>
                 <label>Event Description</label>
+                <p class='pull-right' data-toggle="modal" data-target="#eventdescription_popup">See Example</p>
                 <div class='event_description'>
-                  <p class='pull-right' data-toggle="modal" data-target="#eventdescription_popup">See Example</p>
                   <%= f.text_area :event_description, rows: '11', cols: '62', class: "validate[required]" %>
                 </div>
               </div> 
-
-              <div class='col-md-6 form-group'>
+             
+              <div class='col-md-12 form-group'>
                 <label>Sub Events</label>
+                <p class='pull-right' data-toggle="modal" data-target="#subevents_popup">See Example</p>
                 <div class='subevents'>
-                  <p class='pull-right' data-toggle="modal" data-target="#subevents_popup">See Example</p>
                  <%= f.text_area :sub_events, rows: '8', cols: '21.9', class: "validate[required]" %>
                 </div>
               </div>
 
-              <div class='col-md-6 form-group'>
-                <label>Workshops</label>
-                <div class='workshops'>
-                  <p class='pull-right' data-toggle="modal" data-target="#workshops_popup">See Example</p>
-                  <%= f.text_area :workshops, rows: '8', cols: '21.9' %>
-                </div>  
-              </div>
-
-              <div class='col-md-6 form-group'>
+              <div class='col-md-12 form-group'>
                 <label>Paper Presentation Topics</label>
+                <p class='pull-right' data-toggle="modal" data-target="#papertopics_popup">See Example</p>
                 <div class='paper_presen_topics'>
-                  <p class='pull-right' data-toggle="modal" data-target="#papertopics_popup">See Example</p>
                   	<%= f.text_area :paper_presentation_topics, rows: '8', cols: '21.9' %>
                 </div>  
               </div>
-              
-              <div class='col-md-6 form-group'>
-                <label>Conference Topics</label>
-                <div class='conf_topics'>
-                  <p class='pull-right' data-toggle="modal" data-target="#conferencetopics_popup">See Example</p>
-                  <%= f.text_area :conference_topics, rows: '8', cols: '21.9' %>
-                </div>  
-              </div>     
+                  
             </div>
           </div>
 
@@ -92,6 +77,21 @@
 						</div>
 					</div>
 
+          <div class='col-md-6 form-group'>
+            <label>Workshops</label>
+            <p class='pull-right' data-toggle="modal" data-target="#workshops_popup">See Example</p>
+            <div class='workshops'>
+              <%= f.text_area :workshops, rows: '8', cols: '21.9' %>
+            </div>  
+          </div>
+
+         <div class='col-md-6 form-group'>
+            <label>Conference Topics</label>
+            <p class='pull-right' data-toggle="modal" data-target="#conferencetopics_popup">See Example</p>
+            <div class='conf_topics'>
+              <%= f.text_area :conference_topics, rows: '8', cols: '21.9' %>
+            </div>  
+        </div> 
 
         </div>
       </div>
