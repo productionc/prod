@@ -110,7 +110,7 @@ before_action :authenticate_user!, only: [:show, :new]
    redirect_to :back, flash: { success: EventService.new().going_and_may_be_count(event_going, params) }
   end
 
-  def campus_ambassador
+  def student_partner
     render layout: false
   end
 
