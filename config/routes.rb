@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   get '/collegeda_hide_events', to: 'admins#hide_events'
   get '/student_partner', to: 'events#student_partner'
   get '/about_us', to: 'events#about_us'
-  get '/services', to: 'events#services'
   get '/terms_and_conditions', to: 'events#terms_and_conditions'
+  get '/privacy_policy', to: 'events#privacy_policy'
 
   get "sitemap.xml" => "sitemaps#index", :format => "xml", :as => :sitemap
 

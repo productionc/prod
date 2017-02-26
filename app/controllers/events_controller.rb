@@ -118,12 +118,12 @@ before_action :authenticate_user!, only: [:show, :new]
     render 'static_pages/about_us',layout: false
   end
 
-  def services
-    render 'static_pages/services',layout: false
-  end
-
   def terms_and_conditions
     render 'static_pages/terms_and_conditions',layout: false
+  end
+
+  def privacy_policy
+    render 'static_pages/privacy_policy', layout: false
   end
 
 	private
