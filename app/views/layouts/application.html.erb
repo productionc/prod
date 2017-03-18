@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var fayeClient = new Faye.Client("http://<%= ENV['FAYE_URL'] %>/faye", {timeout: 120})
     </script>
-    <%= javascript_include_tag  "http://<%= ENV['FAYE_URL'] %>/faye.js" %>
+    <script type="text/javascript"  src="http://<%= ENV['FAYE_URL'] %>/faye.js"></script>
     <%= csrf_meta_tags %>
   </head>
   <body>
