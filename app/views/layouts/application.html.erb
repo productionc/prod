@@ -12,6 +12,10 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
+    <script type="text/javascript" src="http://<%= ENV['FAYE_URL'] %>/faye/client.js"></script>
+    <script type="text/javascript">
+      var fayeClient = new Faye.Client("http://<%= ENV['FAYE_URL'] %>/faye", {timeout: 120})
+    </script>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -92,6 +96,21 @@
                     <li><%= link_to "Sign Up", new_user_registration_path %></li>
                     <% end %>
                 </ul>
+              </li>
+              <li><a href="<%= new_preference_path %>">Event Preference</a></li>
+              <% preference_id = current_user.present? ? Preference.where(user_id: current_user.id).first.id : 0 %>
+              <% if preference_id > 0 %>
+              <li><a href="/preferences/<%= preference_id%>/edit">Update Event Preference</a></li>
+              <% end %>
+              <li>
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">Notifications<b class="caret"></b></a>
+                  <ul class="dropdown-menu multi-level" id="notification">
+                    <li>Recent Notifications</li>
+                    <% Notification.where(user_id: current_user.id).each do |notification| %>
+                    <%= notification.message %>
+                    <%= "*****" %>
+                    <% end %>
+                  </ul>
               </li>
             </ul>
           </div>
