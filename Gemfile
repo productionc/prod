@@ -16,7 +16,9 @@ gem 'rails_12factor'
 gem 'toastr-rails'
 gem 'aws-sdk', '~> 2.3'
 gem 'dotenv-rails'
-
+gem 'faye'
+# Use thin for dev and faye
+gem 'thin'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

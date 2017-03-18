@@ -25,6 +25,7 @@
 //= require custom-script
 //= require jquery.dlmenu
 //= require application_helper
+//= require faye
 
 $(function() {
   fayeClient.subscribe('/events/new', function(message) {
