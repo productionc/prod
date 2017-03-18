@@ -15,6 +15,7 @@ gem 'city-state'
 gem 'rails_12factor'
 gem 'toastr-rails'
 gem 'aws-sdk', '~> 2.3'
+gem 'dotenv-rails'
 
 
 # Use SCSS for stylesheets

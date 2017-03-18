@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post 'events/event_subscription' => 'events#event_subscription'
   post 'events/event_going' => 'events#event_going'
   resources :events
+  resources :preferences
   
   root 'events#welcome'
 
@@ -26,6 +27,9 @@ Rails.application.routes.draw do
   get '/privacy_policy', to: 'events#privacy_policy'
 
   get "sitemap.xml" => "sitemaps#index", :format => "xml", :as => :sitemap
+
+  post '/process_notification', to: 'events#process_notification'
+  post '/add_notification', to: 'events#add_notification'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,52 @@
+<style>
+body {
+background: #f7f7f7;
+min-height: 100vh;
+}
+</style>
+<!--event registration start-->
+<div id='preference_container'>
+  <div class='container-fluid'>
+    <h2 class='text-center title'>Event Preference</h2>
+      <%= simple_form_for @preference,validate: true, html: { multipart: true } do |f| %>
+      <% if @preference.errors.any? %>
+      <div id="errors">
+        <h3><%= pluralize(@preference.errors.count, "error") %> prohibited this preference from being saved:</h3>
+        <ul>
+          <% @preference.errors.full_messages.each do |msg| %>
+          <li>
+            <%= msg %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+     <div id="preference_form">
+     <div class='basic_info'>
+      <h3>Preference Details</h3>
+      <div class='row'>
+        <div class="form-group col-md-4">
+          <label class='customlabel'>Event Type</label>
+           <%= f.collection_select :event_type, EventType.all, :name, :name, {selected: @preference.event_type, prompt: true}, class: "select2-size form-control validate[required] select2-offscreen", placeholder: "Select Event Type" %>
+        </div>
+        <%= f.hidden_field :preference_type_id, value: 1 %>
+        <%= f.hidden_field :user_id, value: current_user.present? ? current_user.try(:id) : 1 %>
+    </div>
+    <%= f.button :submit, name: "event_preference_submit", class: "btn btn-primary event_preference_submit", value: "Submit" %><br/>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#new_preference").validationEngine({
+    promptPosition : "bottomLeft",
+    autoHidePrompt: true,
+    autoHideDelay: 3000,
+    fadeDuration: 0.3,
+    scroll: false,
+    maxErrorsPerField:1
+    });
+});
+</script>
