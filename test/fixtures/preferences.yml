@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  preference_type_id: 1
+  user_id: 1
+  event_type: MyString
+  country: MyString
+  state: MyString
+  city: MyString
+  stream: MyString
+  department: MyString
+
+two:
+  preference_type_id: 1
+  user_id: 1
+  event_type: MyString
+  country: MyString
+  state: MyString
+  city: MyString
+  stream: MyString
+  department: MyString
