@@ -106,9 +106,11 @@
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">Notifications<b class="caret"></b></a>
                   <ul class="dropdown-menu multi-level" id="notification">
                     <li>Recent Notifications</li>
-                    <% Notification.where(user_id: current_user.id).each do |notification| %>
-                    <%= notification.message %>
-                    <%= "*****" %>
+                    <% if Notification.count > 0 %>
+                      <% Notification.where(user_id: current_user.id).each do |notification| %>
+                      <%= notification.message %>
+                      <%= "*****" %>
+                      <% end %>
                     <% end %>
                   </ul>
               </li>
