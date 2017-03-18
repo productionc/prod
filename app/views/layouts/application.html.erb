@@ -97,16 +97,19 @@
                     <% end %>
                 </ul>
               </li>
-              <li><a href="<%= new_preference_path %>">Event Preference</a></li>
-              <% preference_id = current_user.present? ? Preference.where(user_id: current_user.id).first.id : 0 %>
-              <% if preference_id > 0 %>
+              <li>
+              <% if user_signed_in? %>
+               <a href="<%= new_preference_path %>">Event Preference</a></li>
+              <% end %>
+              <% preference_id = current_user.present? ? Preference.find_by(user_id: current_user.id).try(:id) : 0 %>
+              <% if user_signed_in? and preference_id.present? %>
               <li><a href="/preferences/<%= preference_id%>/edit">Update Event Preference</a></li>
               <% end %>
               <li>
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">Notifications<b class="caret"></b></a>
                   <ul class="dropdown-menu multi-level" id="notification">
                     <li>Recent Notifications</li>
-                    <% if Notification.count > 0 %>
+                    <% if (Notification.count > 0) and current_user.present? %>
                       <% Notification.where(user_id: current_user.id).each do |notification| %>
                       <%= notification.message %>
                       <%= "*****" %>
