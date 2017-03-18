@@ -1,1 +1,1 @@
-web: bundle exec rails server thin -p $PORT -e $RACK_ENV
+faye: thin -R $RAILS_STACK_PATH/faye/config.ru start
