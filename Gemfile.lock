@@ -104,9 +104,6 @@ GEM
       multi_json (>= 1.0.0)
       rack (>= 1.0.0)
       websocket-driver (>= 0.5.1)
-    faye-rails (2.0.3)
-      eventmachine (~> 1.0.0)
-      faye (= 1.1.2)
     faye-websocket (0.10.7)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
@@ -252,7 +249,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   dotenv-rails
-  faye-rails (~> 2.0)
+  faye
   jbuilder (~> 2.0)
   jquery-rails
   paperclip (~> 5.1)
