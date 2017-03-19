@@ -14,7 +14,7 @@
     <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
     <script type="text/javascript" src="http://<%= ENV['FAYE_URL'] %>/faye.js"></script>
     <script type="text/javascript">
-      var fayeClient = new Faye.Client("http://<%= ENV['FAYE_URL'] %>/faye", {timeout: 120})
+      var fayeClient = new Faye.Client("http://<%= ENV['FAYE_URL'] %>/", {timeout: 120})
     </script>
     <%= csrf_meta_tags %>
   </head>
