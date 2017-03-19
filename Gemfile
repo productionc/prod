@@ -16,7 +16,7 @@ gem 'rails_12factor'
 gem 'toastr-rails'
 gem 'aws-sdk', '~> 2.3'
 gem 'dotenv-rails'
-gem 'faye-rails', '~> 2.0'
+gem 'faye'
 # Use thin for dev and faye
 gem 'thin'
 

@@ -12,11 +12,10 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
-    <script type="text/javascript" src="http://<%= ENV['FAYE_URL'] %>/faye/client.js"></script>
+    <script type="text/javascript" src="http://<%= ENV['FAYE_URL'] %>/faye.js"></script>
     <script type="text/javascript">
       var fayeClient = new Faye.Client("http://<%= ENV['FAYE_URL'] %>/faye", {timeout: 120})
     </script>
-    <script type="text/javascript"  src="http://<%= ENV['FAYE_URL'] %>/faye.js"></script>
     <%= csrf_meta_tags %>
   </head>
   <body>
