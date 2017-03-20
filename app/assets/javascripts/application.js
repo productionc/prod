@@ -26,27 +26,27 @@
 //= require jquery.dlmenu
 //= require application_helper
 
-$(function() {
-  fayeClient.subscribe('/events/new', function(message) {
-    $.post("/process_notification",
-    {
-        event_id: message.text.id
-    },
-    function(data){
-      if(data)
-      {
-        alert('Got a new notification');
-        $.post("/add_notification",
-        {
-          event_id: message.text.id,
-          notification_type_id: 1,
-        },
-        function(msg){
-         });
-      }
-    });
-  });
-});
+// $(function() {
+//   fayeClient.subscribe('/events/new', function(message) {
+//     $.post("/process_notification",
+//     {
+//         event_id: message.text.id
+//     },
+//     function(data){
+//       if(data)
+//       {
+//         alert('Got a new notification');
+//         $.post("/add_notification",
+//         {
+//           event_id: message.text.id,
+//           notification_type_id: 1,
+//         },
+//         function(msg){
+//          });
+//       }
+//     });
+//   });
+// });
 
 $(document).ready(function() {
 
