@@ -43,7 +43,150 @@ min-height: 100vh;
         <div class='col-md-3 form-group'>
           <%= f.collection_select :event_type, EventType.all, :name, :name, {selected: @event.event_type, prompt: true}, class: "select2-size form-control validate[required] select2-offscreen", placeholder: "Select Event Type" %>
         </div>
-       
+       <div class='col-md-3 form-group'>
+          <%= f.text_field :study_place, class: 'form-control validate[required]', placeholder: "College Name / University" %>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3 form-group'>
+         <%= select_tag "event[country]", options_for_select(CS.countries.map { |obj| [obj[1], obj[0]] }, @event.country), class: "select2-size form-control validate[required] select2-offscreen country", prompt: "Select Country" %>
+        </div>
+        <div class='col-md-3 form-group'>
+          <%= select_tag "event[state]", options_for_select(@event.state.present? ? [@event.state] : [], @event.state), prompt: "Select State", class: "select2-size form-control validate[required] select2-offscreen state" %>
+        </div>
+        <div class='col-md-3 form-group'>
+           <%= select_tag "event[district]", options_for_select(@event.district.present? ? [@event.district] : [], @event.district), prompt: "Select City", class: "select2-size validate[required] form-control select2-offscreen city" %>
+        </div>
+        <div class='col-md-3 form-group'>
+              <%= f.text_field :zip, placeholder: 'Zip Code / Post Code', class: "form-control validate[required,custom[onlyNumber]]",'data-errormessage': "Enter valid zip code" %>
+        </div>
+        <div class='col-md-3 form-group'>
+          <%= f.text_field :location, placeholder: 'Location', class: "form-control validate[required]" %>
+        </div>
+      </div>
+    </div>
+
+     <%= f.simple_fields_for :event_detail do |event_detail| %>
+      <%= render 'event_detail_fields', f: event_detail, event: @event %>
+    <% end %>
+
+    <%= render partial: 'event_department', locals: {f: f} %>
+
+    <%= f.simple_fields_for :event_url do |event_url| %>
+    <%= render 'event_url_detail_fields', f: event_url %>
+    <% end %>
+
+    <div class='contperson_and_guest'>
+      <div class='row'>
+        <div class='col-md-6 form-group'>
+          <div class='cont_persondetails'>
+            <h3>Contact Person Details</h3>
+            <%= f.simple_fields_for :event_contact_details do |event_contact_details| %>
+            <%= render 'event_contact_detail_fields', f: event_contact_details %>
+            <% end %>
+            <div class="links">&nbsp;
+              <%= link_to_add_association 'Add Contact', f, :event_contact_details, class: "btn btn-default add-button" %>
+            </div><br/>
+          </div>
+        </div>
+      
+        <div class='col-md-6 form-group'>
+          <div class='cont_persondetails'>
+            <h3>Guest Details</h3>
+            <%= f.simple_fields_for :event_guest_details do |event_guest_details| %>
+            <%= render 'event_guest_detail_fields', f: event_guest_details %>
+            <% end %>
+            <div class="links">&nbsp;
+              <%= link_to_add_association 'Add Guest', f, :event_guest_details, class: "btn btn-default add-button" %>
+            </div><br/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class='lookfor_sponsors_accomodation'>
+      <div class='row'>
+        <div class='col-md-6'>
+          <div class='lookfor_sponsors'>
+            <h3>We are looking for</h3>
+            <div class='row'>
+              <div class='col-md-12'>
+                <%= render partial: 'event_extra', locals: {f: f} %>
+              </div>
+              <p>* Conditions Apply</p>
+            </div>
+          </div>
+        </div>
+        <div class='col-md-6'>
+          <div class='accomodations'>
+            <h3>Accomodation</h3>
+            <div class='row'>
+              <div class='col-md-12'>
+                <%= f.simple_fields_for :event_accomodation do |event_accomodation| %>
+                <div class="field">
+                  <%= event_accomodation.label :accomodation, "Yes", :value => "true" %>
+                  <%= event_accomodation.radio_button :accomodation, true %>
+                  <%= event_accomodation.label :accomodation, "No", :value => "false" %>
+                  <%= event_accomodation.radio_button :accomodation, false, checked: true %>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class='fileuploads'>
+      <h3>File Uploads</h3>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Banner Image</label>
+          <div class="col-sm-10">
+            <%= f.simple_fields_for :event_banner do |event_banner| %>
+            <%= render 'event_banner_fields', f: event_banner %>
+            <% end %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">College Logo / Event Logo<sup>*</sup></label>
+          <div class="col-sm-10">
+            <%= f.simple_fields_for :event_college_banner do |event_college_banner| %>
+            <%= render 'event_college_banner_fields', f: event_college_banner %>
+            <% end %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Broucher</label>
+          <div class="col-sm-10">
+            <%= f.simple_fields_for :event_broucher do |event_broucher| %>
+            <%= render 'event_broucher_fields', f: event_broucher %>
+            <% end %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Sponsors Logo</label>
+          <div class="col-sm-10">
+            <%= f.simple_fields_for :event_sponsors do |event_sponsors| %>
+            <%= render 'event_sponsor_fields', f: event_sponsors %>
+            <% end %>
+            <div class="links">&nbsp;
+              <%= link_to_add_association 'Add Sponsor', f, :event_sponsors, class: "btn btn-default add-button" %>
+            </div><br/>
+            <% if @event.event_sponsors.count > 0 %>
+            <div class='row'>
+              <div class='col-md-3'>
+                <% @event.event_sponsors.each do |sponsor_image| %>
+                <p><%= sponsor_image.sponsor_file_name %></p>
+                <%= image_tag sponsor_image.sponsor.url(:thumb), width: '100px', height: '100px' %>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+
     
            
     <%= f.button :submit, name: "event_registration_submit", class: "btn btn-primary event_registration_submit", value: "Submit" %><br/>
