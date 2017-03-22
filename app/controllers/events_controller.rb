@@ -126,27 +126,27 @@ before_action :authenticate_user!, only: [:show, :new]
     render 'static_pages/privacy_policy', layout: false
   end
 
-  # def process_notification
-  #  event = Event.find_by(id: params[:event_id])
-  #  user_preference = Preference.find_by(user_id: current_user.id)
-  #  notification_status = can_send_notification(event, user_preference) 
-  #  render json: notification_status.to_json
-  # end
+  def process_notification
+   event = Event.find_by(id: params[:event_id])
+   user_preference = Preference.find_by(user_id: current_user.id)
+   notification_status = can_send_notification(event, user_preference) 
+   render json: notification_status.to_json
+  end
 
-  # def can_send_notification event, user_preference
-  #   if event.event_type == user_preference.event_type
-  #     true
-  #   end
-  # end
+  def can_send_notification event, user_preference
+    if event.event_type == user_preference.event_type
+      true
+    end
+  end
 
-  # def add_notification
-  #   @notifications = Notification.all
-  #   event = Event.find_by(id: params[:event_id])
-  #   message = "Your perference matched event with titled #{event.event_name}"
-  #   if !Notification.find_by(message: message).present? == true
-  #    Notification.create(notification_type_id: params[:notification_type_id], message: message, user_id: current_user.id)
-  #  end
-  # end
+  def add_notification
+    @notifications = Notification.all
+    event = Event.find_by(id: params[:event_id])
+    message = "Your perference matched event with titled #{event.event_name}"
+    if !Notification.find_by(message: message).present? == true
+     Notification.create(notification_type_id: params[:notification_type_id], message: message, user_id: current_user.id)
+   end
+  end
 
 	private
 
