@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318082007) do
+ActiveRecord::Schema.define(version: 20170325170247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 20170318082007) do
     t.integer  "event_sponsor_id"
     t.boolean  "is_published",            default: false
     t.string   "dept_stream"
+    t.integer  "user_id"
   end
 
   create_table "notification_types", force: :cascade do |t|
@@ -197,6 +198,7 @@ ActiveRecord::Schema.define(version: 20170318082007) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "user_id"
+    t.integer  "event_id"
   end
 
   create_table "preference_types", force: :cascade do |t|

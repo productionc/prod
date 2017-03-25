@@ -28,8 +28,8 @@ Rails.application.routes.draw do
 
   get "sitemap.xml" => "sitemaps#index", :format => "xml", :as => :sitemap
 
-  # post '/process_notification', to: 'events#process_notification'
-  # post '/add_notification', to: 'events#add_notification'
+  post '/process_notification', to: 'events#process_notification'
+  post '/add_notification', to: 'events#add_notification'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
