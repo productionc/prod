@@ -16,48 +16,23 @@
     <!-- <script type="text/javascript">
       var fayeClient = new Faye.Client("http://<%= ENV['FAYE_URL'] %>/faye", {timeout: 120})
     </script> -->
-    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.5.0.js"></script>
-    <%= csrf_meta_tags %>
-    <script>
-    publish()
-    function publish() {
-   
-    pubnub = new PubNub({
-        publishKey : 'demo',
-        subscribeKey : 'demo'
-    })
-       
-    function publishSampleMessage() {
-        console.log("Since we're publishing on subscribe connectEvent, we're sure we'll receive the following publish.");
-        var publishConfig = {
-            channel : "/events/new",
-            message : "Hello from PubNub Docs!"
-        }
-        pubnub.publish(publishConfig, function(status, response) {
-            console.log(status, response);
-        })
-    }
-       
-    pubnub.addListener({
-        status: function(statusEvent) {
-            if (statusEvent.category === "PNConnectedCategory") {
-                publishSampleMessage();
-            }
-        },
-        message: function(message) {
-            console.log("New Message!!", message);
-        },
-        presence: function(presenceEvent) {
-            // handle presence
-        }
-    })      
-    console.log("Subscribing..");
-    pubnub.subscribe({
-        channels: ['/events/new'] 
+  <script src="https://js.pusher.com/4.0/pusher.min.js"></script>
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('4faead029d9c7bffd984', {
+      encrypted: true
     });
-};
-</script>
-  </head>
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      alert(data.message);
+    });
+  </script>
+    <%= csrf_meta_tags %>
+</head>
   <body>
     
     
