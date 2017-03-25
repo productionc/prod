@@ -26,27 +26,35 @@
 //= require jquery.dlmenu
 //= require application_helper
 
-// $(function() {
-//   fayeClient.subscribe('/events/new', function(message) {
-//     $.post("/process_notification",
-//     {
-//         event_id: message.text.id
-//     },
-//     function(data){
-//       if(data)
-//       {
-//         alert('Got a new notification');
-//         $.post("/add_notification",
-//         {
-//           event_id: message.text.id,
-//           notification_type_id: 1,
-//         },
-//         function(msg){
-//          });
-//       }
-//     });
-//   });
-// });
+$(function() {
+    // Pusher.logToConsole = true;
+
+    var pusher = new Pusher('4faead029d9c7bffd984', {
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      $.post("/process_notification",
+      {
+        event_id: data.message
+      },
+      function(can_notify){
+          if(can_notify)
+          {
+          alert('Got a new notification');
+          $.post("/add_notification",
+          {
+           event_id: data.message,
+           notification_type_id: 1,
+          },
+          function(msg){
+          });
+          }
+        });
+      });
+});
+
 
 $(document).ready(function() {
 

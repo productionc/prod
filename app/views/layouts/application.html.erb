@@ -12,25 +12,7 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
-    <!-- <script type="text/javascript" src="http://<%= ENV['FAYE_URL'] %>/faye.js"></script> -->
-    <!-- <script type="text/javascript">
-      var fayeClient = new Faye.Client("http://<%= ENV['FAYE_URL'] %>/faye", {timeout: 120})
-    </script> -->
   <script src="https://js.pusher.com/4.0/pusher.min.js"></script>
-  <script>
-
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
-
-    var pusher = new Pusher('4faead029d9c7bffd984', {
-      encrypted: true
-    });
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-      alert(data.message);
-    });
-  </script>
     <%= csrf_meta_tags %>
 </head>
   <body>
@@ -120,18 +102,18 @@
               <% if user_signed_in? and preference_id.present? %>
               <li><a href="/preferences/<%= preference_id%>/edit">Update Event Preference</a></li>
               <% end %>
-              <!-- <li>
+              <li>
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">Notifications<b class="caret"></b></a>
                   <ul class="dropdown-menu multi-level" id="notification">
                     <li>Recent Notifications</li>
                     <% if (Notification.count > 0) and current_user.present? %>
                       <% Notification.where(user_id: current_user.id).each do |notification| %>
-                      <%= notification.message %>
+                       <%= link_to notification.message, notification.event %>
                       <%= "*****" %>
                       <% end %>
                     <% end %>
                   </ul>
-              </li> -->
+              </li>
              </ul>
           </div>
         </div>

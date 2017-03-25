@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
 
  include ApplicationHelper
+ belongs_to :user
  belongs_to :event_detail, dependent: :destroy
  has_and_belongs_to_many :event_departments, dependent: :destroy
  has_many :event_contact_details, dependent: :destroy
@@ -12,7 +13,7 @@ class Event < ActiveRecord::Base
  belongs_to :event_college_banner, dependent: :destroy
  belongs_to :event_broucher, dependent: :destroy
  has_many :event_sponsors, dependent: :destroy
- after_save :publish_msg
+ after_create :publish_msg
 
  accepts_nested_attributes_for :event_detail, reject_if: :all_blank, allow_destroy: true
  accepts_nested_attributes_for :event_contact_details, reject_if: :all_blank, allow_destroy: true
@@ -25,9 +26,13 @@ class Event < ActiveRecord::Base
  accepts_nested_attributes_for :event_sponsors, reject_if: :all_blank, allow_destroy: true
 
  def publish_msg
-  Pusher.trigger('my-channel', 'my-event', {
-      message: 'hello world'
+  begin
+    Pusher.trigger('my-channel', 'my-event', {
+      message: self.id
     })
+  rescue Pusher::Error => e
+    Rails.logger.error "Pusher error: #{e.message}"
+  end
  end
 
  def to_param
