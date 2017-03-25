@@ -12,11 +12,51 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
-    <!-- <script type="text/javascript" src="http://<%= ENV['FAYE_URL'] %>/faye/client.js"></script> -->
+    <!-- <script type="text/javascript" src="http://<%= ENV['FAYE_URL'] %>/faye.js"></script> -->
     <!-- <script type="text/javascript">
       var fayeClient = new Faye.Client("http://<%= ENV['FAYE_URL'] %>/faye", {timeout: 120})
     </script> -->
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.5.0.js"></script>
     <%= csrf_meta_tags %>
+    <script>
+    publish()
+    function publish() {
+   
+    pubnub = new PubNub({
+        publishKey : 'demo',
+        subscribeKey : 'demo'
+    })
+       
+    function publishSampleMessage() {
+        console.log("Since we're publishing on subscribe connectEvent, we're sure we'll receive the following publish.");
+        var publishConfig = {
+            channel : "/events/new",
+            message : "Hello from PubNub Docs!"
+        }
+        pubnub.publish(publishConfig, function(status, response) {
+            console.log(status, response);
+        })
+    }
+       
+    pubnub.addListener({
+        status: function(statusEvent) {
+            if (statusEvent.category === "PNConnectedCategory") {
+                publishSampleMessage();
+            }
+        },
+        message: function(message) {
+            console.log("New Message!!", message);
+        },
+        presence: function(presenceEvent) {
+            // handle presence
+        }
+    })      
+    console.log("Subscribing..");
+    pubnub.subscribe({
+        channels: ['/events/new'] 
+    });
+};
+</script>
   </head>
   <body>
     
@@ -97,7 +137,7 @@
                     <% end %>
                 </ul>
               </li>
-              <!-- <li>
+              <li>
               <% if user_signed_in? %>
                <a href="<%= new_preference_path %>">Event Preference</a></li>
               <% end %>
@@ -105,7 +145,7 @@
               <% if user_signed_in? and preference_id.present? %>
               <li><a href="/preferences/<%= preference_id%>/edit">Update Event Preference</a></li>
               <% end %>
-              <li>
+              <!-- <li>
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">Notifications<b class="caret"></b></a>
                   <ul class="dropdown-menu multi-level" id="notification">
                     <li>Recent Notifications</li>
@@ -116,8 +156,8 @@
                       <% end %>
                     <% end %>
                   </ul>
-              </li>
- -->            </ul>
+              </li> -->
+             </ul>
           </div>
         </div>
       </div>
