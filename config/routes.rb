@@ -31,7 +31,12 @@ Rails.application.routes.draw do
   post '/process_notification', to: 'events#process_notification'
   post '/add_notification', to: 'events#add_notification'
 
-
+  namespace :api do
+    # API version v1
+    namespace :v1 do
+      get 'get_all_events' => 'events#events_list'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
