@@ -1,4 +1,4 @@
  <% @notifications.each do |notification| %>
- <p><%= notification.message %></p>
+ <p><%= link_to notification.message, notification.event %></p>
  <p><%= "*****" %></p>
  <% end %>

@@ -15,10 +15,8 @@ before_action :authenticate_user!, only: [:show, :new]
      query << "event_departments.id IN (#{params[:department].join(",")})" if params[:department].present?
 
      @events = Event.joins(:event_departments, :event_college_banner, :event_detail).where(query.join(" AND ")).paginate(:page => params[:page], :per_page => 4).order("event_details.start_date ASC").select("event_name, study_place, country, state, district, event_type, event_details.start_date as start_date, event_details.end_date as end_date, event_college_banners.id as college_banner_id, events.id as id").uniq
-     # binding.pry
     else
      @events = Event.joins(:event_departments, :event_college_banner, :event_detail).where(is_published: true).paginate(:page => params[:page], :per_page => 4).order("event_details.start_date ASC").select("event_name, study_place, country, state, district, event_type, event_details.start_date as start_date, event_details.end_date as end_date, event_college_banners.id as college_banner_id, events.id as id").uniq
-     # binding.pry
     end
 
    if params[:event_type].present?
@@ -40,12 +38,12 @@ before_action :authenticate_user!, only: [:show, :new]
 	end
 
 	def create
-		@event = Event.new(event_params)
-
+ 	@event = Event.new(event_params)
+  @event.user_id = current_user.id
   respond_to do |format|
     if @event.save
       format.html { redirect_to events_path, :notice => "Successfully created event" }
-      format.js   # renders create.js.erb, which could be used to redirect via javascript
+      format.js 
     else
       format.html { render :action => 'new' }
       format.js { render :action => 'new' }
@@ -64,11 +62,13 @@ before_action :authenticate_user!, only: [:show, :new]
   end
 
   def update
-    if @event.update(event_params)
-      redirect_to @event
-    else
-      render 'edit'
-    end
+    respond_to do |format|
+      if @event.update(event_params)
+        format.js
+      else
+        render 'edit'
+      end
+    end  
   end
 
 
@@ -131,32 +131,39 @@ before_action :authenticate_user!, only: [:show, :new]
     render 'static_pages/privacy_policy', layout: false
   end
 
-  # def process_notification
-  #  event = Event.find_by(id: params[:event_id])
-  #  user_preference = Preference.find_by(user_id: current_user.id)
-  #  notification_status = can_send_notification(event, user_preference) 
-  #  render json: notification_status.to_json
-  # end
+  def process_notification
+   event = Event.find_by(id: params[:event_id].to_i)
+   if current_user.id != event.user_id
+     user_preference = Preference.find_by(user_id: current_user.id)
+     notification_status = can_send_notification(event, user_preference) 
+   else
+     notification_status = false
+   end
+   render json: notification_status.to_json
+  end
 
-  # def can_send_notification event, user_preference
-  #   if event.event_type == user_preference.event_type
-  #     true
-  #   end
-  # end
+  def can_send_notification event, user_preference
+    if event.event_type == user_preference.event_type
+      true
+    end
+  end
 
-  # def add_notification
-  #   @notifications = Notification.all
-  #   event = Event.find_by(id: params[:event_id])
-  #   message = "Your perference matched event with titled #{event.event_name}"
-  #   if !Notification.find_by(message: message).present? == true
-  #    Notification.create(notification_type_id: params[:notification_type_id], message: message, user_id: current_user.id)
-  #  end
-  # end
+  def add_notification
+   event = Event.find_by(id: params[:event_id].to_i)
+   if current_user.id != event.user_id
+    @notifications = Notification.all
+    message = "Your perference matched event with titled #{event.event_name}"
+    if !Notification.find_by(message: message).present? == true
+     # binding.pry
+     Notification.create(notification_type_id: 1, event_id: event.id, message: message, user_id: current_user.id)
+   end
+   end 
+  end
 
 	private
 
   def event_params
-		params.require(:event).permit(:first_name, :last_name, :email, :phone_no, 
+		params.require(:event).permit(:user_id, :first_name, :last_name, :email, :phone_no, 
 			:event_name, :event_type, :study_place, :dept_stream, :country, :state, :district, :zip,
 			:location, :event_detail_id, :id, 
 			event_detail_attributes: [:start_date, :end_date,
