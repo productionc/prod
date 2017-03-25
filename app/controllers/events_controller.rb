@@ -41,11 +41,16 @@ before_action :authenticate_user!, only: [:show, :new]
 
 	def create
 		@event = Event.new(event_params)
-  	if @event.save
-  		redirect_to @event, flash: { success: "Successfully created event" }
-  	else
-  		render 'new'
-  	end
+
+  respond_to do |format|
+    if @event.save
+      format.html { redirect_to events_path, :notice => "Successfully created event" }
+      format.js   # renders create.js.erb, which could be used to redirect via javascript
+    else
+      format.html { render :action => 'new' }
+      format.js { render :action => 'new' }
+    end
+  end
 	end
 
 	def show
