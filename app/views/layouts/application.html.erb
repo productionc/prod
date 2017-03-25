@@ -30,7 +30,7 @@
     function publishSampleMessage() {
         console.log("Since we're publishing on subscribe connectEvent, we're sure we'll receive the following publish.");
         var publishConfig = {
-            channel : "/events/new",
+            channel : "hello",
             message : "Hello from PubNub Docs!"
         }
         pubnub.publish(publishConfig, function(status, response) {
@@ -53,7 +53,7 @@
     })      
     console.log("Subscribing..");
     pubnub.subscribe({
-        channels: ['/events/new'] 
+        channels: ['hello'] 
     });
 };
 </script>
