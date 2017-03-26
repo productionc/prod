@@ -30,11 +30,14 @@ Rails.application.routes.draw do
 
   post '/process_notification', to: 'events#process_notification'
   post '/add_notification', to: 'events#add_notification'
+  get '/event_user_preference', to: 'preferences#user_preference'
 
   namespace :api do
     # API version v1
     namespace :v1 do
       get 'get_all_events' => 'events#events_list'
+      get 'get_all_events_count' => 'events#events_count'
+      get 'get_all_users_count' => 'events#all_users_count'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

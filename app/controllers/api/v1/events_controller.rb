@@ -6,4 +6,14 @@ class Api::V1::EventsController < Api::V1::BaseController
     render json: { events: all_events }, status: 200
   end
 
+  def events_count
+    count = Event.count
+    render json: { count: count }
+  end
+
+  def all_users_count
+    count = User.count
+    render json: { count: count }
+  end
+
 end
