@@ -2,7 +2,7 @@ class PreferencesController < ApplicationController
   
   before_filter :set_preference, only: [:edit, :update]
   
-  def user_preference
+  def event_preference
     preference = Preference.find_by(user_id: current_user.id)
     if preference.present?
      @preference = preference
