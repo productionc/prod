@@ -79,14 +79,15 @@
           <div class="collapse navbar-collapse pull-right">
             <ul class="nav navbar-nav">
               <li><a href="https://collegedaa.freshdesk.com/support/home" target="_blank">Support</a></li>
-              <li><a href="#">Message Us</a></li>
               <li><a target="_blank" href="<%= student_partner_path %>">Student Partner</a></li>
+              <li><a href="/posted_events">Posted Events</a></li>
               <li><%= link_to 'Post Events', new_event_path %></li>
               <li>
               <% if user_signed_in? %>
                <a href="/event_user_preference">Event Preference</a></li>
               <% end %>
               <li>
+                <% if user_signed_in? %>
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">Notifications<b class="caret"></b></a>
                   <ul class="dropdown-menu multi-level" id="notification">
                     <li>Recent Notifications</li>
@@ -97,6 +98,7 @@
                       <% end %>
                     <% end %>
                   </ul>
+                 <% end %> 
               </li>
                <li>
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%= user_signed_in? ? current_user.name+" " : "Sign In " %> <b class="caret"></b></a>

@@ -160,6 +160,10 @@ before_action :authenticate_user!, only: [:show, :new]
    end 
   end
 
+  def posted_events
+    @posted_events =  Event.where(user_id: current_user.id)
+  end
+
 	private
 
   def event_params

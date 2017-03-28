@@ -1,0 +1,6 @@
+<div class="container">
+<h2>My posted events</h2>
+<% @posted_events.each do |event| %>
+  <p><%= link_to event.event_name, event %></p>
+<% end %>
+</div>
