@@ -1,11 +1,33 @@
 class PreferencesController < ApplicationController
-
+  
+  before_filter :set_preference, only: [:edit, :update]
+  
   def user_preference
     preference = Preference.find_by(user_id: current_user.id)
     if preference.present?
      @preference = preference
     else
      @preference = Preference.new
+    end
+  end
+
+  def create
+    @preference = Preference.new(preference_params)
+    if @preference.save
+      redirect_to events_path, flash: { success: "Successfully created preference" }
+    else
+      render 'new'
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @preference.update(preference_params)
+      redirect_to events_path, flash: { success: "Successfully updated preference" }
+    else
+      render 'edit'
     end
   end
 
@@ -17,4 +39,5 @@ class PreferencesController < ApplicationController
   def set_preference
     @preference = Preference.find(params[:id])
   end
+
 end
