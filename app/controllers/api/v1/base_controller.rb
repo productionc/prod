@@ -10,7 +10,8 @@ class Api::V1::BaseController < ApplicationController
   private
 
   def validate_api_request_version
-    verify_request_version || render_invalid_message
+    true
+    # verify_request_version || render_invalid_message
   end
 
   def verify_request_version
