@@ -28,6 +28,7 @@ before_action :authenticate_user!, only: [:show, :new]
 	end
 
 	def new
+    @current_user = current_user
 		@event = Event.new
 		@event.build_event_detail
 		@event.build_event_url
@@ -169,7 +170,7 @@ before_action :authenticate_user!, only: [:show, :new]
   def event_params
 		params.require(:event).permit(:user_id, :first_name, :last_name, :email, :phone_no, 
 			:event_name, :event_type, :study_place, :dept_stream, :country, :state, :district, :zip,
-			:location, :event_detail_id, :id, 
+			:event_detail_id, :id, 
 			event_detail_attributes: [:start_date, :end_date,
 			 :event_description, :sub_events, :workshops, :paper_presentation_topics, :conference_topics, :reg_start_date, :reg_end_date, :reg_fee, :id],
 			event_department_ids: [],
