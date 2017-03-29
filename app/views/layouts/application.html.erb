@@ -80,8 +80,8 @@
             <ul class="nav navbar-nav">
               <li><a href="https://collegedaa.freshdesk.com/support/home" target="_blank">Support</a></li>
               <li><a target="_blank" href="<%= student_partner_path %>">Student Partner</a></li>
-              <li><a href="/posted_events">Posted Events</a></li>
-              <li><%= link_to 'Post Events', new_event_path %></li>
+              <% if user_signed_in? %><li><a href="/posted_events">Posted Events</a></li><% end %>
+              <li><%= link_to 'Post Event', new_event_path %></li>
               <li>
               <% if user_signed_in? %>
                <a href="/event_user_preference">Event Preference</a></li>
