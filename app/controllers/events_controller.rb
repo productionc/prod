@@ -60,6 +60,7 @@ before_action :authenticate_user!, only: [:show, :new]
 	end
 
   def edit
+    @current_user = current_user
   end
 
   def update

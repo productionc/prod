@@ -53,7 +53,7 @@ color: #fff;
                 <label class='customlabel'>Country</label>
                 <select name="country" class="country form-control">
                   <option value="" selected="selected">Select Country</option>
-                  <% CS.countries.each do |item| %>
+                  <% CS.countries.slice(:AU, :CA, :IN, :US, :GB).each do |item| %>
                     <option value="<%= item[0] %>"><%= item[1] %></option>
                   <% end %>
                 </select>
