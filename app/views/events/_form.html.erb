@@ -49,7 +49,7 @@ min-height: 100vh;
       </div>
       <div class='row'>
         <div class='col-md-3 form-group'>
-         <%= select_tag "event[country]", options_for_select(CS.countries.map { |obj| [obj[1], obj[0]] }, @event.country), class: "select2-size form-control validate[required] select2-offscreen country", prompt: "Select Country" %>
+         <%= select_tag "event[country]", options_for_select(CS.countries.slice(:AU, :CA, :IN, :US, :GB).map { |obj| [obj[1], obj[0]] }, @event.country), class: "select2-size form-control validate[required] select2-offscreen country", prompt: "Select Country" %>
         </div>
         <div class='col-md-3 form-group'>
           <%= select_tag "event[state]", options_for_select(@event.state.present? ? [@event.state] : [], @event.state), prompt: "Select State", class: "select2-size form-control validate[required] select2-offscreen state" %>
