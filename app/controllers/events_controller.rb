@@ -161,7 +161,7 @@ before_action :authenticate_user!, only: [:show, :new]
   def add_notification
    event = Event.find_by(id: params[:event_id].to_i)
    if current_user.id != event.user_id
-    @notifications = Notification.all
+    @notifications = Notification.where(user_id: current_user.id)
   
     @can_create_notification = Notification.where(
       "notifications.user_id = #{current_user.id} AND
