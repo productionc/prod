@@ -1,4 +1,3 @@
  <% @notifications.each do |notification| %>
- <p><%= link_to notification.message, notification.event %></p>
- <p><%= "*****" %></p>
+ <p>Your perference matched event with titled <%= link_to notification.message, notification.event %></p>
  <% end %>

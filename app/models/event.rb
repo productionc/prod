@@ -24,6 +24,7 @@ class Event < ActiveRecord::Base
  accepts_nested_attributes_for :event_college_banner, reject_if: :all_blank, allow_destroy: true
  accepts_nested_attributes_for :event_broucher, reject_if: :all_blank, allow_destroy: true
  accepts_nested_attributes_for :event_sponsors, reject_if: :all_blank, allow_destroy: true
+ accepts_nested_attributes_for :event_departments, reject_if: :all_blank, allow_destroy: true
 
  def publish_msg
   begin

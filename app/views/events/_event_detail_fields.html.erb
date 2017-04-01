@@ -22,7 +22,7 @@
               </div>
 
               <div class='col-md-12 form-group'>
-                <label>Event Description</label>
+                <label>Event Description<sup>*</sup></label>
                 <p class='pull-right' data-toggle="modal" data-target="#eventdescription_popup"><i class="fa fa-external-link" aria-hidden="true"></i> See Example</p>
                 <div class='event_description'>
                   <%= f.text_area :event_description, rows: '11', cols: '62', class: "validate[required]" %>
@@ -30,7 +30,7 @@
               </div> 
              
               <div class='col-md-12 form-group'>
-                <label>Event List</label>
+                <label>Event List<sup>*</sup></label>
                 <p class='pull-right' data-toggle="modal" data-target="#subevents_popup"><i class="fa fa-external-link" aria-hidden="true"></i> See Example</p>
                 <div class='subevents'>
                  <%= f.text_area :sub_events, rows: '8', cols: '21.9', class: "validate[required]" %>

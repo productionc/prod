@@ -6,7 +6,7 @@ min-height: 100vh;
 </style>
 <!--event registration start-->
 <div id='preference_container'>
-  <div class='container-fluid'>
+  <div class='container'>
     <h2 class='text-center title'>Event Preference</h2>
       <%= simple_form_for @preference,validate: true, html: { multipart: true } do |f| %>
       <% if @preference.errors.any? %>
@@ -25,13 +25,42 @@ min-height: 100vh;
      <div class='basic_info'>
       <h3>Preference Details</h3>
       <div class='row'>
-        <div class="form-group col-md-4">
-          <label class='customlabel'>Event Type</label>
-           <%= f.collection_select :event_type, EventType.all, :name, :name, {selected: @preference.event_type, prompt: true}, class: "select2-size form-control validate[required] select2-offscreen", placeholder: "Select Event Type" %>
-        </div>
         <%= f.hidden_field :preference_type_id, value: 1 %>
         <%= f.hidden_field :user_id, value: current_user.present? ? current_user.try(:id) : 1 %>
+        <div class="form-group col-md-4">
+          <label class='customlabel'>Event Type</label>
+           <%= select_tag "preference[event_type_ids][]", options_for_select(EventType.pluck(:name, :id), @preference.event_types.present? ? @preference.event_types : []),selected: true, multiple: "multiple", class: "select2-size validate[required] form-control select2-offscreen event_type_preferences" %>
+        </div>
+       </div>
+       
+      <div class='row'>
+        <div class='col-md-6 form-group'>
+          <div class='cont_persondetails'>
+            <h3>Location Details</h3>
+            <%= f.simple_fields_for :location_preferences do |location_preferences| %>
+            <%= render 'location_preference_fields', f: location_preferences %>
+            <% end %>
+            <div class="links">&nbsp;
+              <%= link_to_add_association 'Add Location', f, :location_preferences, class: "btn btn-default add-button" %>
+            </div><br/>
+          </div>
+        </div>
     </div>
+
+    <div class='row'>
+        <div class='col-md-6 form-group'>
+          <div class='cont_persondetails'>
+            <h3>Department Details</h3>
+            <%= f.simple_fields_for :department_preferences do |department_preferences| %>
+            <%= render 'department_preference_fields', f: department_preferences %>
+            <% end %>
+            <div class="links">&nbsp;
+              <%= link_to_add_association 'Add Department', f, :department_preferences, class: "btn btn-default add-button" %>
+            </div><br/>
+          </div>
+        </div>
+    </div>
+
     <%= f.button :submit, name: "event_preference_submit", class: "btn btn-primary event_preference_submit", value: "Submit" %><br/>
     </div>
     <% end %>
@@ -48,5 +77,8 @@ $(document).ready(function(){
     scroll: false,
     maxErrorsPerField:1
     });
+    var preference = '<%= @preference.event_types.pluck(:id).join(",") %>';
+    var preference_arr = preference.split(',');
+    $("select[name='preference[event_type_ids][]']").val(preference_arr).trigger('change')
 });
 </script>

@@ -27,7 +27,7 @@
 //= require application_helper
 
 $(function() {
-    // Pusher.logToConsole = true;
+    Pusher.logToConsole = true;
 
     var pusher = new Pusher('4faead029d9c7bffd984', {
       encrypted: true
@@ -42,7 +42,7 @@ $(function() {
       function(can_notify){
           if(can_notify)
           {
-          alert('Got a new notification');
+          toastr.success('Open up', 'You have got a new notification!')
           $.post("/add_notification",
           {
            event_id: data.message,

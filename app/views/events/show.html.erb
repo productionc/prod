@@ -27,7 +27,7 @@
               <li role="presentation"><a href="#register_tab" aria-controls="messages" role="tab" data-toggle="tab">Register</a></li>
               <% if @event.event_contact_details.count > 0 %><li role="presentation"><a href="#contactus_tab" aria-controls="settings" role="tab" data-toggle="tab">Contact Us</a></li><% end %>
               <% if @event.event_sponsors.count > 0 %><li role="presentation"><a href="#sponsors_tab" aria-controls="settings" role="tab" data-toggle="tab">Sponsors</a></li><% end %>
-              <li style="display: none;" role="presentation"><a href="#reports_tab" aria-controls="settings" role="tab" data-toggle="tab">Event Report</a></li>
+              <li style="display: block;" role="presentation"><a href="#reports_tab" aria-controls="settings" role="tab" data-toggle="tab">Event Report</a></li>
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="aboutus_tab">

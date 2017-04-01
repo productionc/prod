@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330165259) do
+ActiveRecord::Schema.define(version: 20170401171528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "department_preferences", force: :cascade do |t|
+    t.integer  "event_department_stream_id"
+    t.integer  "event_department_id"
+    t.integer  "preference_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "event_accomodations", force: :cascade do |t|
     t.boolean  "accomodation"
@@ -147,6 +155,11 @@ ActiveRecord::Schema.define(version: 20170330165259) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "event_types_preferences", id: false, force: :cascade do |t|
+    t.integer "event_type_id", null: false
+    t.integer "preference_id", null: false
+  end
+
   create_table "event_urls", force: :cascade do |t|
     t.string   "web_link"
     t.string   "registration_link"
@@ -185,6 +198,15 @@ ActiveRecord::Schema.define(version: 20170330165259) do
     t.integer  "user_id"
   end
 
+  create_table "location_preferences", force: :cascade do |t|
+    t.string   "country"
+    t.string   "state"
+    t.string   "district"
+    t.integer  "preference_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "notification_types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -209,12 +231,6 @@ ActiveRecord::Schema.define(version: 20170330165259) do
   create_table "preferences", force: :cascade do |t|
     t.integer  "preference_type_id"
     t.integer  "user_id"
-    t.string   "event_type"
-    t.string   "country"
-    t.string   "state"
-    t.string   "city"
-    t.string   "stream"
-    t.string   "department"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
