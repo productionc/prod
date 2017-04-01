@@ -137,15 +137,23 @@ before_action :authenticate_user!, only: [:show, :new]
    event = Event.find_by(id: params[:event_id].to_i)
    if current_user.id != event.user_id
      user_preference = Preference.find_by(user_id: current_user.id)
-     notification_status = can_send_notification(event, user_preference) 
+     notification_status = can_send_notification(user_preference) 
    else
      notification_status = false
    end
    render json: notification_status.to_json
   end
 
-  def can_send_notification event, user_preference
-    if event.event_type == user_preference.event_type
+  def can_send_notification user_preference
+    event = Event.find_by(id: params[:event_id].to_i)
+    if user_preference.event_types.map(&:name).include?(event.event_type)
+      true
+    elsif ((user_preference.location_preferences.map(&:country).include?(event.country)) && 
+          (user_preference.location_preferences.map(&:state).include?(event.state)) &&
+          (user_preference.location_preferences.map(&:district).include?(event.district))) 
+      true
+    elsif ((user_preference.department_preferences.map(&:event_department_stream_id) & (event.event_departments.map(&:stream_id))).count > 0 &&
+          (user_preference.department_preferences.map(&:event_department_id) & (event.event_departments.map(&:id))).count > 0)
       true
     end
   end
@@ -154,11 +162,23 @@ before_action :authenticate_user!, only: [:show, :new]
    event = Event.find_by(id: params[:event_id].to_i)
    if current_user.id != event.user_id
     @notifications = Notification.all
-    message = "Your perference matched event with titled #{event.event_name}"
-    if !Notification.find_by(message: message).present? == true
-     # binding.pry
-     Notification.create(notification_type_id: 1, event_id: event.id, message: message, user_id: current_user.id)
-   end
+  
+    @can_create_notification = Notification.where(
+      "notifications.user_id = #{current_user.id} AND
+       notifications.event_id = #{event.id}"
+    ).first_or_initialize do |notification|
+      notification.assign_attributes(
+       notification_type_id: NotificationType.find_by(name: "Event").id, 
+       event_id: event.id, message: event.event_name, user_id: current_user.id
+        )
+    end
+    respond_to do |format|
+      if @can_create_notification.save
+        format.js
+      else
+        redirect_to :back, flash: { success: "Notification is failed!" }
+      end
+    end
    end 
   end
 

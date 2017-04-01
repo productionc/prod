@@ -64,7 +64,7 @@
     <div class='menu_logo_sec'>
       <div class="container-fluid">
         <div class="logo">
-          <a href='/events' title='Home'><img class='img-responsive' src='<%= asset_path('logo.png')%>'></a>
+          <a href='/' title='Home'><img class='img-responsive' src='<%= asset_path('logo.png')%>'></a>
         </div>    
         
         <div role="navigation" class="navbar navbar-default pull-right mainmenu1">
@@ -93,8 +93,7 @@
                     <li>Recent Notifications</li>
                     <% if (Notification.count > 0) and current_user.present? %>
                       <% Notification.where(user_id: current_user.id).each do |notification| %>
-                       <%= link_to notification.message, notification.event %>
-                      <%= "*****" %>
+                       <p>Your perference matched event with titled <%= link_to notification.message, notification.event %></p>
                       <% end %>
                     <% end %>
                   </ul>
@@ -206,6 +205,9 @@ $(document).ready(function(){
 $(document).ready(function() {
   $(".event_dept").select2({
    placeholder: "Select Departments"
+  });
+  $(".event_type_preferences").select2({
+   placeholder: "Select Event Types"
   });
 });
 </script>

@@ -1,0 +1,49 @@
+<div class="form-inline clearfix">
+  <div class="nested-fields department_preferences">
+    <br/>
+    <div class='col-md-4'>
+     <%= f.collection_select :event_department_stream_id, EventDepartmentStream.all, :id, :name, { prompt: "Select Stream" }, class: "select2-size form-control select2-offscreen validate[required]" %>
+  </div>
+  <div class="clearfix"></div>
+  <div class='col-md-6'>
+   <%= f.collection_select :event_department_id, [], :last, :first, { prompt: "Select Department" }, class: "select2-size form-control select2-offscreen validate[required]" %>
+  </div>
+    <br/>
+    <div class='col-md-12 form-group'>
+      <%= link_to_remove_association "Remove Department", f, class: "btn btn-default form-button" %>
+    </div><br/>
+  </div>
+</div>
+<script>
+ $(document).ready(function() {
+
+$(".edit_preference").validationEngine({
+    promptPosition : "rightLeft",
+    autoHidePrompt: true,
+    autoHideDelay: 3000,
+    fadeDuration: 0.3,
+    scroll: false,
+    maxErrorsPerField:1
+    }); 
+
+$("select[name*='event_department_stream_id']").change(function () {
+  var stream_selector = $(this).attr('name').replace("event_department_stream_id", "event_department_id");
+  var input_dept = $("select[name='"+stream_selector+"']");
+  $.getJSON('/departments/' + $(this).val(), function (data) {
+    input_dept.empty();
+    var initial = "<option value=''>Select Department</option>";
+    input_dept.append(initial);
+    $.each(data, function (i,j) {
+     var opt = '<option value='+ j["id"] +'>' + j["name"] + '</option>';
+      input_dept.append(opt);
+    });
+  });
+});
+
+<% @preference.department_preferences.each_with_index do |item, index| %>
+   $("#preference_department_preferences_attributes_<%= index %>_event_department_id").empty().append("<option><%= item.event_department.name %></option>")
+<% end %>
+
+
+ });
+</script>
