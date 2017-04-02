@@ -152,8 +152,8 @@ before_action :authenticate_user!, only: [:show, :new]
           (user_preference.location_preferences.map(&:state).include?(event.state)) &&
           (user_preference.location_preferences.map(&:district).include?(event.district))) 
       true
-    elsif ((user_preference.department_preferences.map(&:event_department_stream_id) & (event.event_departments.map(&:stream_id))).count > 0 &&
-          (user_preference.department_preferences.map(&:event_department_id) & (event.event_departments.map(&:id))).count > 0)
+    elsif ((user_preference.event_departments.map(&:stream_id) & (event.event_departments.map(&:stream_id))).count > 0 &&
+          (user_preference.event_departments.map(&:id) & (event.event_departments.map(&:id))).count > 0)
       true
     end
   end
@@ -184,6 +184,10 @@ before_action :authenticate_user!, only: [:show, :new]
 
   def posted_events
     @posted_events =  Event.where(user_id: current_user.id)
+  end
+
+  def notifications
+    @notifications = Notification.where(user_id: current_user.id)
   end
 
 	private

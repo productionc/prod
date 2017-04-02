@@ -29,7 +29,7 @@ min-height: 100vh;
           <%= f.text_field :first_name, class: 'form-control validate[required, custom[onlyLetters]]', placeholder: "First Name", value: @current_user.name, readonly: true, style: "cursor:not-allowed" %>
         </div>
         <div class='col-md-3 form-group'>
-          <%= f.text_field :last_name, class: 'form-control validate[required, custom[onlyLetters]]', placeholder: "Last Name" %>
+          <%= f.text_field :last_name, class: 'form-control validate[required, custom[onlyLetters]]', placeholder: "Last Name", value: @current_user.last_name, readonly: true, style: "cursor:not-allowed" %>
         </div>
         <div class='col-md-3 form-group'>
           <%= f.text_field :email, class: 'form-control validate[required,custom[email]]', placeholder: "Email Id", value: @current_user.email, readonly: true, style: "cursor:not-allowed" %>

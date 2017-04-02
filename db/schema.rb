@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401171528) do
+ActiveRecord::Schema.define(version: 20170402161131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "department_preferences", force: :cascade do |t|
-    t.integer  "event_department_stream_id"
-    t.integer  "event_department_id"
+    t.string   "stream"
+    t.string   "department"
     t.integer  "preference_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "event_accomodations", force: :cascade do |t|
@@ -84,6 +84,11 @@ ActiveRecord::Schema.define(version: 20170401171528) do
   create_table "event_departments_events", id: false, force: :cascade do |t|
     t.integer "event_id",            null: false
     t.integer "event_department_id", null: false
+  end
+
+  create_table "event_departments_preferences", id: false, force: :cascade do |t|
+    t.integer "event_department_id", null: false
+    t.integer "preference_id",       null: false
   end
 
   create_table "event_details", force: :cascade do |t|
@@ -233,6 +238,7 @@ ActiveRecord::Schema.define(version: 20170401171528) do
     t.integer  "user_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.string   "stream_preference"
   end
 
   create_table "registration_types", force: :cascade do |t|
@@ -269,6 +275,7 @@ ActiveRecord::Schema.define(version: 20170401171528) do
     t.string   "dept"
     t.string   "official_email_id"
     t.string   "company"
+    t.string   "last_name"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

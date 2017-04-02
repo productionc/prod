@@ -51,12 +51,7 @@ min-height: 100vh;
         <div class='col-md-6 form-group'>
           <div class='cont_persondetails'>
             <h3>Department Details</h3>
-            <%= f.simple_fields_for :department_preferences do |department_preferences| %>
-            <%= render 'department_preference_fields', f: department_preferences %>
-            <% end %>
-            <div class="links">&nbsp;
-              <%= link_to_add_association 'Add Department', f, :department_preferences, class: "btn btn-default add-button" %>
-            </div><br/>
+            <%= render partial: 'department_preference', locals: {f: f} %>
           </div>
         </div>
     </div>
