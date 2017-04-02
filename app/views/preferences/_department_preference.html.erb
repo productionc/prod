@@ -1,0 +1,32 @@
+<div class="form-inline clearfix">
+  <div class="nested-fields department_preferences">
+    <br/>
+    <div class='col-md-4'>
+     <%= f.collection_select :stream_preference, EventDepartmentStream.all, :id, :name, {selected: @preference.stream_preference, prompt: true}, class: "select2-size form-control select2-offscreen validate[required] department_stream", placeholder: "Select Event Type" %>
+  </div>
+  <div class="clearfix"></div>
+  <div class='col-md-6'>
+   <%= select_tag "preference[event_department_ids][]", options_for_select(@preference.event_departments.present? ? @preference.event_departments.map(&:name) : []),selected: true, multiple: "multiple", class: "select2-size validate[required] form-control select2-offscreen event_dept department" %>
+  </div>
+    <br/>
+  </div>
+</div>
+<script>
+ $(document).ready(function() {
+
+$(".edit_preference").validationEngine({
+    promptPosition : "rightLeft",
+    autoHidePrompt: true,
+    autoHideDelay: 3000,
+    fadeDuration: 0.3,
+    scroll: false,
+    maxErrorsPerField:1
+    }); 
+
+    var preference = '<%= @preference.event_departments.map(&:name).join(",") %>';
+    preference = preference.replace("&amp;", "&")
+    var preference_arr = preference.split(',');
+    // console.log(preference)
+    $("select[name='preference[event_department_ids][]']").val(preference_arr).trigger('change')
+ });
+</script>

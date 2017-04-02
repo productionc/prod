@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   post '/add_notification', to: 'events#add_notification'
   get '/event_user_preference', to: 'preferences#event_preference'
   get '/posted_events', to: "events#posted_events"
+  get '/notifications', to: "events#notifications"
 
   namespace :api do
     # API version v1

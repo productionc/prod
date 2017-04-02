@@ -33,10 +33,10 @@ class PreferencesController < ApplicationController
 
   private
   def preference_params
-    params.require(:preference).permit(:preference_type_id, :user_id, 
+    params.require(:preference).permit(:preference_type_id, :stream_preference, :user_id, 
       location_preferences_attributes: [:country, :state, :district, :id, :_destroy],
-      department_preferences_attributes: [:event_department_id, :event_department_stream_id, :id, :_destroy],
-      event_type_ids: [])
+      event_type_ids: [],
+      event_department_ids: [])
   end
 
   def set_preference
