@@ -20,6 +20,10 @@ namespace :load_event_data do
     event_department_stream_data
   end
 
+  task preference_type: :environment do
+    preference_type_data
+  end
+
   def registration_type_data
    types = ["Student-Studying", "Student-Passout", "Teacher", "Employer"]
    types.each do |item|
@@ -171,6 +175,10 @@ namespace :load_event_data do
     data.each do |item|
       EventDepartmentStream.create(name: item)
     end
+  end
+
+  def preference_type_data
+    PreferenceType.create(name: "Event")
   end
 
 end

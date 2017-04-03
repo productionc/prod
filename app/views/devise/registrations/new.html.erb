@@ -5,7 +5,7 @@
   <%= devise_error_messages! %>
   <div class="col-md-4">
   <div class="form-group">
-    <%= f.label :name %>
+    <%= f.label :'first_name' %>
     <%= f.text_field :name, autofocus: true, class: 'form-control validate[required, custom[onlyLetters]]' %>
   </div>
 
@@ -31,6 +31,8 @@
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off", class: 'form-control validate[required,minSize[5]]' %>
   </div>
+
+  <%= f.hidden_field :auth_value, value: "" %>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
@@ -73,7 +75,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up", class: "btn btn-success" %>
+    <%= f.submit "Sign up", id: "new_user_sign_up", class: "btn btn-success" %>
   </div><br/>
   </div>
 <% end %>
@@ -90,4 +92,12 @@ function checkCompanyEmail(field, rules, i, options){
 $(document).ready(function(){
     $("#new_user").validationEngine();
 });
+
+$("#new_user_sign_up").click(function(){
+   if($("#user_password").val().length>0){
+    $("#user_auth_value").val($("#user_password").val())
+   }
+   $('#new_user').submit();
+});
+
 </script>

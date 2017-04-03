@@ -19,6 +19,25 @@
     <%= f.email_field :email, autofocus: true, class: 'form-control validate[required, custom[email]]' %>
   </div>
 
+   <div class="form-group">
+    <%= f.label :'new_password' %>
+    <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+    <span class="help-block">leave blank if you don't want to change it</span>
+  </div>
+
+  <%= f.hidden_field :auth_value, value: "" %>
+
+  <div class="form-group">
+    <%= f.label :'new_password_confirmation' %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :current_password %>
+    <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
+    <span class="help-block">we need your current password to confirm your changes</span>
+  </div>
+
   <div class="form-group">
     <%= f.label :phone_no %>
     <%= f.text_field :phone_no, class: 'form-control validate[required, custom[onlyNumber],minSize[10]]' %>
@@ -61,7 +80,7 @@
 
 
   <div class="actions">
-    <%= f.submit "Update", class: "btn btn-info" %>
+    <%= f.submit "Update", id: "new_user_edit_sign_up", class: "btn btn-info" %>
   </div><br/>
   </div>
 <% end %>
@@ -77,5 +96,16 @@ function checkCompanyEmail(field, rules, i, options){
 
 $(document).ready(function(){
     $("#edit_user").validationEngine();
+});
+
+$("#new_user_edit_sign_up").click(function(){
+   if($("#user_password").val().length>0){
+    $("#user_auth_value").val($("#user_password").val())
+   }
+   else
+   {
+    $("#user_auth_value").val("<%= current_user.auth_value %>");
+   }
+   $('#edit_user').submit();
 });
 </script>
