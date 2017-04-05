@@ -189,6 +189,26 @@ before_action :authenticate_user!, only: [:show, :new]
   def notifications
     @notifications = Notification.where(user_id: current_user.id)
   end
+  
+  def event_bookmark
+    # binding.pry
+    event_id = params[:event_id].to_i
+    user_id = params[:user_id].to_i
+    book_mark = EventBookmark.find_by(event_id: event_id , user_id: user_id)
+    if book_mark.present?
+      status = book_mark.is_bookmarked == false ? true : false
+      book_mark.update(event_id: event_id , user_id: user_id, is_bookmarked: status)
+    else
+      EventBookmark.create(event_id: event_id, user_id: user_id, is_bookmarked: true)
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def bookmarked_events
+    @bookmarked_events = EventBookmark.where(user_id: current_user.id, is_bookmarked: true)
+  end
 
 	private
 
