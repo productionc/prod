@@ -3,6 +3,7 @@
 <div class="col-lg-10 col-md-12 col-sm-12 event-detail">&nbsp;</div>
 <div class='eventview_banner img-responsive' style='background-image: url("<%= @event.event_college_banner.present? ? @event.event_college_banner.college_banner.url : "/assets/dummy_event_banner.png" %>")'>
  <div class='eventbanner_cont'>
+  <%= link_to "<i class='fa #{bookmark_fa_icon(@event, current_user)}' aria-hidden='true'></i> #{bookmark_text(@event, current_user)}".html_safe, event_bookmark_path(event_id: @event.id, user_id: current_user.id),method: :post, remote: true, class: "btn #{bookmark_class(@event, current_user)} bookmark_btn" %>
   <%= image_tag @event.event_banner.present? && @event.event_banner.banner.present? ? @event.event_banner.banner.url : "/assets/eventlogo.png", class: 'text-center img-responsive eventlogo' %>
   <h2 class='eventname'><%= @event.event_name %></h2>
   <p class='location'><%= @event.district %>, <%= @event.state %> <%= @event.zip %>, <%= @event.country %></p>

@@ -81,6 +81,7 @@
               <li><a href="https://collegedaa.freshdesk.com/support/home" target="_blank">Support</a></li>
               <li><a target="_blank" href="<%= student_partner_path %>">Student Partner</a></li>
               <% if user_signed_in? %><li><a href="/posted_events">Posted Events</a></li><% end %>
+              <% if user_signed_in? %><li><a href="/bookmarked_events">Bookmarked Events</a></li><% end %>
               <li><%= link_to 'Post Event', new_event_path %></li>
               <li>
               <% if user_signed_in? %>
