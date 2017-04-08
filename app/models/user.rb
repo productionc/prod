@@ -4,5 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,:confirmable, :lockable
   attr_accessor :current_password
-
+  belongs_to :event_department
+  belongs_to :event_department_stream
 end

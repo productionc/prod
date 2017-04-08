@@ -5,29 +5,35 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Phone #</th>
         <th>College</th>
         <th>Year of Study</th>
         <th>Email</th>
         <th>User Type</th>
+        <th>Stream</th>
         <th>Department</th>
         <th>Offical email</th>
         <th>Company</th>
+        <th>Know us</th>
       </tr>
     </thead>
     <tbody>
       <% @users.each do |user| %>
       <tr>
+        <td><%= user.id %></td>
         <td><%= user.name.present? ? user.name : "N/A" %></td>
         <td><%= user.phone_no.present? ? user.phone_no : "N/A" %></td>
         <td><%= user.place_of_study.present? ? user.place_of_study : "N/A" %></td>
         <td><%= user.passed_out_year.present? ? user.passed_out_year : "N/A" %></td>
         <td><%= user.email.present? ? user.email : "N/A" %></td>
         <td><%= user.registration_type.present? ? user.registration_type : "N/A" %></td>
-        <td><%= user.dept.present? ? user.dept : "N/A" %></td>
+        <td><%= user.event_department_stream.present? ? user.event_department_stream.name : "N/A" %></td>
+        <td><%= user.event_department.present? ? user.event_department.name : "N/A" %></td>
         <td><%= user.official_email_id.present? ? user.official_email_id : "N/A" %></td>
         <td><%= user.company.present? ? user.company : "N/A" %></td>
+        <td><%= user.know_us.present? ? user.know_us : "N/A" %></td>
       </tr>
       <% end %>
     </tbody>
