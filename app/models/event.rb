@@ -14,7 +14,7 @@ class Event < ActiveRecord::Base
  belongs_to :event_broucher, dependent: :destroy
  has_many :event_sponsors, dependent: :destroy
  after_create :publish_msg
- has_many :event_bookmarks, dependent: :destroy
+ has_many :event_favourites, dependent: :destroy
 
  accepts_nested_attributes_for :event_detail, reject_if: :all_blank, allow_destroy: true
  accepts_nested_attributes_for :event_contact_details, reject_if: :all_blank, allow_destroy: true

@@ -190,24 +190,23 @@ before_action :authenticate_user!, only: [:show, :new]
     @notifications = Notification.where(user_id: current_user.id)
   end
   
-  def event_bookmark
-    # binding.pry
+  def event_favourite
     event_id = params[:event_id].to_i
     user_id = params[:user_id].to_i
-    book_mark = EventBookmark.find_by(event_id: event_id , user_id: user_id)
+    book_mark = EventFavourite.find_by(event_id: event_id , user_id: user_id)
     if book_mark.present?
-      status = book_mark.is_bookmarked == false ? true : false
-      book_mark.update(event_id: event_id , user_id: user_id, is_bookmarked: status)
+      status = book_mark.is_favourite == false ? true : false
+      book_mark.update(event_id: event_id , user_id: user_id, is_favourite: status)
     else
-      EventBookmark.create(event_id: event_id, user_id: user_id, is_bookmarked: true)
+      EventFavourite.create(event_id: event_id, user_id: user_id, is_favourite: true)
     end
     respond_to do |format|
       format.js
     end
   end
 
-  def bookmarked_events
-    @bookmarked_events = EventBookmark.where(user_id: current_user.id, is_bookmarked: true)
+  def favourite_events
+    @favourite_events = EventFavourite.where(user_id: current_user.id, is_favourite: true)
   end
 
 	private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405165019) do
+ActiveRecord::Schema.define(version: 20170408151939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,14 +37,6 @@ ActiveRecord::Schema.define(version: 20170405165019) do
     t.datetime "banner_updated_at"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-  end
-
-  create_table "event_bookmarks", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.boolean  "is_bookmarked", default: false
   end
 
   create_table "event_brouchers", force: :cascade do |t|
@@ -123,6 +115,14 @@ ActiveRecord::Schema.define(version: 20170405165019) do
   create_table "event_extras_events", id: false, force: :cascade do |t|
     t.integer "event_id",       null: false
     t.integer "event_extra_id", null: false
+  end
+
+  create_table "event_favourites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "is_favourite", default: false
   end
 
   create_table "event_goings", force: :cascade do |t|
