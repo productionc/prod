@@ -1,0 +1,9 @@
+toastr.success('Event Favourite is updated successfully!');
+if($(".favourite_btn").hasClass("btn-success"))
+{
+ $(".favourite_btn").html("<i class='fa fa-heart' aria-hidden='true'></i> Remove from favourite").removeClass("btn-success").addClass("btn-danger");
+}
+else
+{
+ $(".favourite_btn").html("<i class='fa fa-heart-o' aria-hidden='true'></i> Add to favourite").removeClass("btn-danger").addClass("btn-success");
+}

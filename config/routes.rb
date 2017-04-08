@@ -33,8 +33,8 @@ Rails.application.routes.draw do
   get '/event_user_preference', to: 'preferences#event_preference'
   get '/posted_events', to: "events#posted_events"
   get '/notifications', to: "events#notifications"
-  post '/event_bookmark', to: "events#event_bookmark"
-  get '/bookmarked_events', to: "events#bookmarked_events"
+  post '/event_favourite', to: "events#event_favourite"
+  get '/favourite_events', to: "events#favourite_events"
 
   namespace :api do
     # API version v1

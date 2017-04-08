@@ -3,18 +3,18 @@ module EventsHelper
     Event.find_by(id: event_id).is_published? ? "" : "disabled"
   end  
 
-  def bookmark_text event, user
-    event.event_bookmarks.find_by(user_id: user.id).try(:is_bookmarked) == true ? "Undo Bookmark" :
-    "Bookmark It"
+  def favourite_text event, user
+    event.event_favourites.find_by(user_id: user.id).try(:is_favourite) == true ? "Remove from favourite" :
+    "Add to favourite"
   end
 
-  def bookmark_class event, user
-    event.event_bookmarks.find_by(user_id: user.id).try(:is_bookmarked) == true ? "btn-danger" :
+  def favourite_class event, user
+    event.event_favourites.find_by(user_id: user.id).try(:is_favourite) == true ? "btn-danger" :
     "btn-success"
   end
 
-  def bookmark_fa_icon event, user
-    event.event_bookmarks.find_by(user_id: user.id).try(:is_bookmarked) == true ? "fa-bookmark" :
-    "fa-bookmark-o"
+  def favourite_fa_icon event, user
+    event.event_favourites.find_by(user_id: user.id).try(:is_favourite) == true ? "fa-heart" :
+    "fa-heart-o"
   end
 end

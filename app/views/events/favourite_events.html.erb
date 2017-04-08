@@ -1,0 +1,7 @@
+<div class="container"> 
+<h2>My Favourite events</h2>
+<% if @favourite_events.count == 0 %> No Event Favourites yet!<% end %>
+<% @favourite_events.each do |favourite| %>
+  <p><%= link_to favourite.event.event_name, favourite.event %></p>
+<% end %>
+</div>

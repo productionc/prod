@@ -1,7 +1,0 @@
-<div class="container"> 
-<h2>My Bookmarked events</h2>
-<% if @bookmarked_events.count == 0 %> No Event Bookmarks yet!<% end %>
-<% @bookmarked_events.each do |bookmark| %>
-  <p><%= link_to bookmark.event.event_name, bookmark.event %></p>
-<% end %>
-</div>
