@@ -58,33 +58,65 @@ $(function() {
 
 $(document).ready(function() {
 
+ $(".dept_stream_field").hide();
+  $(".dept_field").hide();
+  $(".college_field").hide();
+  $(".college_joined_year_field").hide();
+  $(".company_field").hide();
+  $(".official_email_id_field").hide();
 $('#user_registration_type').change(function () {
   
-  $('#user_dept, #user_dept_label').css('display','none');
-  $('#user_passed_out_year, #user_passed_out_year_label').css('display','none');
-  $('#user_place_of_study, #user_place_of_study_label').css('display','none');
-  $('#user_official_email_id, #user_official_email_id_label').css('display','none');
-  $('#user_company, #user_company_label').css('display','none');
+  // $('#user_dept, #user_dept_label').css('display','none');
+  // $('#user_passed_out_year, #user_passed_out_year_label').css('display','none');
+  // $('#user_place_of_study, #user_place_of_study_label').css('display','none');
+  // $('#user_official_email_id, #user_official_email_id_label').css('display','none');
+  // $('#user_company, #user_company_label').css('display','none');
+  // $("#user_stream_label").hide();
+  $(".dept_stream_field").hide();
+  $(".dept_field").hide();
+  $(".college_field").hide();
+  $(".college_joined_year_field").hide();
+  $(".company_field").hide();
+  $(".official_email_id_field").hide();
+ 
       
-  if($(this).val() == "Student-Passout"){
-    $("#user_passed_out_year_label").text("Passed out year (YYYY) Eg. 2017");
-    $('#user_dept, #user_dept_label').css('display','block');
-    $('#user_passed_out_year, #user_passed_out_year_label').css('display','block');
-    $('#user_place_of_study, #user_place_of_study_label').css('display','block');
+  if(($(this).val() == "Student-Passout") || ($(this).val() == "Student-Studying") ){
+    $(".dept_stream_field").show();
+    $(".dept_field").show();
+    $(".college_field").show();
+    $(".college_joined_year_field").show();
+
+    // $('#user_dept, #user_dept_label').css('display','block');
+    // $('#user_passed_out_year, #user_passed_out_year_label').css('display','block');
+    // $('#user_place_of_study, #user_place_of_study_label').css('display','block');
+    // $(".select2-container").show(); $("#user_stream_label").show();
+    // $("span.select2.select2-container.select2-container--default").css('display', 'block');
   }
-  else if($(this).val() == "Student-Studying"){
-    $("#user_passed_out_year_label").text("Current year (YYYY) Eg. 2017");
-    $('#user_dept, #user_dept_label').css('display','block');
-    $('#user_passed_out_year, #user_passed_out_year_label').css('display','block');
-    $('#user_place_of_study, #user_place_of_study_label').css('display','block');
-  }
+  // else if($(this).val() == "Student-Studying"){
+
+    // $('#user_dept, #user_dept_label').css('display','block');
+    // $('#user_passed_out_year, #user_passed_out_year_label').css('display','block');
+    // $('#user_place_of_study, #user_place_of_study_label').css('display','block');
+    // $(".select2-container").show(); $("#user_stream_label").show();
+    // $("span.select2.select2-container.select2-container--default").css('display', 'block');
+  // }
   else if($(this).val() == "Teacher"){
-    $('#user_dept, #user_dept_label').css('display','block');
-    $('#user_place_of_study, #user_place_of_study_label').css('display','block');
+    $(".dept_stream_field").show();
+    $(".dept_field").show();
+    $(".college_field").show();
+    // $('#user_dept, #user_dept_label').css('display','block');
+    // $('#user_place_of_study, #user_place_of_study_label').css('display','block');
+    // $("span.select2.select2-container.select2-container--default").css('display', 'none');
+    // $("span.select2.select2-container.select2-container--default").css('display', 'block');
+    // $("#user_stream_label").show();
   }
   else if($(this).val() == "Employer"){
-    $('#user_official_email_id, #user_official_email_id_label').css('display','block');
-    $('#user_company, #user_company_label').css('display','block');
+    $(".company_field").show();
+    $(".official_email_id_field").show();
+    // $('#user_official_email_id, #user_official_email_id_label').css('display','block');
+    // $('#user_company, #user_company_label').css('display','block');
+    // $("span.select2.select2-container.select2-container--default").css('display', 'none');
+    // $('#user_passed_out_year, #user_passed_out_year_label').css('display','block');
   }
 });
 
