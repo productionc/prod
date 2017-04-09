@@ -43,8 +43,8 @@ Rails.application.configure do
   ActionMailer::Base.smtp_settings = {
       :address              => "smtp.gmail.com",
       :port                 => 587,
-      :user_name            => "collegedaaapp@gmail.com",
-      :password             => 'superuser',
+      :user_name            => ENV["GMAIL_EMAIL"],
+      :password             => ENV["GMAIL_PWD"],
       :authentication       => "plain",
       :enable_starttls_auto => true,
       :openssl_verify_mode => 'none'
@@ -53,10 +53,10 @@ Rails.application.configure do
   config.paperclip_defaults = {
   storage: :s3,
   s3_credentials: {
-    bucket: "collegedaa",
-    access_key_id: "AKIAJWTJIOJUNKMECU4A",
-    secret_access_key: "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",
-    s3_region: "us-east-1",
+    bucket: ENV["bucket"]
+    access_key_id: ENV["access_key_id"],
+    secret_access_key: ENV["secret_access_key"],
+    s3_region: ENV["s3_region"],
   }
 }
 end
