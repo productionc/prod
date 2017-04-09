@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       get 'get_all_events' => 'events#events_list'
       get 'get_all_events_count' => 'events#events_count'
       get 'get_all_users_count' => 'events#all_users_count'
+      post 'users/sign_in' => 'users#sign_in'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
