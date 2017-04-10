@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
 
  include ApplicationHelper
  belongs_to :user
+ has_many :event_goings, dependent: :destroy
  belongs_to :event_detail, dependent: :destroy
  has_and_belongs_to_many :event_departments, dependent: :destroy
  has_many :event_contact_details, dependent: :destroy

@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
   attr_accessor :current_password
   belongs_to :event_department
   belongs_to :event_department_stream
+  validates :phone_no, :uniqueness => true, :allow_blank => true
 end

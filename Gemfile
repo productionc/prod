@@ -18,6 +18,7 @@ gem 'aws-sdk', '~> 2.3'
 gem 'dotenv-rails'
 # Use thin for dev and faye
 gem 'pusher'
+gem 'active_model_serializers', '~> 0.9'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
