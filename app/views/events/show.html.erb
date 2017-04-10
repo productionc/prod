@@ -161,7 +161,7 @@
                     <p>Name: <%= event_going.user.name %></p>
                     <p>Email: <%= event_going.user.email %></p>
                     <p>Phone: <%= event_going.user.phone_no %></p>
-                    <p>Status: <%= event_going.going_count == 1 ? "Going" : "May be" %></p>
+                    <p>Status: <%= event_going.going_count == 1 ? "Going" : event_going.may_be_count == 1 ? "May be" : "N/A"  %></p>
                     <p>View count: <%= event_going.reach_count %></p>
                     <hr/>
                   <% end %>
