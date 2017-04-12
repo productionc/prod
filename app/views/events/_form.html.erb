@@ -186,7 +186,8 @@ min-height: 100vh;
 
     
            
-    <%= f.button :submit, name: "event_registration_submit", class: "btn btn-primary event_registration_submit", value: "Submit" %><br/>
+    <%= f.button :submit, name: "event_registration_submit", class: "btn btn-primary event_registration_submit", value: "Submit" %>
+    <br/>
     </div>
     <% end %>
   </div>
@@ -203,4 +204,10 @@ $(document).ready(function(){
     maxErrorsPerField:1
     });
 });
+$(".event_registration_submit").click(function(e){
+ e.preventDefault();
+ swal({   title: "Attention",   text: "This event is submitted for moderation and will be published soon !",   type: "info",   showCancelButton: false,   confirmButtonColor: "#DD6B55",   confirmButtonText: "Okies!",   closeOnConfirm: false }, function(){ $("#new_event").submit(); });
+
+});
 </script>
+

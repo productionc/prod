@@ -17,6 +17,7 @@
 //= require toastr
 //= require moment
 //= require bootstrap-datetimepicker.min
+//= require sweetalert.min
 //= require modernizr
 //= require modernizr.custom
 //= require jquery.flexslider
