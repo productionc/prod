@@ -5,8 +5,13 @@
   <%= devise_error_messages! %>
   <div class="col-md-4">
   <div class="form-group">
-    <%= f.label :name %>
+    <%= f.label :'first_name' %>
     <%= f.text_field :name, autofocus: true, class: 'form-control validate[required, custom[onlyLetters]]' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: 'form-control validate[required, custom[onlyLetters]]' %>
   </div>
 
   <div class="field">
@@ -27,6 +32,8 @@
     <%= f.password_field :password, autocomplete: "off", class: 'form-control validate[required,minSize[5]]' %>
   </div>
 
+  <%= f.hidden_field :auth_value, value: "" %>
+
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control validate[required,minSize[5]]' %>
@@ -42,38 +49,54 @@
     </select>
   </div>
 
-  <div class="form-group">
-    <%= f.label :'Dept', id: 'user_dept_label' %>
-    <%= f.text_field :dept, class: 'form-control validate[required,custom[onlyLetters]]' %>
+  <div class="form-group dept_stream_field">
+    <%= f.label :'Department Stream', id: 'user_stream_label' %><br />
+    <%= f.collection_select :event_department_stream_id, EventDepartmentStream.all, :id, :name, { prompt: true }, class: "select2-size form-control select2-offscreen validate[required] department_stream" %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group dept_field">
+    <%= f.label :'Deparment', id: 'user_dept_label' %><br/>
+    <%= select_tag "user[event_department_id]", options_for_select([]),selected: true, class: "select2-size validate[required] form-control select2-offscreen event_dept department" %>
+  </div>
+
+  <div class="form-group college_field">
     <%= f.label :'college / university', id: 'user_place_of_study_label' %>
     <%= f.text_field :place_of_study, class: 'form-control validate[required, custom[onlyLetters]]' %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :passed_out_year, id: 'user_passed_out_year_label' %>
-    <%= f.text_field :passed_out_year, class: 'form-control validate[required, custom[onlyNumber], minSize[4]]' %>
+  <div class="form-group college_joined_year_field">
+    <%= f.label :'college_joined_year', id: 'user_passed_out_year_label' %><br/>
+    <%= select_tag "user[passed_out_year]", options_for_select((1937..2017).to_a, []), class: "select2-size form-control validate[required, custom[onlyNumber], minSize[4]] select2-offscreen passed_out_year", prompt: "Select Year", id: "user_passed_out_year" %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group company_field">
     <%= f.label :company, id: 'user_company_label' %>
     <%= f.text_field :company, class: 'form-control validate[required, custom[onlyLetters]]' %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group official_email_id_field">
     <%= f.label :official_email_id, id: 'user_official_email_id_label' %>
     <%= f.text_field :official_email_id, class: 'form-control validate[required,custom[email],funcCall[checkCompanyEmail]]' %>
   </div>
 
+  <div class="form-group">
+    <%= f.label :'how_do_you_know_us?' %>
+    <%= select_tag "user[know_us]", options_for_select( ['Facebook', 'Google', 'By Friends', 'Paper Ads'], []), class: "select2-size form-control validate[required] select2-offscreen know_us", prompt: "Select here" %>
+  </div>
+
   <div class="actions">
-    <%= f.submit "Sign up", class: "btn btn-success" %>
+    <%= f.submit "Sign up", id: "new_user_sign_up", class: "btn btn-success" %>
   </div><br/>
   </div>
 <% end %>
 
 </div>
+
+<style>
+span.select2.select2-container.select2-container--default{
+  width: auto !important;
+}
+</style>
 
 <script type="text/javascript">
 function checkCompanyEmail(field, rules, i, options){
@@ -83,6 +106,15 @@ function checkCompanyEmail(field, rules, i, options){
 }
 
 $(document).ready(function(){
+    $(".passed_out_year").select2({});
     $("#new_user").validationEngine();
 });
+
+$("#new_user_sign_up").click(function(){
+   if($("#user_password").val().length>0){
+    $("#user_auth_value").val($("#user_password").val())
+   }
+   $('#new_user').submit();
+});
+
 </script>

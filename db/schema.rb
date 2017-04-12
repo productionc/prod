@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170325170247) do
+ActiveRecord::Schema.define(version: 20170408184738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "department_preferences", force: :cascade do |t|
+    t.string   "stream"
+    t.string   "department"
+    t.integer  "preference_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "event_accomodations", force: :cascade do |t|
     t.boolean  "accomodation"
@@ -78,6 +86,11 @@ ActiveRecord::Schema.define(version: 20170325170247) do
     t.integer "event_department_id", null: false
   end
 
+  create_table "event_departments_preferences", id: false, force: :cascade do |t|
+    t.integer "event_department_id", null: false
+    t.integer "preference_id",       null: false
+  end
+
   create_table "event_details", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
@@ -102,6 +115,14 @@ ActiveRecord::Schema.define(version: 20170325170247) do
   create_table "event_extras_events", id: false, force: :cascade do |t|
     t.integer "event_id",       null: false
     t.integer "event_extra_id", null: false
+  end
+
+  create_table "event_favourites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "is_favourite", default: false
   end
 
   create_table "event_goings", force: :cascade do |t|
@@ -147,6 +168,11 @@ ActiveRecord::Schema.define(version: 20170325170247) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "event_types_preferences", id: false, force: :cascade do |t|
+    t.integer "event_type_id", null: false
+    t.integer "preference_id", null: false
+  end
+
   create_table "event_urls", force: :cascade do |t|
     t.string   "web_link"
     t.string   "registration_link"
@@ -171,7 +197,6 @@ ActiveRecord::Schema.define(version: 20170325170247) do
     t.string   "state"
     t.string   "district"
     t.string   "zip"
-    t.string   "location"
     t.integer  "event_detail_id"
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
@@ -184,6 +209,15 @@ ActiveRecord::Schema.define(version: 20170325170247) do
     t.boolean  "is_published",            default: false
     t.string   "dept_stream"
     t.integer  "user_id"
+  end
+
+  create_table "location_preferences", force: :cascade do |t|
+    t.string   "country"
+    t.string   "state"
+    t.string   "district"
+    t.integer  "preference_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "notification_types", force: :cascade do |t|
@@ -210,14 +244,9 @@ ActiveRecord::Schema.define(version: 20170325170247) do
   create_table "preferences", force: :cascade do |t|
     t.integer  "preference_type_id"
     t.integer  "user_id"
-    t.string   "event_type"
-    t.string   "country"
-    t.string   "state"
-    t.string   "city"
-    t.string   "stream"
-    t.string   "department"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.string   "stream_preference"
   end
 
   create_table "registration_types", force: :cascade do |t|
@@ -231,12 +260,12 @@ ActiveRecord::Schema.define(version: 20170325170247) do
     t.string   "phone_no"
     t.string   "place_of_study"
     t.string   "passed_out_year"
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                      default: "", null: false
+    t.string   "encrypted_password",         default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",              default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
@@ -245,15 +274,19 @@ ActiveRecord::Schema.define(version: 20170325170247) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "failed_attempts",        default: 0,  null: false
+    t.integer  "failed_attempts",            default: 0,  null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "registration_type"
-    t.string   "dept"
+    t.integer  "event_department_id"
     t.string   "official_email_id"
     t.string   "company"
+    t.string   "last_name"
+    t.string   "auth_value"
+    t.integer  "event_department_stream_id"
+    t.string   "know_us"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

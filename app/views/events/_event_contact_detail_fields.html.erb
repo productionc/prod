@@ -1,16 +1,17 @@
 <div class="form-inline clearfix">
   <div class="nested-fields">
-    <br/><div class='col-md-6'>
-      <%= f.text_field :designation, placeholder: "Designation", class: "form-control validate[required]" %>
-    </div>
+    <br/>
     <div class='col-md-6 form-group'>
       <%= f.text_field :name, placeholder: "Name", class: "form-control validate[required]" %>
+    </div>
+    <div class='col-md-6'>
+      <%= f.text_field :designation, placeholder: "Designation", class: "form-control validate[required]" %>
     </div>
     <div class='col-md-6 form-group'>
       <%= f.text_field :email, placeholder: "Email Id", class: "form-control validate[required,custom[email]]"%>
     </div>
     <div class='col-md-6 form-group'>
-      <%= f.text_field :phone_no, placeholder: "Mobile No", class: "form-control validate[required,custom[onlyNumber]]"%>
+      <%= f.text_field :phone_no, placeholder: "Mobile No", class: "form-control validate[required,custom[onlyNumber],minSize[10]]"%>
     </div>
     <div class='col-md-12 form-group'>
       <%= f.text_field :general_support, placeholder: "General support or helpdesk email address - if any",class: "form-control validate[required]"%>

@@ -3,9 +3,10 @@
 <div class="col-lg-10 col-md-12 col-sm-12 event-detail">&nbsp;</div>
 <div class='eventview_banner img-responsive' style='background-image: url("<%= @event.event_college_banner.present? ? @event.event_college_banner.college_banner.url : "/assets/dummy_event_banner.png" %>")'>
  <div class='eventbanner_cont'>
+  <%= link_to "<i class='fa #{favourite_fa_icon(@event, current_user)}' aria-hidden='true'></i> #{favourite_text(@event, current_user)}".html_safe, event_favourite_path(event_id: @event.id, user_id: current_user.id),method: :post, remote: true, class: "btn #{favourite_class(@event, current_user)} favourite_btn" %>
   <%= image_tag @event.event_banner.present? && @event.event_banner.banner.present? ? @event.event_banner.banner.url : "/assets/eventlogo.png", class: 'text-center img-responsive eventlogo' %>
   <h2 class='eventname'><%= @event.event_name %></h2>
-  <p class='location'><%= @event.location %>, <%= @event.district %>, <%= @event.state %> <%= @event.zip %>, <%= @event.country %></p>
+  <p class='location'><%= @event.district %>, <%= @event.state %> <%= @event.zip %>, <%= @event.country %></p>
   <div class='dates'>
     <div class='startdate'><p><%= @event.event_detail.start_date.present? ? @event.event_detail.start_date.strftime("%a, %d %b %y") : '' %></p><p><%= @event.event_detail.start_date.present? ? @event.event_detail.start_date.strftime("%I:%M %P") : '' %></p></div>
     <div class='enddate'><p><%= @event.event_detail.end_date.present? ? @event.event_detail.end_date.strftime("%a, %d %b %y") : '' %></p><p><%= @event.event_detail.end_date.present? ? @event.event_detail.end_date.strftime("%I:%M %P") : '' %></p></div>
@@ -27,7 +28,7 @@
               <li role="presentation"><a href="#register_tab" aria-controls="messages" role="tab" data-toggle="tab">Register</a></li>
               <% if @event.event_contact_details.count > 0 %><li role="presentation"><a href="#contactus_tab" aria-controls="settings" role="tab" data-toggle="tab">Contact Us</a></li><% end %>
               <% if @event.event_sponsors.count > 0 %><li role="presentation"><a href="#sponsors_tab" aria-controls="settings" role="tab" data-toggle="tab">Sponsors</a></li><% end %>
-              <li style="display: none;" role="presentation"><a href="#reports_tab" aria-controls="settings" role="tab" data-toggle="tab">Event Report</a></li>
+              <li style="display: block;" role="presentation"><a href="#reports_tab" aria-controls="settings" role="tab" data-toggle="tab">Event Report</a></li>
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="aboutus_tab">
@@ -160,7 +161,7 @@
                     <p>Name: <%= event_going.user.name %></p>
                     <p>Email: <%= event_going.user.email %></p>
                     <p>Phone: <%= event_going.user.phone_no %></p>
-                    <p>Status: <%= event_going.going_count == 1 ? "Going" : "May be" %></p>
+                    <p>Status: <%= event_going.going_count == 1 ? "Going" : event_going.may_be_count == 1 ? "May be" : "N/A"  %></p>
                     <p>View count: <%= event_going.reach_count %></p>
                     <hr/>
                   <% end %>

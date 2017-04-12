@@ -30,8 +30,22 @@ Rails.application.routes.draw do
 
   post '/process_notification', to: 'events#process_notification'
   post '/add_notification', to: 'events#add_notification'
+  get '/event_user_preference', to: 'preferences#event_preference'
+  get '/posted_events', to: "events#posted_events"
+  get '/notifications', to: "events#notifications"
+  post '/event_favourite', to: "events#event_favourite"
+  get '/favourite_events', to: "events#favourite_events"
 
-
+  namespace :api do
+    # API version v1
+    namespace :v1 do
+      get 'get_all_events' => 'events#events_list'
+      get 'get_all_events_count' => 'events#events_count'
+      get 'get_all_users_count' => 'events#all_users_count'
+      post 'users/sign_in' => 'users#sign_in'
+      get 'event_detail/:event_id' => 'events#event_detail'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

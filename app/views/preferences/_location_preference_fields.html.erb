@@ -1,0 +1,69 @@
+<div class="form-inline clearfix">
+  <div class="nested-fields location_preferences">
+    <br/>
+    <div class='col-md-3 form-group'>
+      <%= f.collection_select :country, CS.countries.slice(:AU, :CA, :IN, :US, :GB).map { |obj| [obj[1], obj[0]] }, :last, :first, { prompt: "Select Country" }, class: "select2-size form-control validate[required] select2-offscreen" %>
+    </div>
+    <div class="clearfix"></div>
+    <div class='col-md-3 form-group'>
+      <%= f.collection_select :state, [], :last, :first, { prompt: "Select State" }, class: "select2-size form-control validate[required] select2-offscreen" %>
+    </div>
+    <div class="clearfix"></div>
+    <div class='col-md-3 form-group'>
+      <%= f.collection_select :district, [], :last, :first, { prompt: "Select City"}, class: "select2-size form-control validate[required] select2-offscreen" %>
+    </div>
+    <br/>
+    <div class='col-md-12 form-group'>
+      <%= link_to_remove_association "Remove Location", f, class: "btn btn-default form-button" %>
+    </div><br/>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+
+  $(".edit_preference").validationEngine({
+    promptPosition : "rightLeft",
+    autoHidePrompt: true,
+    autoHideDelay: 3000,
+    fadeDuration: 0.3,
+    scroll: false,
+    maxErrorsPerField:1
+    });
+
+  $("select[name*='country']").change(function () {
+  var state_selector = $(this).attr('name').replace("country", "state");
+  var input_state = $("select[name='"+state_selector+"']");
+  $.getJSON('/states/' + $(this).val(), function (data) {
+    input_state.empty();
+    var initial = "<option value=''>Select State</option>";
+    input_state.append(initial);
+    $.each(data, function (i,j) {
+     var opt = '<option value='+ i +'>' + j + '</option>';
+      input_state.append(opt);
+    });
+  });
+});
+
+$("select[name*='state']").change(function () {
+  var city_selector = $(this).attr('name').replace("state", "district");
+  var country_selector = $(this).attr('name').replace("state", "country");
+  var input_city = $("select[name='"+city_selector+"']");
+  $.getJSON('/cities/' + $(this).val()+ '/'+ $("select[name='"+country_selector+"']").val(), function (data) {
+    input_city.empty();
+    var initial = "<option value=''>Select City</option>";
+    input_city.append(initial);
+    $.each(data, function (i,j) {
+     var opt = '<option value='+ j +'>' + j + '</option>';
+      input_city.append(opt);
+    });
+  });
+});
+
+<% @preference.location_preferences.each_with_index do |item, index| %>
+  $("#preference_location_preferences_attributes_<%= index %>_state").empty().append("<option><%= item.state %></option>")
+  $("#preference_location_preferences_attributes_<%= index %>_district").empty().append("<option><%= item.district %></option>")
+<% end %>
+
+});
+</script>

@@ -800,7 +800,7 @@ transform: rotate(135deg);
   position: relative;
 }
 .event_search_result .section3 ul li:first-child::before {
-  background-image: url("../images/doubletick.png");
+  background-image: url(<%= asset_path('doubletick.png') %>);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 100% auto;
@@ -1329,7 +1329,11 @@ section#signup_page input[type="submit"]:hover {
     background-color: brown;
 }
 
-#user_dept, #user_dept_label{
+/*#user_dept, #user_dept_label{
+  display: none;
+}
+
+#user_stream, #user_stream_label{
   display: none;
 }
 
@@ -1348,7 +1352,7 @@ section#signup_page input[type="submit"]:hover {
 #user_company, #user_company_label{
   display: none;
 }
-
+*/
 a.previous_page{
   display: none;
 }
@@ -1382,3 +1386,150 @@ textarea#event_event_detail_attributes_conference_topics{
  width: 616px;
  height: 253px;
 }
+@media screen and (-webkit-min-device-pixel-ratio:0){ 
+      .fbshare .fb_iframe_widget {
+        margin-top: 22px;
+      }
+}
+.notification_menu .notify_det {
+  border-bottom: 1px solid #784cab;
+  display: flex;
+  margin-bottom: 4px;
+  outline: medium none;
+  padding-bottom: 4px;
+  width: 100%;
+}
+.notification_menu .notifydet_left {
+  display: inline;
+  float: left;
+  width: 70%;
+}
+.notification_menu .notifydet_right {
+  display: inline;
+  float: left;
+  position: relative;
+  width: 30%;
+}
+.notification_menu .notifydet_left p {
+  font-size: 12px;
+  margin-bottom: 0;
+  text-align: left;
+}
+.notification_menu .notifydet_right img {
+  height: auto;
+  margin: 26px 0 7px;
+  max-width: 70px;
+}
+.notification_menu .notifydet_right a {
+  background-color: #784cab;
+  border: 1px solid #784cab;
+  color: #ffffff;
+  font-size: 10px;
+  min-height: 69px;
+  padding: 3px 10px;
+  position: relative;
+  text-decoration: none;
+}
+.notification_menu .notifydet_right a:hover {
+  background-color: #ffffff;
+  border: 1px solid #784CAB;
+  color: #784CAB;
+}
+.notification_menu .notifydet_right button.delete_notify {
+  background-color: #784cab;
+  border: 2px solid transparent;
+  clear: both;
+  color: #ffffff;
+  display: unset;
+  font-size: 9px;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: 0;
+}
+.notification_menu .notification-footer {
+  border-top: 1px solid #000000;
+  margin: 10px auto;
+  padding: 11px 10px 1px;
+  text-align: center;
+}
+.notification_menu .notification-footer a {
+  background-color: #784cab;
+  color: #ffffff;
+  padding: 6px 15px !important;
+  text-decoration: none;
+  border: 1px solid #784cab;
+}
+.notification_menu .notification-footer a:hover {
+  background-color: #ffffff;
+  border: 1px solid #784cab;
+  color: #784cab;
+  padding: 6px 15px !important;
+  text-decoration: none;
+}
+.notifications {
+  min-width:340px; 
+}
+.notification_menu .notifications-wrapper {
+  max-height: 470px;
+  overflow-y: auto;
+  padding: 20px;
+}
+  .notification_sec .notify_det {
+    border-bottom: 1px solid #784cab;
+    display: flex;
+    margin-bottom: 4px;
+    outline: medium none;
+    padding-bottom: 4px;
+    width: 100%;
+  }
+  .notification_sec .notifydet_left {
+    display: inline;
+    float: left;
+    width: 70%;
+  }
+  .notification_sec .notifydet_right {
+    display: inline;
+    float: left;
+    position: relative;
+    width: 30%;
+  }
+  .notification_sec .notifydet_left p {
+    font-size: 14px;
+    margin-bottom: 0;
+    text-align: left;
+  }
+  .notification_sec .notifydet_right img {
+    display: block;
+    height: auto;
+    margin: 26px 0 7px;
+    max-width: 100px;
+    min-width: 100px;
+  }
+  .notification_sec .notifydet_right a {
+    background-color: #784cab;
+    border: 1px solid #784cab;
+    color: #ffffff;
+    font-size: 10px;
+    min-height: 69px;
+    padding: 3px 10px;
+    position: relative;
+    text-decoration: none;
+  }
+  .notification_sec .notifydet_right a:hover {
+    background-color: #ffffff;
+    border: 1px solid #784CAB;
+    color: #784CAB;
+  }
+  .notification_sec .notifydet_right button.delete_notify {
+    background-color: #784cab;
+    border: 2px solid transparent;
+    clear: both;
+    color: #ffffff;
+    display: unset;
+    font-size: 9px;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+  }

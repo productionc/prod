@@ -1,8 +1,14 @@
 class PreferencesController < ApplicationController
+  
   before_filter :set_preference, only: [:edit, :update]
-
-  def new
-    @preference = Preference.new
+  
+  def event_preference
+    preference = Preference.find_by(user_id: current_user.id)
+    if preference.present?
+     @preference = preference
+    else
+     @preference = Preference.new
+    end
   end
 
   def create
@@ -27,10 +33,14 @@ class PreferencesController < ApplicationController
 
   private
   def preference_params
-    params.require(:preference).permit(:preference_type_id, :user_id, :event_type)
+    params.require(:preference).permit(:preference_type_id, :stream_preference, :user_id, 
+      location_preferences_attributes: [:country, :state, :district, :id, :_destroy],
+      event_type_ids: [],
+      event_department_ids: [])
   end
 
   def set_preference
     @preference = Preference.find(params[:id])
   end
+
 end

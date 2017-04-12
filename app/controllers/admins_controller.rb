@@ -4,10 +4,12 @@ class AdminsController < ApplicationController
   end
 
   def collegeda_users
+    authenticate_user!
     @users = User.all.order('created_at DESC')
   end
 
   def collegeda_events_moderation
+    authenticate_user!
   end
 
   def publish_event
@@ -16,10 +18,12 @@ class AdminsController < ApplicationController
   end
 
   def events_subscriber
+    authenticate_user!
     @event_subscribers = EventSubscription.all.order('created_at DESC')
   end
 
   def events_action
+    authenticate_user!
     @all_events = Event.all.order('created_at DESC')
   end
 

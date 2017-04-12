@@ -28,6 +28,7 @@ before_action :authenticate_user!, only: [:show, :new]
 	end
 
 	def new
+    @current_user = current_user
 		@event = Event.new
 		@event.build_event_detail
 		@event.build_event_url
@@ -59,6 +60,7 @@ before_action :authenticate_user!, only: [:show, :new]
 	end
 
   def edit
+    @current_user = current_user
   end
 
   def update
@@ -135,15 +137,23 @@ before_action :authenticate_user!, only: [:show, :new]
    event = Event.find_by(id: params[:event_id].to_i)
    if current_user.id != event.user_id
      user_preference = Preference.find_by(user_id: current_user.id)
-     notification_status = can_send_notification(event, user_preference) 
+     notification_status = can_send_notification(user_preference) 
    else
      notification_status = false
    end
    render json: notification_status.to_json
   end
 
-  def can_send_notification event, user_preference
-    if event.event_type == user_preference.event_type
+  def can_send_notification user_preference
+    event = Event.find_by(id: params[:event_id].to_i)
+    if user_preference.event_types.map(&:name).include?(event.event_type)
+      true
+    elsif ((user_preference.location_preferences.map(&:country).include?(event.country)) && 
+          (user_preference.location_preferences.map(&:state).include?(event.state)) &&
+          (user_preference.location_preferences.map(&:district).include?(event.district))) 
+      true
+    elsif ((user_preference.event_departments.map(&:stream_id) & (event.event_departments.map(&:stream_id))).count > 0 &&
+          (user_preference.event_departments.map(&:id) & (event.event_departments.map(&:id))).count > 0)
       true
     end
   end
@@ -151,13 +161,52 @@ before_action :authenticate_user!, only: [:show, :new]
   def add_notification
    event = Event.find_by(id: params[:event_id].to_i)
    if current_user.id != event.user_id
-    @notifications = Notification.all
-    message = "Your perference matched event with titled #{event.event_name}"
-    if !Notification.find_by(message: message).present? == true
-     # binding.pry
-     Notification.create(notification_type_id: 1, event_id: event.id, message: message, user_id: current_user.id)
-   end
+    @notifications = Notification.where(user_id: current_user.id)
+  
+    @can_create_notification = Notification.where(
+      "notifications.user_id = #{current_user.id} AND
+       notifications.event_id = #{event.id}"
+    ).first_or_initialize do |notification|
+      notification.assign_attributes(
+       notification_type_id: NotificationType.find_by(name: "Event").id, 
+       event_id: event.id, message: event.event_name, user_id: current_user.id
+        )
+    end
+    respond_to do |format|
+      if @can_create_notification.save
+        format.js
+      else
+        redirect_to :back, flash: { success: "Notification is failed!" }
+      end
+    end
    end 
+  end
+
+  def posted_events
+    @posted_events =  Event.where(user_id: current_user.id)
+  end
+
+  def notifications
+    @notifications = Notification.where(user_id: current_user.id)
+  end
+  
+  def event_favourite
+    event_id = params[:event_id].to_i
+    user_id = params[:user_id].to_i
+    book_mark = EventFavourite.find_by(event_id: event_id , user_id: user_id)
+    if book_mark.present?
+      status = book_mark.is_favourite == false ? true : false
+      book_mark.update(event_id: event_id , user_id: user_id, is_favourite: status)
+    else
+      EventFavourite.create(event_id: event_id, user_id: user_id, is_favourite: true)
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def favourite_events
+    @favourite_events = EventFavourite.where(user_id: current_user.id, is_favourite: true)
   end
 
 	private
@@ -165,7 +214,7 @@ before_action :authenticate_user!, only: [:show, :new]
   def event_params
 		params.require(:event).permit(:user_id, :first_name, :last_name, :email, :phone_no, 
 			:event_name, :event_type, :study_place, :dept_stream, :country, :state, :district, :zip,
-			:location, :event_detail_id, :id, 
+			:event_detail_id, :id, 
 			event_detail_attributes: [:start_date, :end_date,
 			 :event_description, :sub_events, :workshops, :paper_presentation_topics, :conference_topics, :reg_start_date, :reg_end_date, :reg_fee, :id],
 			event_department_ids: [],
