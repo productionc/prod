@@ -14,7 +14,18 @@ class AdminsController < ApplicationController
 
   def publish_event
     Event.find_by(id: params[:event_id]).update(is_published: true)
+    publish_msg(params[:event_id])
     redirect_to :back, flash: { success: 'Event Published successfully !' }
+  end
+
+  def publish_msg event_id
+    begin
+      Pusher.trigger('my-channel', 'my-event', {
+        message: event_id
+      })
+    rescue Pusher::Error => e
+      Rails.logger.error "Pusher error: #{e.message}"
+    end
   end
 
   def events_subscriber

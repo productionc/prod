@@ -14,7 +14,6 @@ class Event < ActiveRecord::Base
  belongs_to :event_college_banner, dependent: :destroy
  belongs_to :event_broucher, dependent: :destroy
  has_many :event_sponsors, dependent: :destroy
- after_create :publish_msg
  has_many :event_favourites, dependent: :destroy
 
  accepts_nested_attributes_for :event_detail, reject_if: :all_blank, allow_destroy: true
@@ -27,16 +26,6 @@ class Event < ActiveRecord::Base
  accepts_nested_attributes_for :event_broucher, reject_if: :all_blank, allow_destroy: true
  accepts_nested_attributes_for :event_sponsors, reject_if: :all_blank, allow_destroy: true
  accepts_nested_attributes_for :event_departments, reject_if: :all_blank, allow_destroy: true
-
- def publish_msg
-  begin
-    Pusher.trigger('my-channel', 'my-event', {
-      message: self.id
-    })
-  rescue Pusher::Error => e
-    Rails.logger.error "Pusher error: #{e.message}"
-  end
- end
 
  def to_param
     [id, event_name.parameterize, study_place.parameterize, district.parameterize].join("-")
