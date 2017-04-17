@@ -1,0 +1,62 @@
+ <div class='container-fluid'>
+    <h2 class='text-center title'>Add a new Course</h2>
+      <%= simple_form_for @course,validate: true,remote: true, :authenticity_token => true, html: { multipart: true } do |f| %>
+      <% if @course.errors.any? %>
+      <div id="errors">
+        <h3><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h3>
+        <ul>
+          <% @course.errors.full_messages.each do |msg| %>
+          <li>
+            <%= msg %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+     <div id="eventregistrationform">
+     <div class='basic_info'>
+      <h3>Course Details</h3>
+      <div class='row'>
+        <div class='col-md-3 form-group'>
+          <%= f.text_field :title, class: 'form-control validate[required, custom[onlyLetters]]', placeholder: "Course title" %>
+        </div>
+
+        <div class='col-md-3 form-group'>
+          <%= f.text_field :duration, class: 'form-control validate[required]', placeholder: "Course duration" %>
+        </div>
+
+        <div class='col-md-3 form-group'>
+          <%= f.text_field :summary, class: 'form-control validate[required, custom[onlyLetters]]', placeholder: "Course summary" %>
+        </div>
+
+        <div class="col-sm-10">
+            <%= f.simple_fields_for :course_materials do |course_materials| %>
+            <%= render 'course_material_fields', f: course_materials %>
+            <% end %>
+            <div class="links">&nbsp;
+              <%= link_to_add_association 'Add course material', f, :course_materials, class: "btn btn-default add-button" %>
+            </div><br/>
+       </div>     
+
+      </div>
+      
+    </div>
+
+    <%= f.button :submit, name: "course_submit", class: "btn btn-primary course_submit", value: "Submit" %>
+    <br/>
+    </div>
+    <% end %>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#new_course").validationEngine({
+    promptPosition : "bottomLeft",
+    autoHidePrompt: true,
+    autoHideDelay: 3000,
+    fadeDuration: 0.3,
+    scroll: false,
+    maxErrorsPerField:1
+    });
+});
+</script>
