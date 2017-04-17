@@ -24,6 +24,10 @@ namespace :load_event_data do
     preference_type_data
   end
 
+  task notification_type: :environment do
+    notification_type_data
+  end
+
   def registration_type_data
    types = ["Student-Studying", "Student-Passout", "Teacher", "Employer"]
    types.each do |item|
@@ -179,6 +183,10 @@ namespace :load_event_data do
 
   def preference_type_data
     PreferenceType.create(name: "Event")
+  end
+
+  def notification_type_data
+    NotificationType.create(name: "Event")
   end
 
 end

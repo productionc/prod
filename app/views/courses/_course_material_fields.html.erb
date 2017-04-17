@@ -1,0 +1,13 @@
+<div class="form-inline clearfix" style="
+    border-radius: 12px;
+    padding: 11px 3px 9px 8px;">
+  <div class="nested-fields">
+    <div class="fallback">
+      <%= f.file_field :material %>
+    </div>
+    <div class='col-md-12 form-group'>
+      <%= link_to_remove_association "Remove course material", f, class: "btn btn-default form-button" %>
+    </div>
+  </div>
+</div>
+<br/>

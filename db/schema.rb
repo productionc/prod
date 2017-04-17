@@ -11,10 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170408184738) do
+ActiveRecord::Schema.define(version: 20170417173522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "course_materials", force: :cascade do |t|
+    t.integer  "course_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "material_file_name"
+    t.string   "material_content_type"
+    t.integer  "material_file_size"
+    t.datetime "material_updated_at"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "title"
+    t.string   "duration"
+    t.string   "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "department_preferences", force: :cascade do |t|
     t.string   "stream"
