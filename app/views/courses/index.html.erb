@@ -1,0 +1,15 @@
+<div class="container">
+<h2>All courses</h2>
+
+<% @courses.each do |course| %>
+  <p><strong>Title:</strong> <%= course.title %></p>
+  <p><strong>Summary:</strong> <%= course.summary %></p>
+  <p><strong>Duration:</strong> <%= course.duration %></p>
+
+  <p>Video materials</p>
+  <% course.course_materials.each do |material| %>
+   <p><%= video_tag material.material.url, size: "420x340", controls: true, autoplay: true %></p>
+  <% end %>
+  <hr/>
+<% end %>
+</div>
