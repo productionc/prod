@@ -7,9 +7,9 @@ class Api::V1::UsersController < Api::V1::BaseController
     @user = User.find_by_email(email)
 
     if @user && @user.valid_password?(password)
-      render status: 200, json: {success: true, response: { message: "Sign in Successfully!"}}
+      render json: { meta: { status: 200, message: "Sign in Successfully!" } }
     else
-      render status: 400, json: {success: false, response: { message: "Invalid username or password"}}
+      render json: { meta: { status: 400, message: "Invalid username or password" } }
     end 
   end
 
