@@ -5,7 +5,7 @@ class Api::V1::EventsController < Api::V1::BaseController
     per_page = 10
     paginated_events = all_events.paginate(page: params[:page].to_i, per_page: per_page)
     total_entries = paginated_events.total_entries
-    no_of_pages = total_entries/per_page
+    no_of_pages = (total_entries.to_f/per_page).ceil
     has_more = paginated_events.current_page != paginated_events.total_pages && paginated_events.current_page <= paginated_events.total_pages
     code = paginated_events.count > 0 ? 200 : 400
     message = paginated_events.count > 0 ? "Successful" : "Unsuccessful"
