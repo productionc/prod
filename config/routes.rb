@@ -43,7 +43,7 @@ Rails.application.routes.draw do
       get 'get_all_events_count' => 'events#events_count'
       get 'get_all_users_count' => 'events#all_users_count'
       post 'users/sign_in' => 'users#sign_in'
-      get 'event_detail/:event_id' => 'events#event_detail'
+      get 'event_detail' => 'events#event_detail'
     end
   end
 
