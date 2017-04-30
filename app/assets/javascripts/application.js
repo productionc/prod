@@ -25,6 +25,7 @@
 //= require jquery.validationEngine-en
 //= require custom-script
 //= require jquery.dlmenu
+//= require ckeditor/init
 //= require application_helper
 
 $(function() {
