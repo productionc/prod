@@ -78,17 +78,15 @@
           </div>
           <div class="collapse navbar-collapse pull-right">
             <ul class="nav navbar-nav">
-              <li><a href="https://collegedaa.freshdesk.com/support/home" target="_blank">Support</a></li>
-              <li><a target="_blank" href="<%= student_partner_path %>">Student Partner</a></li>
-              <% if user_signed_in? %><li><a href="/posted_events">Posted Events</a></li><% end %>
+              <li><a href="/events">Events</a></li>
               <% if user_signed_in? %><li><a href="/favourite_events">Favourite Events</a></li><% end %>
-              <li><%= link_to 'Post Event', new_event_path %></li>
-              <li>
+              <% if user_signed_in? %><li><a href="/posted_events">Posted Events</a></li><% end %>
               <% if user_signed_in? %>
-               <a href="/event_user_preference">Event Preference</a></li>
+               <li><a href="/event_user_preference">Event Preference</a></li>
               <% end %>
-
-
+              <li><%= link_to 'Post Event', new_event_path %></li>
+              <li><a target="_blank" href="<%= student_partner_path %>">Student Partner</a></li>
+              <li><a href="https://collegedaa.freshdesk.com/support/home" target="_blank">Support</a></li>
               <li>
               <% if user_signed_in? and (Notification.where(user_id: current_user.id).count > 0) %>
                 <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html"><i class="fa fa-bell-o fa-3" aria-hidden="true"></i></a>
@@ -130,20 +128,6 @@
                 <% end %>
               </li>
 
-<!-- 
-              <li>
-                <% if user_signed_in? %>
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">Notifications<b class="caret"></b></a>
-                  <ul class="dropdown-menu multi-level" id="notification">
-                    <li>Recent Notifications</li>
-                    <% if (Notification.count > 0) and current_user.present? %>
-                      <% Notification.where(user_id: current_user.id).each do |notification| %>
-                       <p>Your perference matched event with titled <%= link_to notification.message, notification.event %></p>
-                      <% end %>
-                    <% end %>
-                  </ul>
-                 <% end %> 
-              </li> -->
                <li>
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%= user_signed_in? ? current_user.name+" " : "Sign In " %> <b class="caret"></b></a>
                 <ul class="dropdown-menu multi-level">
