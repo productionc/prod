@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
+  resources :blogs
   devise_for :users, controllers: {registrations: 'registrations'}
   
   get 'events/welcome' => 'events#welcome'
