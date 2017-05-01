@@ -28,6 +28,14 @@ namespace :load_event_data do
     notification_type_data
   end
 
+  task job_type: :environment do
+    job_type_data
+  end
+
+  task stipend_type: :environment do
+    stipend_type_data
+  end
+
   def registration_type_data
    types = ["Student-Studying", "Student-Passout", "Teacher", "Employer"]
    types.each do |item|
@@ -187,6 +195,20 @@ namespace :load_event_data do
 
   def notification_type_data
     NotificationType.create(name: "Event")
+  end
+
+  def job_type_data
+    data = ["Full Time", "Part Time", "Work From Home"]
+    data.each do |item|
+      JobType.create(name: item)
+    end
+  end
+
+  def stipend_type_data
+    data = ["Fixed", "Variable", "Incentive", "Expenses Covered", "None"]
+    data.each do |item|
+      StipendType.create(name: item)
+    end
   end
 
 end

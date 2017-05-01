@@ -27,6 +27,9 @@
 //= require jquery.dlmenu
 //= require ckeditor/init
 //= require application_helper
+//= require chosen.init
+//= require chosen.jquery
+//= require chosen.prism
 
 $(function() {
     Pusher.logToConsole = true;

@@ -27,8 +27,45 @@ $(window).load(function(){
     }
   });
 });
+
+jQuery(document).ready(function(){
+      jQuery('#new_internship .stipendtype_fixed, .edit_internship .stipendtype_fixed').hide();
+      jQuery('#new_internship .stipendtype_variable, .edit_internship .stipendtype_variable').hide();
+      jQuery('#new_internship .stipendtype_incentive, .edit_internship .stipendtype_incentive').hide();
+      jQuery(document).on("click", "#internship_stipend_type_id", function(){
+        var chosenval = jQuery(this).val();
+        if(chosenval == "1"){
+          jQuery('#new_internship .stipendtype_fixed, .edit_internship .stipendtype_incentive').show();
+          jQuery('#new_internship .stipendtype_variable, .edit_internship .stipendtype_variable').hide();
+          jQuery('#new_internship .stipendtype_incentive, .edit_internship .stipendtype_incentive').hide();
+        } else if(chosenval == "2"){
+          jQuery('#new_internship .stipendtype_variable, .edit_internship .stipendtype_variable').show();
+          jQuery('#new_internship .stipendtype_fixed, .edit_internship .stipendtype_incentive').hide();
+          jQuery('#new_internship .stipendtype_incentive, .edit_internship .stipendtype_incentive').hide();
+        } else if(chosenval == "3"){
+          jQuery('#new_internship .stipendtype_incentive, .edit_internship .stipendtype_incentive').show();
+          jQuery('#new_internship .stipendtype_fixed, .edit_internship .stipendtype_incentive').hide();
+          jQuery('#new_internship .stipendtype_variable, .edit_internship .stipendtype_variable').hide();
+        } else if(chosenval == "4"){
+          jQuery('#new_internship .stipendtype_fixed, .edit_internship .stipendtype_incentive').hide();
+          jQuery('#new_internship .stipendtype_variable, .edit_internship .stipendtype_variable').hide();
+          jQuery('#new_internship .stipendtype_incentive, .edit_internship .stipendtype_incentive').hide();
+        } else if(chosenval == "5") {
+          jQuery('#new_internship .stipendtype_fixed, .edit_internship .stipendtype_incentive').hide();
+          jQuery('#new_internship .stipendtype_variable, .edit_internship .stipendtype_variable').hide();
+          jQuery('#new_internship .stipendtype_incentive, .edit_internship .stipendtype_incentive').hide();
+        }
+        else{
+          jQuery('#new_internship .stipendtype_fixed, .edit_internship .stipendtype_incentive').hide();
+          jQuery('#new_internship .stipendtype_variable, .edit_internship .stipendtype_variable').hide();   
+          jQuery('#new_internship .stipendtype_incentive, .edit_internship .stipendtype_incentive').hide();
+        }
+      })
+    });
   
 $(function () {
+  $('#new_internship #internstartdate').datetimepicker({});
+
   $('#event_filter_form #date').datetimepicker({
     format: 'DD-MM-YYYY'
   });
