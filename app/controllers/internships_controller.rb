@@ -35,11 +35,15 @@ class InternshipsController < ApplicationController
   def update
     @internship = Internship.find(params[:id])
     @internship.user_id = current_user.id
+    respond_to do |format|
     if @internship.update_attributes(internship_params)
-      redirect_to internships_path, notice: "Internship has been successfully updated."
+      format.html { redirect_to internships_path, :notice => "Successfully updated internship" }
+      format.js 
     else
-      render action: "edit"
+      format.html { render :action => 'edit' }
+      format.js { render :action => 'edit' }
     end
+  end
   end
 
 private
