@@ -16,7 +16,6 @@ class InternshipsController < ApplicationController
 
   def create
   @internship = Internship.new(internship_params)
-  binding.pry
   @internship.user_id = current_user.id
   respond_to do |format|
     if @internship.save
