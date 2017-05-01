@@ -1,0 +1,126 @@
+<%= simple_form_for @internship,validate: true,remote: true, :authenticity_token => true, html: { multipart: true } do |f| %>
+      <% if @internship.errors.any? %>
+      <div id="errors">
+        <h3><%= pluralize(@internship.errors.count, "error") %> prohibited this event from being saved:</h3>
+        <ul>
+          <% @internship.errors.full_messages.each do |msg| %>
+          <li>
+            <%= msg %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+<!--post internship start-->
+  <div id='internpost_body_container'>
+    <div class='container-fluid'>
+      <h2 class='text-center title'><span class='halfcolor'>Post Your</span> Summer Internship</h2>
+      <form name='internpostform' id='internpostform' action='' method='post' enctype="multipart/form-data">
+        <p class='text-center'>Hello! Welcome Aboard :D Please tell us about who you're looking for :)</p>
+        <p class='text-center'>Please be flexible with your start date as interns from different colleges have vacations starting on different dates.</p>
+        <div class='row'>
+          <div class='col-md-4 form-group'>
+            <label class='star_required'>Internship Title</label>
+            <%= f.text_field :title, class: 'form-control validate[required, custom[onlyLetters]]', placeholder: "Internship Title", value: @internship.title %>
+          </div>
+          <div class='col-md-4 form-group'>
+            <label class='star_required'>No of Openings</label>
+            <%= f.text_field :no_of_openings, class: 'form-control validate[required, custom[onlyNumber]]', placeholder: "No of Openings in digits", value: @internship.no_of_openings %>
+          </div>
+          <div class='col-md-4 form-group'>
+            <label class='star_required'>Category</label>
+            <%= f.text_field :category, class: 'form-control', placeholder: "Category", value: @internship.category %>
+          </div>
+        </div>
+
+        <div class='row'>
+          <div class='col-md-4 form-group'>
+            <div class='input-group date' id='internstartdate'>
+              <label class='datelabel'>Start Date<span> *</span></label>
+              <% date_val = @internship.start_date.present? ? @internship.start_date.strftime("%m/%d/%Y %I:%M %p") : "" %>
+              <%= f.text_field :start_date, placeholder: "Start Date", class: "form-control validate[required]", value: date_val %>
+              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+          </div>
+          <div class='col-md-4 form-group'>
+            <label class='star_required'>Duration</label>
+            <%= f.text_field :duration, class: 'form-control validate[required, custom[onlyNumber]]', placeholder: "Duration (in months) in digits", value: @internship.duration %>
+          </div>
+
+          <div class='col-md-4 form-group'>
+            <label class='star_required'>Job Type</label>
+            <%= f.collection_select :job_type_id, JobType.all, :id, :name, { selected: @internship.job_type_id, prompt: "Select Job Type" }, class: "select2-size form-control validate[required] select2-offscreen" %>
+          </div>
+        </div>
+
+        <div class="row">
+        <div class='col-md-4 form-group'>
+        <label class='star_required'>Country</label>
+         <%= select_tag "internship[country]", options_for_select(CS.countries.slice(:AU, :CA, :IN, :US, :GB).map { |obj| [obj[1], obj[0]] }, @internship.country), class: "select2-size form-control validate[required] select2-offscreen country", prompt: "Select Country" %>
+        </div>
+        <div class='col-md-4 form-group'>
+        <label class='star_required'>State</label>
+          <%= select_tag "internship[state]", options_for_select(@internship.state.present? ? [@internship.state] : [], @internship.state), prompt: "Select State", class: "select2-size form-control validate[required] select2-offscreen state" %>
+        </div>
+        <div class='col-md-4 form-group'>
+        <label class='star_required'>District</label>
+           <%= select_tag "internship[district]", options_for_select(@internship.district.present? ? [@internship.district] : [], @internship.district), prompt: "Select City", class: "select2-size validate[required] form-control select2-offscreen city" %>
+        </div>
+        </div>
+
+        <div class='row'>
+          <div class='col-md-4 form-group'>
+            <label class='star_required'>Skills</label>
+            <%= f.text_field :skills, class: 'form-control', placeholder: "Enter skills", value: @internship.skills %>
+          </div>
+          <div class='col-md-4 form-group'>
+            <label class='star_required'>Stipend Type</label>
+            <%= f.collection_select :stipend_type_id, StipendType.all, :id, :name, { selected: @internship.stipend_type_id, prompt: "Select Stipend Type" }, class: "select2-size form-control validate[required] select2-offscreen" %>
+          </div>
+        </div>
+
+        <%= f.simple_fields_for :stipend_amount do |stipend_amount| %>
+          <%= render 'stipend_amount_fields', f: stipend_amount %>
+        <% end %>
+
+        <div class='row'>
+          <div class='col-md-12 form-group'>
+            <%= f.check_box :certificate %> Certificate/LOR will be provided<br/>
+            <%= f.check_box :pre_placement %> Pre Placement Offer could be made
+          </div>
+        </div>
+        
+        <div class='row'>
+          <div class='col-md-12 form-group'>
+            <label class='star_required'>Description</label><br/>
+            <%= f.text_area :description, rows: '8', cols: '81.9', class: "validate[required]" %>
+          </div>
+        </div>
+
+        <input type='submit' name='internpost_submit' class='internpost_submit btn btn-success' value='Submit'>
+      </form>
+    </div>
+  </div> 
+ <% end %>  
+<!--post internship end-->
+
+<script type="text/javascript">
+    $(".internpost_submit").click(function(e){
+ e.preventDefault();
+ swal({   title: "Attention",   text: "This internship is submitted for moderation and will be published soon !",   type: "info",   showCancelButton: false,   confirmButtonColor: "#DD6B55",   confirmButtonText: "Okies!",   closeOnConfirm: false }, function(){ $("#new_internship").submit(); });
+
+});
+
+  $(function () {
+  
+  $("#new_internship").validationEngine({
+    promptPosition : "bottomLeft",
+    autoHidePrompt: true,
+    autoHideDelay: 3000,
+    fadeDuration: 0.3,
+    scroll: false,
+    maxErrorsPerField:1
+  });
+
+  });
+</script>

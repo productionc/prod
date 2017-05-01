@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170430175707) do
+ActiveRecord::Schema.define(version: 20170501161958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -250,6 +250,34 @@ ActiveRecord::Schema.define(version: 20170430175707) do
     t.integer  "user_id"
   end
 
+  create_table "internships", force: :cascade do |t|
+    t.string   "title"
+    t.string   "no_of_openings"
+    t.string   "category"
+    t.string   "country"
+    t.string   "state"
+    t.string   "district"
+    t.integer  "job_type_id"
+    t.string   "duration"
+    t.string   "skills"
+    t.integer  "stipend_type_id"
+    t.boolean  "certificate"
+    t.boolean  "pre_placement"
+    t.string   "description"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "user_id"
+    t.boolean  "is_published",      default: false
+    t.datetime "start_date"
+    t.integer  "stipend_amount_id"
+  end
+
+  create_table "job_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "location_preferences", force: :cascade do |t|
     t.string   "country"
     t.string   "state"
@@ -289,6 +317,22 @@ ActiveRecord::Schema.define(version: 20170430175707) do
   end
 
   create_table "registration_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stipend_amounts", force: :cascade do |t|
+    t.string   "amount"
+    t.string   "amount_lower_limit"
+    t.string   "amount_upper_limit"
+    t.string   "incentive_amount"
+    t.string   "incentive_type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "stipend_types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

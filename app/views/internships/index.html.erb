@@ -1,0 +1,18 @@
+<div class="container">
+<%= link_to "New Internship", new_internship_path %>
+<% @internships.each do |internship| %>
+  <p><%= link_to internship.title.html_safe, edit_internship_path(internship) %></p>
+  <p><%= internship.no_of_openings %></p>
+  <p><%= internship.category %></p>
+  <p><%= internship.start_date %></p>
+  <p><%= internship.country %></p>
+  <p><%= internship.state %></p>
+  <p><%= internship.district %></p>
+  <p><%= internship.skills %></p>
+  <p><%= internship.stipend_type.name %></p>
+  <p><%= internship.certificate %></p>
+  <p><%= internship.pre_placement %></p>
+  <p><%= internship.description %></p>
+  <p>-------------------------------------------</p>
+<% end %>
+</div>

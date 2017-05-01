@@ -209,5 +209,11 @@ $(".event_registration_submit").click(function(e){
  swal({   title: "Attention",   text: "This event is submitted for moderation and will be published soon !",   type: "info",   showCancelButton: false,   confirmButtonColor: "#DD6B55",   confirmButtonText: "Okies!",   closeOnConfirm: false }, function(){ $("#new_event").submit(); });
 
 });
+
+$(".event_registration_submit").click(function(e){
+ e.preventDefault();
+ swal({   title: "Attention",   text: "This event is submitted for moderation and will be published soon !",   type: "info",   showCancelButton: false,   confirmButtonColor: "#DD6B55",   confirmButtonText: "Okies!",   closeOnConfirm: false }, function(){ $("#new_event").submit(); });
+
+});
 </script>
 
