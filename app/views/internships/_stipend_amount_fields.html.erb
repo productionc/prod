@@ -1,0 +1,34 @@
+<div class='stipendtype_fixed'>
+  <div class='row'>
+    <div class='col-md-4 form-group'>
+      <label class='star_required'>Amount</label>
+      <%= f.text_field :amount, class: 'form-control validate[required, custom[onlyNumber]]', placeholder: "Put Stipend here in digits", value: @internship.stipend_amount.try(:amount) %>
+    </div>
+  </div>
+</div>
+
+<div class='stipendtype_variable'>
+  <div class='row'>
+    <div class='col-md-4 form-group'>
+      <label class='star_required'>Amount(Lower Limit)</label>
+      <%= f.text_field :amount_lower_limit, class: 'form-control validate[required, custom[onlyNumber]]', placeholder: "Put Lower Limit here in digits", value: @internship.stipend_amount.try(:amount_lower_limit) %>
+    </div>
+    <div class='col-md-4 form-group'>
+      <label class='star_required'>Amount(Upper Limit)</label>
+      <%= f.text_field :amount_upper_limit, class: 'form-control validate[required, custom[onlyNumber]]', placeholder: "Put Upper Limit here in digits", value: @internship.stipend_amount.try(:amount_upper_limit) %>
+    </div>
+  </div>
+</div>
+
+<div class='stipendtype_incentive'>
+  <div class='row'>
+    <div class='col-md-4 form-group'>
+      <label class='star_required'>Incentive amount</label>
+      <%= f.text_field :incentive_amount, class: 'form-control validate[required, custom[onlyNumber]]', placeholder: "Put Incentive here in digits", value: @internship.stipend_amount.try(:incentive_amount) %>
+    </div>
+    <div class='col-md-4 form-group'>
+      <label class='star_required'>Incentive Type</label>
+      <%= f.text_field :incentive_type, class: 'form-control validate[required, custom[onlyNumber]]', placeholder: "Put Incentive Type here in digits", value: @internship.stipend_amount.try(:incentive_type) %>
+    </div>
+  </div>
+</div>

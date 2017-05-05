@@ -19,6 +19,7 @@ gem 'dotenv-rails'
 # Use thin for dev and faye
 gem 'pusher'
 gem 'active_model_serializers', '~> 0.9'
+gem "ckeditor"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

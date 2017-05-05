@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
+  resources :blogs
   devise_for :users, controllers: {registrations: 'registrations'}
   
   get 'events/welcome' => 'events#welcome'
@@ -48,6 +50,7 @@ Rails.application.routes.draw do
   end
 
   resources :courses
+  resources :internships
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
