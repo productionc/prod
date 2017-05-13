@@ -91,7 +91,7 @@ before_action :authenticate_user!, only: [:show, :new]
   end
 
   def departments
-    render json: EventDepartment.where(stream_id: params[:stream_id]).to_json
+    render json: EventDepartment.where(stream_id: params[:stream_id]).order(:name).to_json
   end
 
   def get_event_results
