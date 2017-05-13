@@ -36,6 +36,10 @@ namespace :load_event_data do
     stipend_type_data
   end
 
+  task add_it_and_other_dept: :environment do
+    add_it_and_other_dept
+  end
+
   def registration_type_data
    types = ["Student-Studying", "Student-Passout", "Teacher", "Employer"]
    types.each do |item|
@@ -170,6 +174,15 @@ namespace :load_event_data do
 ["Law",6]
 ]
     data.each do |item|
+      EventDepartment.create(name: item[0], stream_id: item[1]+1)
+    end
+  end
+
+  def add_it_and_other_dept
+     data = [["Instrumentation",2],
+["Information Technology",2],
+["Telecommunication",2]]
+     data.each do |item|
       EventDepartment.create(name: item[0], stream_id: item[1]+1)
     end
   end
