@@ -1,0 +1,7 @@
+<div class="container">
+<% @posted_internships.each do |internship| %>
+  <p><%= internship.title.html_safe %>
+  </p>
+  <p>-------------------------------------------</p>
+<% end %>
+</div>

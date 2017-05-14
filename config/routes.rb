@@ -50,7 +50,11 @@ Rails.application.routes.draw do
   end
 
   resources :courses
+  get '/internships/posted_internships', to: 'internships#posted_internships'
   resources :internships
+
+  get '/apply_for_internship', to: 'internships#apply_for_internship'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
