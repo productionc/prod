@@ -1,6 +1,8 @@
 class InternshipsController < ApplicationController
  def index
-    @internships = Internship.order("created_at DESC")
+    @internships = Internship.all.order("created_at DESC")
+    @applied_internships = AppliedInternship.find_by(company_id: current_user.id).present? ?
+     AppliedInternship.where(company_id: current_user.id) : []
   end
 
   def show
@@ -8,6 +10,7 @@ class InternshipsController < ApplicationController
   end
 
   def new
+    authenticate_user!
     @internship = Internship.new
     @internship.build_job_type
     @internship.build_stipend_type
@@ -44,6 +47,20 @@ class InternshipsController < ApplicationController
       format.js { render :action => 'edit' }
     end
   end
+  end
+
+  def show
+    @internship = Internship.find(params[:id])
+  end
+
+  def apply_for_internship
+    authenticate_user!
+    AppliedInternship.create(company_id: params[:company_id],user_id: current_user.id, internship_id: params[:internship_id], internship_status: 'Submitted')
+    redirect_to :back
+  end
+
+  def posted_internships
+    @posted_internships = Internship.where(user_id: current_user.id)
   end
 
 private
