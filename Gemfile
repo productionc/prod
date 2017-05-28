@@ -20,6 +20,8 @@ gem 'dotenv-rails'
 gem 'pusher'
 gem 'active_model_serializers', '~> 0.9'
 gem "ckeditor"
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+gem 'jquery-ui-rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
