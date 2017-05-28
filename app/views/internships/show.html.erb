@@ -1,1 +1,9 @@
-show.html.erb
+<div class="container">
+Show page  
+  <p><%= @internship.title.html_safe %></p>
+  <p><%= @internship.no_of_openings %></p>
+  <p><%= @internship.category %></p>
+  <p><%= @internship.start_date %></p>
+  <p><%= link_to check_internship_apply(@internship.id) == true ? "Applied" : "Apply", apply_for_internship_path(internship_id: @internship.id, company_id: @internship.user_id), class: "btn btn-primary", disabled: check_internship_apply(@internship.id) %></p>
+  <p>-------------------------------------------</p>
+</div>

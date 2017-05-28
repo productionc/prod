@@ -1,0 +1,27 @@
+<div class="container">
+<h3>Events</h3>
+
+<table id="events" class="display" data-source="<%= all_events_url(format: "json") %>">
+  <thead id="events_header">
+  <tr>
+    <th>Event Name</th>
+    <th>Event Type</th>
+    <th>College Name</th>
+    <th>District</th>
+  </tr>
+  </thead>
+  <tbody id="events_body"></tbody>
+</table>
+<br/>
+</div>
+<script>
+jQuery(function() {
+  return $('#events').dataTable({
+    sPaginationType: "full_numbers",
+    bJQueryUI: true,
+    bProcessing: true,
+    bServerSide: true,
+    sAjaxSource: $('#events').data('source')
+  });
+});
+</script>
