@@ -209,6 +209,13 @@ before_action :authenticate_user!, only: [:show, :new]
     @favourite_events = EventFavourite.where(user_id: current_user.id, is_favourite: true)
   end
 
+  def all_events
+    respond_to do |format|
+      format.html
+      format.json { render json: EventsDatatable.new(view_context) }
+    end
+  end
+
 	private
 
   def event_params
